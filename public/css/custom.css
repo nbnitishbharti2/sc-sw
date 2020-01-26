@@ -1,0 +1,18 @@
+.user-menu-pull-left i{
+	padding-left: 7px;
+}
+.user-menu-pull-left{
+	padding: 6px;
+	width: max-content;
+}
+.img-circle{
+	height: auto;
+    width: 2.1rem;
+}
+.dropdown-user{
+	padding-right: 20px;
+	padding-top: 3px;
+}
+.alert-notice{
+	color: red;
+}
