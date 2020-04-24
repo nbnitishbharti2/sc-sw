@@ -21,7 +21,7 @@
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">{{ \Lang::get('title.login_title') }}</p>
+                <p class="login-box-msg">{{ trans('title.login_title') }}</p>
                 <form action="{{ route('login') }}" method="post">
                     @csrf
                     <div class="input-group mb-3">
@@ -54,7 +54,7 @@
                     <div class="input-group mb-3">
                         <select name="session" class="form-control">
                             @foreach(CommanHelper::getSession() as $key => $value)
-                            <option value="{{ $value->id }}" {{ ($value->academic_year==$currntSession)?'selected':'' }}>{{ $value->academic_year }}</option>
+                            <option value="{{ $value->id }}" {{ ($value->name==$currntSession)?'selected':'' }}>{{ $value->name }}</option>
                             @endforeach
                         </select>
                         <div class="input-group-append">
