@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Setting extends Model
+class SchoolDetails extends Model
 {
-    //  not use in project 
+    //
 }

@@ -4,7 +4,7 @@
 
     <div class="login-box">
         <div class="login-logo auth-messge"> 
-            <label>{{ $data->school_name }}</label>
+            <label>{{ $data->school_short_name }}</label>
             @if(session('success'))
             <div class="alert alert-success alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>

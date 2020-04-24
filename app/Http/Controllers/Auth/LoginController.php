@@ -11,7 +11,7 @@ use App\Http\Requests\LoginRequest;
 use App\User;
 use Log;
 use App\Models\UserSessionMap;
-use App\Models\Setting;
+use App\Models\SchoolDetails;
 use App\Models\AcademicYear;
 use Illuminate\Validation\ValidationException;
 use Session;
@@ -52,7 +52,7 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-        $data=Setting::first(); 
+        $data=SchoolDetails::first(); 
         if(!empty($data)){
              return view('Auth.login', compact('data')); 
         }else{

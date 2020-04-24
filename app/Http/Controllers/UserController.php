@@ -11,7 +11,7 @@ use Lang;
 use Log;
 use App;
 use Storage;
-use App\Models\Setting; 
+use App\Models\SchoolDetails; 
 use App\Models\SaveOtp;
 use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
@@ -91,7 +91,7 @@ class UserController extends Controller
     }
     public function verify_otp()
     {
-        $data=Setting::first(); 
+        $data=SchoolDetails::first(); 
         return view('auth.passwords.verify-otp', compact('data'));
     }
     public function reset_password(Request $request)

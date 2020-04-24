@@ -17,7 +17,7 @@
             @endif
         </div>
       <div class="login-logo">
-        <label>{{ $data->school_name }}</label>
+        <label>{{ $data->school_short_name }}</label>
     </div>
     <!-- /.login-logo -->
     <div class="card">

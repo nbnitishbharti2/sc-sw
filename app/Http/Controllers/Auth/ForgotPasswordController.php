@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
-use App\Models\Setting; 
+use App\Models\SchoolDetails; 
 use Illuminate\Support\Facades\Password;
 use Illuminate\Http\Request;
 use App\User;
@@ -39,7 +39,7 @@ class ForgotPasswordController extends Controller
 
      public function showLinkRequestForm()
     {
-        $data=Setting::first(); 
+        $data=SchoolDetails::first(); 
         return view('auth.passwords.email', compact('data'));
     }
      public function sendResetLinkEmail(Request $request)
