@@ -13,7 +13,8 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-
+    'forgote_password_otp' => 'Your rest Password OTP is ', 
+    'delete_class'=>'Are you sure? You want to Delete Class.',
+    'restore_class'=>'Are you sure? You want to Restore Class.',
+    'delete_section'=>'Are you sure? You want to Delete Section.'
 ];
