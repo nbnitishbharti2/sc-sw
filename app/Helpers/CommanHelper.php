@@ -2,13 +2,13 @@
  
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Model\Session;
+use App\Models\AcademicYear;
 
 class CommanHelper
 {
 	public static function getSession()
 	{
-		return $session = Session::where('status','=','Active')->orderBy('name','asc')->get(['id','name']);
+		return $session = AcademicYear::where('status','=','Active')->orderBy('academic_year','asc')->get(['id','academic_year']);
 	}
 	
 	

@@ -19,7 +19,7 @@ class ClassRepository {
     {
        
     	try {
-    		  return $query = Classes::where('session_id',Session::get('session'))->withTrashed()->get(); 
+    		  return  $query = Classes::where('session_id',Session::get('session'))->withTrashed()->get();  
     	} catch(\Exception $err){
     		Log::error('message error in getAllClass on ClassRepository :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());

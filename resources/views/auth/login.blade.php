@@ -54,7 +54,7 @@
                     <div class="input-group mb-3">
                         <select name="session" class="form-control">
                             @foreach(CommanHelper::getSession() as $key => $value)
-                            <option value="{{ $value->id }}" {{ ($value->name==$currntSession)?'selected':'' }}>{{ $value->name }}</option>
+                            <option value="{{ $value->id }}" {{ ($value->academic_year==$currntSession)?'selected':'' }}>{{ $value->academic_year }}</option>
                             @endforeach
                         </select>
                         <div class="input-group-append">
