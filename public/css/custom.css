@@ -16,3 +16,9 @@
 .alert-notice{
 	color: red;
 }
+.toast-message{
+	display: none;
+}
+.right-align{
+	text-align: right;
+}

@@ -68,6 +68,10 @@ return [
     */
 
     'timezone' => 'UTC',
+    'date_format' => 'd/m/Y',
+    'date_format_javascript' => 'DD/MM/YYYY',
+    'date_time_format' => 'd/m/Y H:i A',
+    'date_format_javascript' => 'DD/MM/YYYY H:i a',
 
     /*
     |--------------------------------------------------------------------------
@@ -161,11 +165,11 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        Spatie\Permission\PermissionServiceProvider::class,
         /*
          * Package Service Providers...
          */
-
+        Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
         /*
          * Application Service Providers...
          */

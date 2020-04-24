@@ -6,28 +6,6 @@
 		@include('layouts.navbar')
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
-			{{-- For message --}}
-			<section class="content">
-				<div class="container-fluid">
-					<div class="row">
-						<!-- left column -->
-						<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-							@if(session('success'))
-								<div class="alert alert-success alert-dismissible">
-				                  	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-				                  	<i class="icon fas fa-check"></i>{{ session('success') }}
-				                </div>	
-							@endif
-							@if(session('error'))
-								<div class="alert alert-warning alert-dismissible">
-				                  	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-				                  	<i class="icon fas fa-exclamation-triangle"></i>{{ session('error') }}
-				                </div>	
-							@endif
-						</div>
-					</div>
-				</div>
-			</section>
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<div class="container-fluid">
@@ -99,6 +77,16 @@
 									</div>
 									<!-- /.card-body -->
 								</form>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="user-image" style="padding: 35px 70px 50px 20%;">
+								{{-- @if(file_exists( public_path().'/storage/user_profile/'.Auth::user()->account_id.'.png' ))
+									<img class="img img-responsive img-thumbnail" src="{{ asset('public/storage/user_profile/user1-128x128.jpg') }}" width="250">
+								@else
+									<img class="img img-responsive img-thumbnail" src="{{ asset('public/storage/user_profile/useravatar.jpg') }}" width="250">
+								@endif --}}
+								<img class="img img-responsive img-thumbnail" src="{{ asset('public/dist/img/user-avatar.jpg') }}" width="250">
 							</div>
 						</div>
 					</div>

@@ -10,8 +10,7 @@ class UserRepository {
     // 
     public function getAllUsers()
     {
-    	try
-    	{
+    	try {
     		return User::all();
     	} catch(\Exception $err){
     		Log::error('message error in getAllUsers on UserRepository :'. $err->getMessage());
@@ -21,14 +20,13 @@ class UserRepository {
 
     public function updateProfile($input)
     {
-        try
-        {
+        try {
             $user = Auth::user(); // Fetch logged in user
             $result = $user->update($input);
             return ($result == true) ? true : false;
         } catch(\Exception $err){
-            // Log::error('message error in getAllUsers on UserRepository :'. $err->getMessage());
-            // return back()->with('error', $err->getMessage());
+            Log::error('message error in getAllUsers on UserRepository :'. $err->getMessage());
+            return back()->with('error', $err->getMessage());
         }
     }
 }
