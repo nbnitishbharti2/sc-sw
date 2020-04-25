@@ -33,7 +33,7 @@
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
                   <li class="nav-item"><a class="nav-link active" href="#school_details" data-toggle="tab">School Details</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#sms_details" data-toggle="tab">SMS Details</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#sms_details" data-toggle="tab">SMS Details new </a></li>
                   <li class="nav-item"><a class="nav-link" href="#smtp" data-toggle="tab">SMTP</a></li>
                 </ul>
               </div><!-- /.card-header -->

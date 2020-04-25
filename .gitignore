@@ -9,8 +9,3 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-composer.lock
-.editorconfig
-.env.example
-.gitattributes
-.htaccess
