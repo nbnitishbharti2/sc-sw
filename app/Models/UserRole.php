@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,7 +10,7 @@ class UserRole extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'user_id', 'role_id', 'original_user_id', 'status'
+        'user_id', 'role_id'
     ];
 
     public function Role()
@@ -20,7 +20,7 @@ class UserRole extends Model
 
     public function getRoleAttribute()
     {
-        return $this->belongsTo(Role::class,'role_id')->first();
+        return $this->belongsTo(Role::class, 'role_id')->first();
     }
 
     public function User()

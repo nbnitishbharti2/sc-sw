@@ -84,10 +84,10 @@
 				</div>
 			</section>
 		</div>
+		@include('layouts.footer')
 	</div>
 @endsection
-@section('script')
-	<script src="{{ asset('public/js/common-function.js') }}"></script>
+@section('script') 
 	<script src="{{ asset('public/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
 	<script type="text/javascript">
 		$(document).ready(function () {

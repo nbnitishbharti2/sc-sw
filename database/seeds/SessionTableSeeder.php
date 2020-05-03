@@ -13,7 +13,8 @@ class SessionTableSeeder extends Seeder
     public function run()
     {
         DB::table('sessions')->insert([
-            'session' => date("Y").'-'.date("Y", strtotime('+1 year')),
+            'academic_year' => date("Y").'-'.date("Y", strtotime('+1 year')),
+            'value' => date("Y").'-'.date("Y", strtotime('+1 year')),
             'added_by' => 1,
             'updated_by' => 1,
         ]);

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+ 
   <html lang="{{ app()->getLocale() }}">
   <head>
       <meta charset="utf-8">
@@ -40,6 +40,8 @@
       <!-- Toastr -->
       <link rel="stylesheet" href="{{ asset('public/plugins/toastr/toastr.min.css') }}">
       <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+      <!-- flag-icon-css -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.3.0/css/flag-icon.min.css">
   </head>
   
   <!-- /.login-box -->  
@@ -52,13 +54,14 @@
         <!-- jQuery UI 1.11.4 -->
         <script src="{{ asset('public/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
         <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-        <!-- AdminLTE App -->
-        <script src="{{ asset('public/dist/js/adminlte.min.js') }}"></script>
+        
         <script type="text/javascript">
           $.widget.bridge('uibutton', $.ui.button)
         </script>
         <!-- Bootstrap 4 -->
         <script src="{{ asset('public/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <!-- AdminLTE App -->
+        <script src="{{ asset('public/dist/js/adminlte.min.js') }}"></script>
         <!-- daterangepicker -->
         <script src="{{ asset('public/plugins/moment/moment.min.js') }}"></script>
         <script src="{{ asset('public/plugins/daterangepicker/daterangepicker.js') }}"></script>
@@ -69,7 +72,7 @@
         <!-- overlayScrollbars -->
         <script src="{{ asset('public/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
         <!-- AdminLTE App -->
-        <script src="{{ asset('public/dist/js/adminlte.js') }}"></script>
+        {{-- <script src="{{ asset('public/dist/js/adminlte.js') }}"></script> --}}
         
         <!-- AdminLTE for demo purposes -->
         <script src="{{ asset('public/dist/js/demo.js') }}"></script>
@@ -107,5 +110,6 @@
       @endif
 
       @yield('script')
+        <script type="text/javascript" src="{{ asset('public/js/common-function.js') }}?v={{ time() }}"></script>
   </body>
 </html>

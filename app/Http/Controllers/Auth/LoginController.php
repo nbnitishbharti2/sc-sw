@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\LoginRequest;
-use App\User;
+use App\Models\User;
 use Log;
 use App\Models\UserSessionMap;
 use App\Models\SchoolDetails;
@@ -52,25 +52,22 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-        $data=SchoolDetails::first(); 
+        $data = SchoolDetails::first(); 
         if(!empty($data)){
-             return view('Auth.login', compact('data')); 
+             return view('auth.login', compact('data')); 
         }else{
-            return view('Auth.login', $data); 
+            return view('auth.login', $data);
         }
        
     }
     public function login(LoginRequest $request)
     { 
-        try
-        {
-            $login_type = filter_var($request->input('email'), FILTER_VALIDATE_EMAIL ) 
-        ? 'email' 
-        : 'mobile_no';
+        try {
+            $login_type = filter_var($request->input('email'), FILTER_VALIDATE_EMAIL )  ? 'email' : 'mobile_no';
 
-    $request->merge([
-        $login_type => $request->input('email')
-    ]);
+            $request->merge([
+                $login_type => $request->input('email')
+            ]);
 
             $session=request('session'); 
             if (Auth::attempt($request->only($login_type, 'password'))) {
@@ -78,22 +75,18 @@ class LoginController extends Controller
                     $q->where('session_id', '=', $session);  
                 })->with('UserSessionMap')->where('id','=',Auth::user()->id)->first();
                 if(isset($users->id)){
-                 //   $user->setAttribute('orgId', 1);
-        // $user->orgId = $organisation->id;
-        
-        // Set Auth Details
-        //\Auth::login($user);
-                 return $this->sendLoginResponse($request);
-             }else{
-               return $this->logoutUserSession($request);
-           } 
-       }else{
-           return $this->sendFailedLoginResponse($request);  
-       }  
-   }catch(\Exception $err){
-    Log::error('Error in login on LoginController :'. $err->getMessage());
-    return back()->with('error', $err->getMessage());
-}
+                    // $users->assignRole('administrator');
+                    return $this->sendLoginResponse($request);
+                } else {
+                    return $this->logoutUserSession($request);
+                } 
+            } else {
+                return $this->sendFailedLoginResponse($request);  
+            }
+        } catch(\Exception $err){
+            Log::error('Error in login on LoginController :'. $err->getMessage());
+            return back()->with('error', $err->getMessage());
+        }
 }
 
 protected function sendFailedLoginResponse(Request $request)

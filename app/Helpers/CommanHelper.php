@@ -1,8 +1,12 @@
 <?php
- 
-use App\Http\Controllers\Controller;
+
+namespace App\Helpers;
+
 use Illuminate\Support\Facades\Auth;
 use App\Models\AcademicYear;
+use App\Models\Permission;
+use App\Models\RolePermission;
+use Log;
 
 class CommanHelper
 {
@@ -23,5 +27,35 @@ class CommanHelper
 			$session = ($year-1).'-'.$year;
 		}
 		return $session;
+	}
+
+	/**
+	* Method to check user permission
+	* @param string $permission
+	* @return boolean 
+	*/
+	public static function checkPermission($permission)
+	{
+		try {
+			$permission_id 		= Permission::where('name', $permission)->first();
+			$check_permission 	= RolePermission::where(['permission_id' => $permission_id->id, 'role_id' => Auth::user()->roles->role_id])->count();
+			return ($check_permission == 1) ? true : false;
+		} catch (\Throwable $th) {
+			Log::error('error on checkPermission in CommanHelper '. $th->getMessage());
+		}
+	}
+
+	/**
+	* Method to get User role
+	* 
+	* @return string 
+	*/
+	public static function userRole()
+	{
+		try {
+			return ucfirst(Auth::user()->roles->role->name);
+		} catch (\Throwable $th) {
+			Log::error('error on userRole in CommanHelper '. $th->getMessage());
+		}
 	}
 }

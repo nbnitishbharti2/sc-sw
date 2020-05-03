@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Validation\Rule;
-
+use Session;
 class SectionRequest extends FormRequest
 {
     /**
@@ -29,10 +29,10 @@ class SectionRequest extends FormRequest
         return [
             'class_id'          => 'required|integer',
             'section_name'      =>  ['required', 'string', 'max:50', 'min:1', Rule::unique('sections')->where(function ($query) use ($input) {
-                                        return $query->where('session_id', 1)->where('classes_id', $input['class_id']);
+                                        return $query->where('session_id', Session::get('session'))->where('classes_id', $input['class_id']);
                                     })->ignore($input['section_id'])],
             'section_short'     =>  ['required', 'string', 'max:50', 'min:1', Rule::unique('sections')->where(function ($query) use ($input) {
-                                    return $query->where('session_id', 1)->where('classes_id', $input['class_id']);
+                                    return $query->where('session_id', Session::get('session'))->where('classes_id', $input['class_id']);
                                 })->ignore($input['section_id'])],
         ];
     }

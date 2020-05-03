@@ -15,7 +15,7 @@ class CreateSessionsTable extends Migration
     {
         Schema::create('sessions', function (Blueprint $table) {
             $table->increments('id'); 
-            $table->string('name');
+            $table->string('academic_year');
             $table->string('value');
             $table->enum('status', array('Active','InActive','Deleted'))->defoult('Active');
             $table->integer('added_by');

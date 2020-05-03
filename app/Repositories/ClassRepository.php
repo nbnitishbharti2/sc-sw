@@ -2,8 +2,8 @@
 
 namespace App\Repositories;
 
-use App\Classes;
-use App\Section;
+use App\Models\Classes;
+use App\Models\Section;
 use Log;
 use Auth;
 use Lang;

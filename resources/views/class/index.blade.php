@@ -11,12 +11,12 @@
 				<div class="container-fluid">
 					<div class="row mb-2">
 						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-							<h1>View Class</h1>
+							<h1>{{trans('title.view_class')}}</h1>
 						</div>
 						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 right-align">
-							<a href="{!! url('/') !!}" class="btn btn-success"><i class="fa fa-arrow-left"></i> &nbsp; Back</a>
-							<a href="{!! route('add.class') !!}" class="btn btn-primary"><i class="fa fa-plus"></i>  &nbsp; Add</a>
-							<a href="{!! route('import.class.section') !!}" class="btn btn-primary"><i class="fa fa-undo"></i>  &nbsp; Import Prv Session Classes</a>
+							<a href="{!! url('/') !!}" class="btn btn-success"><i class="fa fa-arrow-left"></i> &nbsp; {{trans('button.back')}}</a>
+							<a href="{!! route('add.class') !!}" class="btn btn-primary"><i class="fa fa-plus"></i>  &nbsp; {{trans('button.add')}}</a>
+							<a href="{!! route('import.class.section') !!}" class="btn btn-primary"><i class="fa fa-undo"></i>  &nbsp; {{ trans('button.import_prv_session_slasses') }}</a>
 						</div>
 					</div>
 				</div><!-- /.container-fluid -->
@@ -35,11 +35,11 @@
 										<table id="table" class="table table-bordered table-striped">
 											<thead>
 												<tr>
-													<th>Serial No</th>
-													<th>Class Name</th>
-													<th>Class Short</th>
-													<th>Created</th>
-													<th>Action</th>
+													<th>{{trans('title.serial_no')}}</th>
+													<th>{{trans('title.class_name')}}</th>
+													<th>{{trans('title.class_short')}}</th>
+													<th>{{trans('title.created')}}</th>
+													<th>{{trans('title.action')}}</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -73,10 +73,7 @@
 			</section>
 		</div>
 		<!-- /.content-wrapper -->
-		<footer class="main-footer">
-		    <strong>Copyright &copy; 2019-{{ date('Y') }} <a href="http://galaxywebsolution.in">Galaxy Web Solution</a>.</strong>
-		    All rights reserved.
-		</footer>
+		@include('layouts.footer')
 
 		<!-- Control Sidebar -->
 		<aside class="control-sidebar control-sidebar-dark">
@@ -89,17 +86,17 @@
 	    <div class="modal-dialog">
 	      <div class="modal-content">
 	        <div class="modal-header">
-	          <h4 class="modal-title">Delete Class</h4>
+	          <h4 class="modal-title">{{Lang::get('title.delete_class')}}</h4>
 	          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	            <span aria-hidden="true">&times;</span>
 	          </button>
 	        </div>
 	        <div class="modal-body">
-	          <p> Are you sure? You want to Delete Class.</p>
+	          <p>{{Lang::get('message.delete_class')}}</p>
 	        </div>
 	        <div class="modal-footer">
-	          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-	          <a href="{{ url('/delete-class/11') }}" id="delete-class" class="btn btn-primary">Delete</a>
+	          <button type="button" class="btn btn-danger" data-dismiss="modal">{{ trans('button.close') }}</button>
+	          <a href="{{ url('/delete-class/11') }}" id="delete-class" class="btn btn-primary">{{ trans('button.delete') }}</a>
 	        </div>
 	      </div>
 	      <!-- /.modal-content -->
@@ -112,17 +109,17 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Restore Class</h4>
+              <h4 class="modal-title">{{Lang::get('title.restore_class')}}</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              <p> Are you sure? You want to Restore Class.</p>
+              <p>{{Lang::get('message.restore_class')}}</p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-              <a href="{{ url('/restore-class/11') }}" id="restore-class" class="btn btn-primary">Restore</a>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">{{ trans('button.close') }}</button>
+              <a href="{{ url('/restore-class/11') }}" id="restore-class" class="btn btn-primary">{{ trans('button.restore') }}</a>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -131,7 +128,6 @@
     </div>
     <!-- /.modal -->
 @endsection
-@section('script')
-	<script type="text/javascript" src="{{ asset('public/js/common-function.js') }}"></script>
+@section('script') 
 @endsection
 

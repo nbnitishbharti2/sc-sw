@@ -93,6 +93,7 @@
 				</div>
 			</section>
 		</div>
+		@include('layouts.footer')
 	</div>
 @endsection
 @section('script')

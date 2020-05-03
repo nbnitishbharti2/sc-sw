@@ -5,22 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repositories\ClassRepository;
 use App\Http\Requests\ClassRequest;
-use App\User;
-use Validator;
-use Auth;
 use Lang;
 use Log;
 use App;
 use Session;
+use Helper;
+
 class ClassController extends Controller
 {
    	public function __construct(ClassRepository $class)
 	{
 		$this->class = $class;
-		// if(!Auth::user()->lang) {
-		// 	App::setLocale('en');
-		// }
-		App::setLocale('en');
 	}
 
 	/**
@@ -82,6 +77,10 @@ class ClassController extends Controller
 	public function edit($class_id = 0)
 	{
 		try {
+			// Check permission
+			if(!Helper::checkPermission('edit-class')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			if($class_id == 0){
 				return back()->with('error', Lang::get('error.class_not_found'));
 			}
