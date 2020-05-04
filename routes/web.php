@@ -54,6 +54,10 @@ Route::group(['middleware'=>['localization']],function(){
 		Route::post('/update-roles', 'RoleController@update')->name('update.roles');
 		Route::get('/delete-roles/{roles_id}', 'RoleController@destroy')->name('delete.roles');
 		Route::get('/restore-roles/{roles_id}', 'RoleController@restore')->name('restore.roles');
+
+		/* Permission Routes */
+		Route::get('/add-permission', 'RoleController@permission')->name('add.permission');
+		Route::post('/store-permission', 'RoleController@storePermission')->name('store.permission');
 		
 		/*setting */
 		Route::get('/school-details', 'SchoolDetailsController@index')->name('view.school-details');

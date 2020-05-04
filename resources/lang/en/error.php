@@ -74,4 +74,5 @@ return [
     'room_not_restored'                     => 'Oops! Room not restored.',
     'room_not_deleted'                      => 'Oops! Room not deleted',
     'roles_not_added'                       => 'Oops! Roles not added',
+    'permission_not_added'                  => 'Oops! Permission not added',
 ];

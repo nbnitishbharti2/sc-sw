@@ -62,5 +62,6 @@ return [
     'room_updated_successfully'                 => 'Room updated successfully!',
     'room_deleted_successfully'                 => 'Room deleted successfully!',
     'room_restored_successfully'                => 'Room restored successfully!',
-    'all_previous_session_stopages_imported'    => 'All previous session stopages imported'
+    'all_previous_session_stopages_imported'    => 'All previous session stopages imported',
+    'permission_added_successfully'             => 'Permission added successfully',
 ];

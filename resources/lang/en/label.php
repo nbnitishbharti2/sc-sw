@@ -88,4 +88,7 @@ return [
     'hostel_id'                     => 'Hostel',
     'room_type_id'                  => 'Room Type',
     'room_capacity'                 => 'Room Capacity',
+    'module'                        => 'Module',
+    'permission_name'               => 'Permission Name',
+    'permission_description'        => 'Permission Description',
 ];

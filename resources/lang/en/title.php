@@ -107,4 +107,7 @@ return [
     'restore_room'              => 'Restore Room',
     'no_of_rooms'               => 'No of Rooms',
     'warden_name'               => 'Warden Name',
+    'permission'                => 'Permission',
+    'add_permission'            => 'Add Permission',
+    'module'                    => 'Module',
 ];

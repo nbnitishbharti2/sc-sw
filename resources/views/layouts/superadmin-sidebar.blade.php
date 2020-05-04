@@ -125,13 +125,13 @@
         <li class="nav-item">
           <a href="{{ route('view.roles') }}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
-            <p>Roles</p>
+            <p>{{trans('title.roles')}}</p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('view.section') }}" class="nav-link">
+          <a href="{{ route('add.permission') }}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
-            <p>Section</p>
+            <p>{{trans('title.permission')}}</p>
           </a>
         </li>
       </ul>

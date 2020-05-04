@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Repositories\RoleRepository;
 use App\Http\Requests\RolesRequest;
+use App\Http\Requests\PermissionRequest;
 use Helper;
 use Log;
 
@@ -92,6 +93,41 @@ class RoleController extends Controller
 			return view('role.edit', $data);
 		} catch(\Exception $err){
     		Log::error('Error in edit on RoleController :'. $err->getMessage());
+    		return back()->with('error', $err->getMessage());
+    	}
+	}
+
+	/**
+	* Method to show form for create resource
+	*
+	* @return Illuminate\Http\Response
+	*/
+	public function permission()
+	{
+		try {
+			$data = $this->role->permission();
+			return view('permission.form', $data);
+		} catch(\Exception $err){
+    		Log::error('Error in permission on RoleController :'. $err->getMessage());
+    		return back()->with('error', $err->getMessage());
+    	}
+	}
+	
+	/**
+	* Method to create resource
+	* @param App\Http\Requests\PermissionRequest $permission_request
+	* @return Illuminate\Http\Response
+	*/
+	public function storePermission(PermissionRequest $permission_request)
+	{
+		try {
+            $result = $this->role->storePermission($permission_request);
+			if($result == true) {
+				return back()->with('success', trans('success.permission_added_successfully'));
+			}
+			return back()->with('error', trans('error.permission_not_added'));
+		} catch(\Exception $err){
+    		Log::error('Error in store on RoleController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());
     	}
 	}

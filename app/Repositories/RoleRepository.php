@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Role;
 use App\Models\Permission;
+use App\Models\Module;
 use Log;
 use Session;
 class RoleRepository {
@@ -215,6 +216,57 @@ class RoleRepository {
             }
         } catch(\Exception $err){
             Log::error('message error in delete on RoleRepository :'. $err->getMessage());
+            return back()->with('error', $err->getMessage());
+        }
+    }
+
+    /**
+    * Method to fetch create resource data
+    *
+    * @return array $data
+    */
+    public function permission()
+    {
+        try {
+            $data = [
+                'action'        => route('store.permission'),
+                'page_title'    => trans('title.permission'),
+                'title'         => trans('title.add_permission'),
+                'permission_id' => 0,
+                'name'          => (old('name')) ? old('name') : '',
+                'description'   => (old('description')) ? old('description') : '',
+                'modules'        => Module::get(),
+            ];
+            return $data;
+        } catch(\Exception $err){
+            Log::error('message error in permission on RoleRepository :'. $err->getMessage());
+            return back()->with('error', $err->getMessage());
+        }
+    }
+
+    /**
+    * Method to create resource
+    * @param $request
+    * @return boolean
+    */
+    public function storePermission($request)
+    {
+        try {
+            $data = [
+                'module_id'     => $request->module_id,
+                'name'          => $request->name,
+                'description'   => $request->description,
+                'guard_name'    => 'web',
+            ];
+            
+            $permission = Permission::create($data);
+            if ($permission->exists) {
+               return true;
+            } else {
+               return false;
+            }
+        } catch(\Exception $err){
+            Log::error('message error in storePermission on RoleRepository :'. $err->getMessage());
             return back()->with('error', $err->getMessage());
         }
     }

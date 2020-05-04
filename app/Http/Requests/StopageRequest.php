@@ -27,7 +27,6 @@ class StopageRequest extends FormRequest
     {
         $input = Input::all();
         return [
-            //'stopage_name' => 'required|string|max:190',
             'stopage_name'      =>  ['required', 'string','max:190', Rule::unique('stopages')->where(function ($query) use ($input) {
                                         return $query->where('root_id', $input['root_id'])->where('vehicle_type_id', $input['vehicle_type_id'])->where('vehicle_id', $input['vehicle_id'])->where('session_id', Session::get('session'));
                                     })->ignore($input['stopage_id'])], 

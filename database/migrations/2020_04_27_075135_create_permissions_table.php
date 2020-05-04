@@ -15,10 +15,14 @@ class CreatePermissionsTable extends Migration
     {
         Schema::create('permissions', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('module_id');
             $table->string('name');
             $table->string('description');
             $table->string('guard_name');
             $table->timestamps();
+        });
+        Schema::table('permissions', function($table){
+            $table->foreign('module_id')->references('id')->on('module')->onDelete('cascade');
         });
     }
 

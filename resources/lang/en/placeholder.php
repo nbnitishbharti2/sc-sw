@@ -67,4 +67,7 @@ return [
     'hostel_id'                 => 'Enter Hostel',
     'room_type_id'              => 'Enter Room Type',
     'room_capacity'             => 'Enter Room Capacity',
+    'module'                    => 'Module',
+    'permission_name'           => 'Enter Permission Route ( Like view.class )',
+    'permission_description'    => 'Enter Permission Description ( Like View Class )',
 ];
