@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Repositories\RoleRepository;
 use App\Http\Requests\RolesRequest;
 use App\Http\Requests\PermissionRequest;
+use Illuminate\Http\Request;
 use Helper;
 use Log;
 
@@ -128,6 +129,19 @@ class RoleController extends Controller
 			return back()->with('error', trans('error.permission_not_added'));
 		} catch(\Exception $err){
     		Log::error('Error in store on RoleController :'. $err->getMessage());
+    		return back()->with('error', $err->getMessage());
+    	}
+	}
+	public function update(Request $request)
+	{ 
+		try {
+            $result = $this->role->update($request);
+			if($result == true) {
+				return back()->with('success', trans('success.role_updated_successfully'));
+			}
+			return back()->with('error', trans('error.role_not_updated'));
+		} catch(\Exception $err){
+    		Log::error('Error in update on RoleController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());
     	}
 	}
