@@ -16,6 +16,7 @@ class CreateFeeFrequenciesTable extends Migration
         Schema::create('fee_frequencies', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name',255);
+            $table->integer('value');
             $table->timestamps();
         });
     }
