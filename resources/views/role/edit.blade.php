@@ -83,7 +83,7 @@
                                             @else   
                                                 <div class="col-3  mt-2">
                                                     <div class="icheck-primary d-inline">
-                                                        <input type="checkbox" name="permission[]" id="permission_{{ $value->id }}" value="{{ $value->id }}" class="" {{ (isset($permission_role)?((in_array('5', $permission_role) )? 'checked="checked"' : ''):'') }} >
+                                                        <input type="checkbox" name="permission[]" id="permission_{{ $value->id }}" value="{{ $value->id }}" class="" {{ (isset($permission_role)?((in_array($value->id, $permission_role) )? 'checked="checked"' : ''):'') }} >
                                                         <label for="permission_{{ $value->id }}"> </label>
                                                     </div>
                                                 </div>
