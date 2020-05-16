@@ -8,10 +8,10 @@ use App\Http\Requests\HostelRequest;
 use App\Models\Hostel;
 use Validator;
 use Auth;
-use Lang;
 use Log;
 use App;
 use Session;
+use Helper;
 
 class HostelController extends Controller
 {
@@ -28,6 +28,9 @@ class HostelController extends Controller
 	public function index()
 	{
 		try {
+			if(!Helper::checkPermission('view-hostel')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			$data['hostel'] = $this->hostel->getAllHostel(); // Fetch all hostel data
 			return view('hostel.index',$data);
 		} catch(\Exception $err){
@@ -44,6 +47,9 @@ class HostelController extends Controller
 	public function create()
 	{
 		try {
+			if(!Helper::checkPermission('add-hostel')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			$data = $this->hostel->create();
 			return view('hostel.form', $data);
 		} catch(\Exception $err){
@@ -61,11 +67,14 @@ class HostelController extends Controller
 	{
 		$facilities_ids=implode(',',$hostel_request->facilities_ids);
 		try {
+			if(!Helper::checkPermission('add-hostel')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			$result = $this->hostel->store($hostel_request,$facilities_ids);
 			if($result == true) {
-				return back()->with('success', Lang::get('success.hostel_added_successfully'));
+				return back()->with('success', trans('success.hostel_added_successfully'));
 			}
-			return back()->with('error', Lang::get('error.hostel_not_added'));
+			return back()->with('error', trans('error.hostel_not_added'));
 		} catch(\Exception $err){
     		Log::error('Error in store on HostelController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());
@@ -80,8 +89,11 @@ class HostelController extends Controller
 	public function edit($hostel_id = 0)
 	{
 		try {
+			if(!Helper::checkPermission('edit-hostel')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			if($hostel_id == 0){
-				return back()->with('error', Lang::get('error.hostel_not_found'));
+				return back()->with('error', trans('error.hostel_not_found'));
 			}
 			$data = $this->hostel->edit($hostel_id);
 			return view('hostel.form', $data);
@@ -100,11 +112,14 @@ class HostelController extends Controller
 	{
 		$facilities_ids=implode(',',$request->facilities_ids);
 		try {
+			if(!Helper::checkPermission('edit-hostel')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			$result = $this->hostel->update($request,$facilities_ids);
 			if($result == true) {
-				return redirect('view-hostel')->with('success', Lang::get('success.hostel_updated_successfully'));
+				return redirect('view-hostel')->with('success', trans('success.hostel_updated_successfully'));
 			}
-			return back()->with('error', Lang::get('error.hostel_not_updated'));
+			return back()->with('error', trans('error.hostel_not_updated'));
 		} catch(\Exception $err){
 			Log::error('Error in update on HostelController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());
@@ -119,14 +134,17 @@ class HostelController extends Controller
 	public function delete($hostel_id = 0)
 	{
 		try {
+			if(!Helper::checkPermission('delete-hostel')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			if($hostel_id == 0){
-				return back()->with('error', Lang::get('error.hostel_not_found'));
+				return back()->with('error', trans('error.hostel_not_found'));
 			}
 			$result = $this->hostel->delete($hostel_id);
 			if($result == true) {
-				return back()->with('success', Lang::get('success.hostel_deleted_successfully'));
+				return back()->with('success', trans('success.hostel_deleted_successfully'));
 			}
-			return back()->with('error', Lang::get('error.hostel_not_deleted'));
+			return back()->with('error', trans('error.hostel_not_deleted'));
 		} catch(\Exception $err){
     		Log::error('Error in delete on HostelController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());
@@ -141,14 +159,17 @@ class HostelController extends Controller
 	public function restore($hostel_id = 0)
 	{
 		try {
+			if(!Helper::checkPermission('delete-hostel')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			if($hostel_id == 0){
-				return back()->with('error', Lang::get('error.hostel_not_found'));
+				return back()->with('error', trans('error.hostel_not_found'));
 			}
 			$result = $this->hostel->restore($hostel_id);
 			if($result == true) {
-				return back()->with('success', Lang::get('success.hostel_restored_successfully'));
+				return back()->with('success', trans('success.hostel_restored_successfully'));
 			}
-			return back()->with('error', Lang::get('error.hostel_not_restored'));
+			return back()->with('error', trans('error.hostel_not_restored'));
 		} catch(\Exception $err){
     		Log::error('Error in restore on HostelController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());

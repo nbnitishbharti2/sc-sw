@@ -151,3 +151,41 @@ function room_confirm_restore(room_id) {
     $('#restore-room').attr('href', restore_url);
     $('#modal-room-restore').modal('show');
 }
+
+//Delete fee show popup function
+function fee_confirm_delete(fee_id) {
+    var delete_url = $('#delete-fee').attr('href');
+    delete_url = delete_url.replace(/\d+/g, '') + fee_id;
+    $('#delete-fee').attr('href', delete_url);
+    $('#modal-fee-delete').modal('show');
+}
+//Function for show restore popup for fee
+function fee_confirm_restore(fee_id) {
+    var restore_url = $('#restore-fee').attr('href');
+    restore_url = restore_url.replace(/\d+/g, '') + fee_id;
+    $('#restore-fee').attr('href', restore_url);
+    $('#modal-fee-restore').modal('show');
+}
+
+
+//Fee for class index script starts here
+$("#class").on('change', function(){
+    $("#feeForClassForm").submit();
+});
+
+$("#fee").on('change', function(){
+    $("#feeForClassForm").submit();
+});
+
+$("#fee_head").on('change', function(){
+    $("#feeForClassForm").submit();
+});
+
+$("#fee_type").on('change', function(){
+    $("#feeForClassForm").submit();
+});
+
+$("#fee_frequency").on('change', function(){
+    $("#feeForClassForm").submit();
+});
+//Fee for class index script ends here

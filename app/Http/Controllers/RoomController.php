@@ -10,10 +10,10 @@ use App\Models\Hostel;
 use App\Models\RoomType;
 use Validator;
 use Auth;
-use Lang;
 use Log;
 use App;
 use Session;
+use Helper;
 
 class RoomController extends Controller
 {
@@ -30,6 +30,9 @@ class RoomController extends Controller
 	public function index()
 	{
 		try {
+			if(!Helper::checkPermission('view-room')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			$data['room'] = $this->room->getAllRoom(); // Fetch all room data 
 			return view('room.index', $data);
 		} catch(\Exception $err){
@@ -46,6 +49,9 @@ class RoomController extends Controller
 	public function create()
 	{
 		try {
+			if(!Helper::checkPermission('add-room')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			$data = $this->room->create();
 			return view('room.form', $data);
 		} catch(\Exception $err){
@@ -62,11 +68,14 @@ class RoomController extends Controller
 	public function store(RoomRequest $room_request)
 	{
 		try {
+			if(!Helper::checkPermission('add-room')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			$result = $this->room->store($room_request);
 			if($result == true) {
-				return back()->with('success', Lang::get('success.room_added_successfully'));
+				return back()->with('success', trans('success.room_added_successfully'));
 			}
-			return back()->with('error', Lang::get('error.room_not_added'));
+			return back()->with('error', trans('error.room_not_added'));
 		} catch(\Exception $err){
     		Log::error('Error in store on RoomController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());
@@ -81,8 +90,11 @@ class RoomController extends Controller
 	public function edit($room_id = 0)
 	{
 		try {
+			if(!Helper::checkPermission('edit-room')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			if($room_id == 0){
-				return back()->with('error', Lang::get('error.room_not_found'));
+				return back()->with('error', trans('error.room_not_found'));
 			}
 			$data = $this->room->edit($room_id);
 			return view('room.form', $data);
@@ -100,11 +112,14 @@ class RoomController extends Controller
 	public function update(RoomRequest $request)
 	{
 		try {
+			if(!Helper::checkPermission('edit-room')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			$result = $this->room->update($request);
 			if($result == true) {
-				return redirect('view-room')->with('success', Lang::get('success.room_updated_successfully'));
+				return redirect('view-room')->with('success', trans('success.room_updated_successfully'));
 			}
-			return back()->with('error', Lang::get('error.room_not_updated'));
+			return back()->with('error', trans('error.room_not_updated'));
 		} catch(\Exception $err){
 			Log::error('Error in update on RoomController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());
@@ -119,14 +134,17 @@ class RoomController extends Controller
 	public function delete($room_id = 0)
 	{
 		try {
+			if(!Helper::checkPermission('delete-room')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			if($room_id == 0){
-				return back()->with('error', Lang::get('error.room_not_found'));
+				return back()->with('error', trans('error.room_not_found'));
 			}
 			$result = $this->room->delete($room_id);
 			if($result == true) {
-				return back()->with('success', Lang::get('success.room_deleted_successfully'));
+				return back()->with('success', trans('success.room_deleted_successfully'));
 			}
-			return back()->with('error', Lang::get('error.room_not_deleted'));
+			return back()->with('error', trans('error.room_not_deleted'));
 		} catch(\Exception $err){
     		Log::error('Error in delete on RoomController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());
@@ -141,14 +159,17 @@ class RoomController extends Controller
 	public function restore($room_id = 0)
 	{
 		try {
+			if(!Helper::checkPermission('delete-room')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			if($room_id == 0){
-				return back()->with('error', Lang::get('error.room_not_found'));
+				return back()->with('error', trans('error.room_not_found'));
 			}
 			$result = $this->room->restore($room_id);
 			if($result == true) {
-				return back()->with('success', Lang::get('success.room_restored_successfully'));
+				return back()->with('success', trans('success.room_restored_successfully'));
 			}
-			return back()->with('error', Lang::get('error.room_not_restored'));
+			return back()->with('error', trans('error.room_not_restored'));
 		} catch(\Exception $err){
     		Log::error('Error in restore on RoomController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());

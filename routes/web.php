@@ -133,10 +133,33 @@ Route::group(['middleware'=>['localization']],function(){
 		Route::get('/delete-room/{room_id}', 'RoomController@delete')->name('delete.room');
 		Route::get('/restore-room/{room_id}', 'RoomController@restore')->name('restore.room');
 
+
+		/* Fee Routes */
+		Route::get('/view-fee', 'FeeController@index')->name('view.fee');
+		Route::get('/add-fee', 'FeeController@create')->name('add.fee');
+		Route::post('/store-fee', 'FeeController@store')->name('store.fee');
+		Route::get('/edit-fee/{fee_id}', 'FeeController@edit')->name('edit.fee');
+		Route::post('/update-fee', 'FeeController@update')->name('update.fee');
+		Route::get('/delete-fee/{fee_id}', 'FeeController@delete')->name('delete.fee');
+		Route::get('/restore-fee/{fee_id}', 'FeeController@restore')->name('restore.fee');
+
+
+		/* Fee For Classes Routes */
+		Route::get('/view-fee-for-classes', 'FeeForClassController@index')->name('view.fee-for-classes');
+		Route::get('/add-fee-for-classes/{fee_id}', 'FeeForClassController@addFeeForClasses')->name('add.fee-for-classes');
+		Route::post('/store-fee-for-classes', 'FeeForClassController@storeFeeForClasses')->name('store.fee-for-classes');
+		Route::get('/edit-fee-for-classes/{fee_id}', 'FeeForClassController@edit')->name('edit.fee-for-classes');
+		Route::post('/update-fee-for-classes', 'FeeForClassController@update')->name('update.fee-for-classes');
+
+
+
 		/*  All Ajax Routes */
 		Route::post('/get-vehicle-no-from-vehicle', 'VehicleRootMapController@getVehicleNo')->name('get-vehicle-no-from-vehicle');
 		Route::post('/get-vehicle-type-from-vehicle-root-map', 'StopageController@getVehicleType')->name('get-vehicle-type-from-vehicle-root-map');
 		Route::post('/get-vehicle-no-from-vehicle-root-map', 'StopageController@getVehicleNo')->name('get-vehicle-no-from-vehicle-root-map');
+		Route::post('/get-fee-head-frequency-from-fee-setting', 'FeeController@getFeeHeadFrequency')->name('get-fee-head-frequency-from-fee-setting');
+		Route::post('/get-fee-frequency-from-fee-frequency', 'FeeController@getFeeFrequency')->name('get-fee-frequency-from-fee-frequency');
+		Route::post('/get-frequency-value-from-fee-frequency', 'FeeController@getFeeFrequencyValue')->name('get-frequency-value-from-fee-frequency');
 		/*Route::get('/test', 'HomeController@test')->name('test');*/
 	});
 });

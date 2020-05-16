@@ -12,10 +12,10 @@ use App\Models\VehicleType;
 use App\Models\Vehicle;
 use Validator;
 use Auth;
-use Lang;
 use Log;
 use App;
 use Session;
+use Helper;
 
 class StopageController extends Controller
 {
@@ -32,6 +32,9 @@ class StopageController extends Controller
 	public function index()
 	{
 		try {
+			if(!Helper::checkPermission('view-stopage')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			$data['stopage'] = $this->stopage->getAllStopage(); // Fetch all stopage data
 			return view('stopage.index', $data);
 		} catch(\Exception $err){
@@ -48,6 +51,9 @@ class StopageController extends Controller
 	public function create()
 	{
 		try {
+			if(!Helper::checkPermission('add-stopage')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			$data = $this->stopage->create();
 			return view('stopage.form', $data);
 		} catch(\Exception $err){
@@ -86,11 +92,14 @@ class StopageController extends Controller
 	public function store(StopageRequest $stopage_request)
 	{
 		try {
+			if(!Helper::checkPermission('add-stopage')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			$result = $this->stopage->store($stopage_request);
 			if($result == true) {
-				return back()->with('success', Lang::get('success.stopage_added_successfully'));
+				return back()->with('success', trans('success.stopage_added_successfully'));
 			}
-			return back()->with('error', Lang::get('error.stopage_not_added'));
+			return back()->with('error', trans('error.stopage_not_added'));
 		} catch(\Exception $err){
 			Log::error('Error in store on StopageController :'. $err->getMessage());
 			return back()->with('error', $err->getMessage());
@@ -105,8 +114,11 @@ class StopageController extends Controller
 	public function edit($stopage_id = 0)
 	{
 		try {
+			if(!Helper::checkPermission('edit-stopage')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			if($stopage_id == 0){
-				return back()->with('error', Lang::get('error.stopage_not_found'));
+				return back()->with('error', trans('error.stopage_not_found'));
 			}
 			$data = $this->stopage->edit($stopage_id);
 			return view('stopage.form', $data);
@@ -124,11 +136,14 @@ class StopageController extends Controller
 	public function update(StopageRequest $request)
 	{
 		try {
+			if(!Helper::checkPermission('edit-stopage')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			$result = $this->stopage->update($request);
 			if($result == true) {
-				return redirect('view-stopage')->with('success', Lang::get('success.stopage_updated_successfully'));
+				return redirect('view-stopage')->with('success', trans('success.stopage_updated_successfully'));
 			}
-			return back()->with('error', Lang::get('error.stopage_not_updated'));
+			return back()->with('error', trans('error.stopage_not_updated'));
 		} catch(\Exception $err){
 			Log::error('Error in update on StopageController :'. $err->getMessage());
 			return back()->with('error', $err->getMessage());
@@ -143,14 +158,17 @@ class StopageController extends Controller
 	public function delete($stopage_id = 0)
 	{
 		try {
+			if(!Helper::checkPermission('delete-stopage')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			if($stopage_id == 0){
-				return back()->with('error', Lang::get('error.stopage_not_found'));
+				return back()->with('error', trans('error.stopage_not_found'));
 			}
 			$result = $this->stopage->delete($stopage_id);
 			if($result == true) {
-				return back()->with('success', Lang::get('success.stopage_deleted_successfully'));
+				return back()->with('success', trans('success.stopage_deleted_successfully'));
 			}
-			return back()->with('error', Lang::get('error.stopage_not_deleted'));
+			return back()->with('error', trans('error.stopage_not_deleted'));
 		} catch(\Exception $err){
 			Log::error('Error in delete on StopageController :'. $err->getMessage());
 			return back()->with('error', $err->getMessage());
@@ -165,14 +183,17 @@ class StopageController extends Controller
 	public function restore($stopage_id = 0)
 	{
 		try {
+			if(!Helper::checkPermission('delete-stopage')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			if($stopage_id == 0){
-				return back()->with('error', Lang::get('error.stopage_not_found'));
+				return back()->with('error', trans('error.stopage_not_found'));
 			}
 			$result = $this->stopage->restore($stopage_id);
 			if($result == true) {
-				return back()->with('success', Lang::get('success.stopage_restored_successfully'));
+				return back()->with('success', trans('success.stopage_restored_successfully'));
 			}
-			return back()->with('error', Lang::get('error.stopage_not_restored'));
+			return back()->with('error', trans('error.stopage_not_restored'));
 		} catch(\Exception $err){
 			Log::error('Error in restore on StopageController :'. $err->getMessage());
 			return back()->with('error', $err->getMessage());
@@ -181,14 +202,17 @@ class StopageController extends Controller
 	public function import()
 	{
 		try {
+			if(!Helper::checkPermission('import.stopage')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			if(Session::get('nextsession')==null){
-				return back()->with('error', Lang::get('error.previous_session_not_found'));
+				return back()->with('error', trans('error.previous_session_not_found'));
 			}
 			$result = $this->stopage->importPreviousSessionStopages(); //Import previous session classes
 			if($result == true) {
-				return back()->with('success', Lang::get('success.all_previous_session_stopages_imported'));
+				return back()->with('success', trans('success.all_previous_session_stopages_imported'));
 			}
-			return back()->with('error', Lang::get('error.stopages_not_found_in_previous_session'));
+			return back()->with('error', trans('error.stopages_not_found_in_previous_session'));
 		} catch(\Exception $err){
 			Log::error('Error in import on StopageController :'. $err->getMessage());
 			return back()->with('error', $err->getMessage());

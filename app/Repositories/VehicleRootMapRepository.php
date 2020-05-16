@@ -7,7 +7,6 @@ use App\Models\Root;
 use App\Models\Vehicle;
 use App\Models\VehicleType;
 use Log;
-use Lang;
 use Session;
 
 class VehicleRootMapRepository {
@@ -38,8 +37,8 @@ class VehicleRootMapRepository {
         try {
             $data = [
                 'action'          => route('store.vehicle_root_map'),
-                'page_title'      => Lang::get('label.vehicle_root_map'),
-                'title'           => Lang::get('title.add_vehicle_root_map'),
+                'page_title'      => trans('label.vehicle_root_map'),
+                'title'           => trans('title.add_vehicle_root_map'),
                 'vehicle_root_map_id' => 0,
                 'root_list'    => Root::getAllRootForListing(),
                 'root_id'       => 0,
@@ -105,8 +104,8 @@ class VehicleRootMapRepository {
             // Create data for edit form
             $data = [
                 'action'              => route('update.vehicle_root_map'),
-                'page_title'          => Lang::get('label.vehicle_root_map'),
-                'title'               => Lang::get('title.edit_vehicle_root_map'),
+                'page_title'          => trans('label.vehicle_root_map'),
+                'title'               => trans('title.edit_vehicle_root_map'),
                 'vehicle_root_map_id' => $vehicle_root_map->id,
                 'root_list'           => Root::getAllRootForListing(),
                 'root_id'             => $vehicle_root_map->roots->id,

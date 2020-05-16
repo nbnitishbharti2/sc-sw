@@ -65,4 +65,10 @@ return [
     'all_previous_session_stopages_imported'    => 'All previous session stopages imported',
     'permission_added_successfully'             => 'Permission added successfully',
     'role_updated_successfully'                 => 'Role updated successfully',
+    'fee_added_successfully'                    => 'Fee added successfully!',
+    'fee_updated_successfully'                  => 'Fee updated successfully!',
+    'fee_deleted_successfully'                  => 'Fee deleted successfully!',
+    'fee_restored_successfully'                 => 'Fee restored successfully!',
+    'fee_for_class_added_successfully'          => 'Fee For Classes added successfully!',
+    'fee_for_class_updated_successfully'        => 'Fee For Classes updated successfully!',
 ];

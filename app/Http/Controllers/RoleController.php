@@ -76,7 +76,7 @@ class RoleController extends Controller
     	}
 	}
 
-	/**
+	/**  
 	* Method to show form for edit resource
 	* @param int $roles_id
 	* @return Illuminate\Http\Response

@@ -9,9 +9,9 @@ use App\Http\Requests\SectionRequest;
 use App\User;
 use Validator;
 use Auth;
-use Lang;
 use Log;
 use App;
+use Helper;
 
 
 class SectionController extends Controller
@@ -32,6 +32,9 @@ class SectionController extends Controller
     public function index()
     {
         try {
+            if(!Helper::checkPermission('view-section')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
             $data['section'] = $this->section->getAllSection(); // Fetch all section data
             return view('section.index', $data);
         } catch(\Exception $err){
@@ -49,6 +52,9 @@ class SectionController extends Controller
     {
        
         try {
+            if(!Helper::checkPermission('add-section')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
             $data = $this->section->create();
             return view('section.form', $data);
         } catch(\Exception $err){
@@ -66,11 +72,14 @@ class SectionController extends Controller
     public function store(SectionRequest $section_request)
     {
         try {
+            if(!Helper::checkPermission('add-section')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			$result = $this->section->store($section_request);
 			if($result == true) {
-				return back()->with('success', Lang::get('success.section_added_successfully'));
+				return back()->with('success', trans('success.section_added_successfully'));
 			}
-			return back()->with('error', Lang::get('error.section_not_added'));
+			return back()->with('error', trans('error.section_not_added'));
 		} catch(\Exception $err){
     		Log::error('Error in index on SectionController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());
@@ -97,8 +106,11 @@ class SectionController extends Controller
     public function edit($section_id = 0)
     {
         try {
+            if(!Helper::checkPermission('edit-section')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			if($section_id == 0){
-				return back()->with('error', Lang::get('error.section_not_found'));
+				return back()->with('error', trans('error.section_not_found'));
             }
             $data = $this->section->edit($section_id);
 			return view('section.form', $data);
@@ -118,11 +130,14 @@ class SectionController extends Controller
     public function update(SectionRequest $section_request)
     {
         try {
+            if(!Helper::checkPermission('edit-section')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			$result = $this->section->update($section_request);
 			if($result == true) {
-				return redirect('view-section')->with('success', Lang::get('success.section_updated_successfully'));
+				return redirect('view-section')->with('success', trans('success.section_updated_successfully'));
 			}
-			return back()->with('error', Lang::get('error.section_not_updated'));
+			return back()->with('error', trans('error.section_not_updated'));
 		} catch(\Exception $err){
 			Log::error('Error in update on SectionController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());
@@ -138,14 +153,17 @@ class SectionController extends Controller
     public function destroy($section_id = 0)
     {
         try {
+            if(!Helper::checkPermission('delete-section')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			if($section_id == 0){
-				return back()->with('error', Lang::get('error.section_not_found'));
+				return back()->with('error', trans('error.section_not_found'));
 			}
 			$result = $this->section->delete($section_id);
 			if($result == true) {
-				return back()->with('success', Lang::get('success.section_deleted_successfully'));
+				return back()->with('success', trans('success.section_deleted_successfully'));
 			}
-			return back()->with('error', Lang::get('error.section_not_deleted'));
+			return back()->with('error', trans('error.section_not_deleted'));
 		} catch(\Exception $err){
     		Log::error('Error in index on SectionController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());
@@ -160,17 +178,21 @@ class SectionController extends Controller
 	public function restore($section_id = 0)
 	{
 		try {
+            if(!Helper::checkPermission('delete-section')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			if($section_id == 0) {
-				return back()->with('error', Lang::get('error.section_not_found'));
+				return back()->with('error', trans('error.section_not_found'));
 			}
 			$result = $this->section->restore($section_id);
 			if($result == true) {
-				return back()->with('success', Lang::get('success.section_restored_successfully'));
+				return back()->with('success', trans('success.section_restored_successfully'));
 			}
-			return back()->with('error', Lang::get('error.section_not_restored'));
+			return back()->with('error', trans('error.section_not_restored'));
 		} catch(\Exception $err){
     		Log::error('Error in restore on SectionController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());
     	}
     }
+    
 }

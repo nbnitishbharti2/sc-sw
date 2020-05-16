@@ -31,4 +31,6 @@ return [
     'restore_hostel'                    => 'Are you sure? You want to Restore Hostel.',
     'delete_room'                       => 'Are you sure? You want to Delete Room.',
     'restore_room'                      => 'Are you sure? You want to Restore Room.',
+    'delete_fee'                        => 'Are you sure? You want to Delete Fee.',
+    'restore_fee'                       => 'Are you sure? You want to Restore Fee.',
 ];

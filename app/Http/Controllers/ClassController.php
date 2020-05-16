@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repositories\ClassRepository;
 use App\Http\Requests\ClassRequest;
-use Lang;
 use Log;
 use App;
 use Session;
@@ -26,6 +25,9 @@ class ClassController extends Controller
 	public function index()
 	{
 		try {
+			if(!Helper::checkPermission('view-class')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			$data['class'] = $this->class->getAllClass(); // Fetch all class data
 			return view('class.index', $data);
 		} catch(\Exception $err){
@@ -42,6 +44,9 @@ class ClassController extends Controller
 	public function create()
 	{
 		try {
+			if(!Helper::checkPermission('add-class')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			$data = $this->class->create();
 			return view('class.form', $data);
 		} catch(\Exception $err){
@@ -58,11 +63,14 @@ class ClassController extends Controller
 	public function store(ClassRequest $class_request)
 	{
 		try {
+			if(!Helper::checkPermission('add-class')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			$result = $this->class->store($class_request);
 			if($result == true) {
-				return back()->with('success', Lang::get('success.class_added_successfully'));
+				return back()->with('success', trans('success.class_added_successfully'));
 			}
-			return back()->with('error', Lang::get('error.class_not_added'));
+			return back()->with('error', trans('error.class_not_added'));
 		} catch(\Exception $err){
     		Log::error('Error in store on ClassController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());
@@ -82,7 +90,7 @@ class ClassController extends Controller
                 return back()->with('error', trans('error.unauthorized'));
             }
 			if($class_id == 0){
-				return back()->with('error', Lang::get('error.class_not_found'));
+				return back()->with('error', trans('error.class_not_found'));
 			}
 			$data = $this->class->edit($class_id);
 			return view('class.form', $data);
@@ -100,11 +108,14 @@ class ClassController extends Controller
 	public function update(Request $request)
 	{
 		try {
+			if(!Helper::checkPermission('edit-class')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			$result = $this->class->update($request);
 			if($result == true) {
-				return redirect('view-class')->with('success', Lang::get('success.class_updated_successfully'));
+				return redirect('view-class')->with('success', trans('success.class_updated_successfully'));
 			}
-			return back()->with('error', Lang::get('error.class_not_updated'));
+			return back()->with('error', trans('error.class_not_updated'));
 		} catch(\Exception $err){
 			Log::error('Error in update on ClassController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());
@@ -119,14 +130,17 @@ class ClassController extends Controller
 	public function delete($class_id = 0)
 	{
 		try {
+			if(!Helper::checkPermission('delete-class')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			if($class_id == 0){
-				return back()->with('error', Lang::get('error.class_not_found'));
+				return back()->with('error', trans('error.class_not_found'));
 			}
 			$result = $this->class->delete($class_id);
 			if($result == true) {
-				return back()->with('success', Lang::get('success.class_deleted_successfully'));
+				return back()->with('success', trans('success.class_deleted_successfully'));
 			}
-			return back()->with('error', Lang::get('error.class_not_deleted'));
+			return back()->with('error', trans('error.class_not_deleted'));
 		} catch(\Exception $err){
     		Log::error('Error in index on ClassController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());
@@ -141,14 +155,17 @@ class ClassController extends Controller
 	public function restore($class_id = 0)
 	{
 		try {
+			if(!Helper::checkPermission('delete-class')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			if($class_id == 0){
-				return back()->with('error', Lang::get('error.class_not_found'));
+				return back()->with('error', trans('error.class_not_found'));
 			}
 			$result = $this->class->restore($class_id);
 			if($result == true) {
-				return back()->with('success', Lang::get('success.class_restored_successfully'));
+				return back()->with('success', trans('success.class_restored_successfully'));
 			}
-			return back()->with('error', Lang::get('error.class_not_restored'));
+			return back()->with('error', trans('error.class_not_restored'));
 		} catch(\Exception $err){
     		Log::error('Error in index on ClassController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());
@@ -163,14 +180,17 @@ class ClassController extends Controller
 	public function importPreviousSessionClassSection()
 	{
 		try {
+			if(!Helper::checkPermission('import.class.section')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			if(Session::get('nextsession')==null){
-				return back()->with('error', Lang::get('error.previous_session_not_found'));
+				return back()->with('error', trans('error.previous_session_not_found'));
 			}
 			$result = $this->class->importPreviousSessionClass(); //Import previous session classes
 			if($result == true) {
-				return back()->with('success', Lang::get('success.all_previous_session_class_imported'));
+				return back()->with('success', trans('success.all_previous_session_class_imported'));
 			}
-			return back()->with('error', Lang::get('error.class_not_found_in_previous_session'));
+			return back()->with('error', trans('error.class_not_found_in_previous_session'));
 		} catch(\Exception $err){
     		Log::error('Error in index on ClassController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());

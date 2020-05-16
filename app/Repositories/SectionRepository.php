@@ -7,7 +7,7 @@ use App\Models\Classes;
 use Log;
 use Auth;
 use Session;
-use Lang;
+
 class SectionRepository {
 
     /**
@@ -36,8 +36,8 @@ class SectionRepository {
         try {
             $data = [
                 'action'        => route('store.section'),
-                'page_title'    => Lang::get('label.section'),
-                'title'         => Lang::get('title.add_section'),
+                'page_title'    => trans('label.section'),
+                'title'         => trans('title.add_section'),
                 'section_id'    => 0,
                 'class_list'    => Classes::getAllClassForListing(),
                 'class_id'      => 0,
@@ -96,8 +96,8 @@ class SectionRepository {
             // Create data for edit form
             $data = [
                 'action'            => route('update.section'),
-                'page_title'    => Lang::get('label.section'),
-                'title'         => Lang::get('title.edit_section'),
+                'page_title'    => trans('label.section'),
+                'title'         => trans('title.edit_section'),
                 'class_id'          => $section->class->id,
                 'section_id'        => $section->id,
                 'class_list'        => Classes::getAllClassForListing(),

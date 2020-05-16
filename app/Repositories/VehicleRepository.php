@@ -5,7 +5,6 @@ namespace App\Repositories;
 use App\Models\Vehicle;
 use App\Models\VehicleType;
 use Log;
-use Lang;
 use Session;
 
 class VehicleRepository {
@@ -36,8 +35,8 @@ class VehicleRepository {
         try {
             $data = [
                 'action'          => route('store.vehicle'),
-                'page_title'      => Lang::get('label.vehicle'),
-                'title'           => Lang::get('title.add_vehicle'),
+                'page_title'      => trans('label.vehicle'),
+                'title'           => trans('title.add_vehicle'),
                 'vehicle_id' => 0,
                 'driver_name'       => (old('driver_name')) ? old('driver_name') : '',
                 'driver_contact_no' => (old('driver_contact_no')) ? old('driver_contact_no') : '',
@@ -97,8 +96,8 @@ class VehicleRepository {
             // Create data for edit form
             $data = [
                 'action'          => route('update.vehicle'),
-                'page_title'      => Lang::get('label.vehicle'),
-                'title'           => Lang::get('title.edit_vehicle'),
+                'page_title'      => trans('label.vehicle'),
+                'title'           => trans('title.edit_vehicle'),
                 'vehicle_id' => $vehicle->id,
                 'driver_name'       => ($vehicle->driver_name) ? $vehicle->driver_name : old('driver_name'),
                 'driver_contact_no' => ($vehicle->driver_contact_no) ? $vehicle->driver_contact_no : old('driver_contact_no'),

@@ -25,3 +25,14 @@
 .role-header{
 	padding: 10px;
 }
+
+
+.new-filter select {
+    width: 100%;
+    font-size: 13px;
+    border: 1px solid #e2e2e2;
+    border-radius: 4px;
+    height: 34px;
+    padding: 0px 6px;
+    color: #909090;
+}

@@ -8,7 +8,7 @@ use App\Models\SmtpCretedantials;
 use Log;
 use Auth;
 use Session;
-use Lang;
+
 class SchoolDetailsRepository {
 
     /**
@@ -23,8 +23,8 @@ class SchoolDetailsRepository {
             // Create data for edit form
              $data = [
                 'action'            => route('update.school-details'),
-                'page_title'    => Lang::get('label.setting'),
-                'title'         => Lang::get('title.school_details'),
+                'page_title'    => trans('label.setting'),
+                'title'         => trans('title.school_details'),
                 'tab'         => 'school_details',  
                 'school_details'      => $schoolDetails, 
             ];
@@ -110,8 +110,8 @@ class SchoolDetailsRepository {
             // Create data for edit form
              $data = [
                 'action'            => route('update.sms-details'),
-                'page_title'    => Lang::get('label.setting'),
-                'title'         => Lang::get('title.school_details'),
+                'page_title'    => trans('label.setting'),
+                'title'         => trans('title.school_details'),
                 'tab'         => 'sms',  
                 'sms_cretedantials'      => $SmsCretedantials, 
             ];
@@ -162,8 +162,8 @@ class SchoolDetailsRepository {
             // Create data for edit form
              $data = [
                 'action'            => route('update.smtp-details'),
-                'page_title'    => Lang::get('label.setting'),
-                'title'         => Lang::get('title.school_details'),
+                'page_title'    => trans('label.setting'),
+                'title'         => trans('title.school_details'),
                 'tab'         => 'smtp',  
                 'smtp_cretedantials'      => $SmtpCretedantials, 
             ];

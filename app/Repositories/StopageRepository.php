@@ -8,7 +8,6 @@ use App\Models\Root;
 use App\Models\Vehicle;
 use App\Models\VehicleType;
 use Log;
-use Lang;
 use Session;
 
 
@@ -40,8 +39,8 @@ class StopageRepository {
         try {
             $data = [
                 'action'          => route('store.stopage'),
-                'page_title'      => Lang::get('label.stopage'),
-                'title'           => Lang::get('title.add_stopage'),
+                'page_title'      => trans('label.stopage'),
+                'title'           => trans('title.add_stopage'),
                 'stopage_id' => 0,
                 'stopage_name' => (old('stopage_name')) ? old('stopage_name') : '',
                 'root_list'    => Root::getAllRootForListing(),
@@ -122,8 +121,8 @@ class StopageRepository {
             // Create data for edit form
                 $data = [
                     'action'              => route('update.stopage'),
-                    'page_title'          => Lang::get('label.stopage'),
-                    'title'               => Lang::get('title.edit_stopage'),
+                    'page_title'          => trans('label.stopage'),
+                    'title'               => trans('title.edit_stopage'),
                     'stopage_id'          => $stopage->id,
                     'stopage_name'        => ($stopage->stopage_name) ? $stopage->stopage_name : old('stopage_name'),
                     'root_list'           => Root::getAllRootForListing(),

@@ -70,4 +70,7 @@ return [
     'module'                    => 'Module',
     'permission_name'           => 'Enter Permission Route ( Like view-class )',
     'permission_description'    => 'Enter Permission Description ( Like View Class )',
+    'fee_name'                  => 'Enter Fee Name',
+    'fee_short_name'            => 'Enter Fee Short Name',
+
 ];

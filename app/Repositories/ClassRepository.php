@@ -6,8 +6,8 @@ use App\Models\Classes;
 use App\Models\Section;
 use Log;
 use Auth;
-use Lang;
 use Session;
+
 class ClassRepository {
 
     /**
@@ -17,9 +17,8 @@ class ClassRepository {
     */
     public function getAllClass()
     {
-       
     	try {
-    		  return  $query = Classes::where('session_id',Session::get('session'))->withTrashed()->get();  
+    		return  $query = Classes::where('session_id',Session::get('session'))->withTrashed()->get();  
     	} catch(\Exception $err){
     		Log::error('message error in getAllClass on ClassRepository :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());
@@ -36,8 +35,8 @@ class ClassRepository {
         try {
             $data = [
                 'action'        => route('store.class'),
-                'page_title'    => Lang::get('label.class'),
-                'title'         => Lang::get('title.add_class'),
+                'page_title'    => trans('label.class'),
+                'title'         => trans('title.add_class'),
                 'class_id'      => 0,
                 'class_name'    => (old('class_name')) ? old('class_name') : '',
                 'class_short'   => (old('class_short')) ? old('class_short') : '',
@@ -88,8 +87,8 @@ class ClassRepository {
             $class = Classes::findOrFail($class_id); //Fetch class data 
             $data = [
                 'action'        => route('update.class'),
-                'page_title'    => Lang::get('label.class'),
-                'title'         => Lang::get('title.edit_class'),
+                'page_title'    => trans('label.class'),
+                'title'         => trans('title.edit_class'),
                 'class_id'      => $class->id,
                 'class_name'    => ($class->class_name) ? $class->class_name : old('class_name'),
                 'class_short'   => ($class->class_short) ? $class->class_short : old('class_short'),

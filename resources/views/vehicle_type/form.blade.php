@@ -14,7 +14,7 @@
 							<h1>{!! $page_title !!}</h1>
 						</div>
 						<div class="col-md-2 text-right">
-							<a href="{!! route('view.vehicle_type') !!}" class="btn btn-success"><i class="fa fa-arrow-left"></i> &nbsp; {{Lang::get('button.back')}}</a>
+							<a href="{!! route('view.vehicle_type') !!}" class="btn btn-success"><i class="fa fa-arrow-left"></i> &nbsp; {{trans('button.back')}}</a>
 						</div>
 					</div>
 				</div><!-- /.container-fluid -->
@@ -38,8 +38,8 @@
 									<input type="hidden" name="vehicle_type_id" value="{{ $vehicle_type_id }}">
 									<div class="card-body">
 										<div class="form-group">
-											<label for="vehicle_type_name">{{Lang::get('label.vehicle_type_name')}}</label>
-											<input type="text" class="form-control" value="{{ ($name) ? $name : old('name') }}" id="name" name="name" placeholder="{{Lang::get('placeholder.vehicle_type_name')}}">
+											<label for="vehicle_type_name">{{trans('label.vehicle_type_name')}}</label>
+											<input type="text" class="form-control" value="{{ ($name) ? $name : old('name') }}" id="name" name="name" placeholder="{{trans('placeholder.vehicle_type_name')}}">
 
 										</div>
 										@if($errors->has('name'))
@@ -49,9 +49,9 @@
 				                        @endif
 										
 										<div class="card-footer">
-						                  	<button type="submit" class="btn btn-primary">{{Lang::get('button.submit')}}</button>
-						                  	<button type="reset" class="btn btn-danger">{{Lang::get('button.reset')}}</button>
-						                  	<a href="{{ route('view.vehicle_type') }}" class="btn btn-success">{{Lang::get('button.back')}}</a>
+						                  	<button type="submit" class="btn btn-primary">{{trans('button.submit')}}</button>
+						                  	<button type="reset" class="btn btn-danger">{{trans('button.reset')}}</button>
+						                  	<a href="{{ route('view.vehicle_type') }}" class="btn btn-success">{{trans('button.back')}}</a>
 						                </div>
 									</div>
 									<!-- /.card-body -->

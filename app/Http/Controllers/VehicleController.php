@@ -9,10 +9,10 @@ use App\Models\Vehicle;
 use App\Models\VehicleType;
 use Validator;
 use Auth;
-use Lang;
 use Log;
 use App;
 use Session;
+use Helper;
 
 class VehicleController extends Controller
 {
@@ -29,6 +29,9 @@ class VehicleController extends Controller
 	public function index()
 	{
 		try {
+			if(!Helper::checkPermission('view-vehicle')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			$data['vehicle'] = $this->vehicle->getAllVehicle(); // Fetch all vehicle data
 			return view('vehicle.index', $data);
 		} catch(\Exception $err){
@@ -45,6 +48,9 @@ class VehicleController extends Controller
 	public function create()
 	{
 		try {
+			if(!Helper::checkPermission('add-vehicle')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			$data = $this->vehicle->create();
 			return view('vehicle.form', $data);
 		} catch(\Exception $err){
@@ -61,11 +67,14 @@ class VehicleController extends Controller
 	public function store(VehicleRequest $vehicle_request)
 	{
 		try {
+			if(!Helper::checkPermission('add-vehicle')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			$result = $this->vehicle->store($vehicle_request);
 			if($result == true) {
-				return back()->with('success', Lang::get('success.vehicle_added_successfully'));
+				return back()->with('success', trans('success.vehicle_added_successfully'));
 			}
-			return back()->with('error', Lang::get('error.vehicle_not_added'));
+			return back()->with('error', trans('error.vehicle_not_added'));
 		} catch(\Exception $err){
     		Log::error('Error in store on VehicleController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());
@@ -80,8 +89,11 @@ class VehicleController extends Controller
 	public function edit($vehicle_id = 0)
 	{
 		try {
+			if(!Helper::checkPermission('edit-vehicle')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			if($vehicle_id == 0){
-				return back()->with('error', Lang::get('error.vehicle_not_found'));
+				return back()->with('error', trans('error.vehicle_not_found'));
 			}
 			$data = $this->vehicle->edit($vehicle_id);
 			return view('vehicle.form', $data);
@@ -99,11 +111,14 @@ class VehicleController extends Controller
 	public function update(VehicleRequest $request)
 	{
 		try {
+			if(!Helper::checkPermission('edit-vehicle')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			$result = $this->vehicle->update($request);
 			if($result == true) {
-				return redirect('view-vehicle')->with('success', Lang::get('success.vehicle_updated_successfully'));
+				return redirect('view-vehicle')->with('success', trans('success.vehicle_updated_successfully'));
 			}
-			return back()->with('error', Lang::get('error.vehicle_not_updated'));
+			return back()->with('error', trans('error.vehicle_not_updated'));
 		} catch(\Exception $err){
 			Log::error('Error in update on VehicleController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());
@@ -118,14 +133,17 @@ class VehicleController extends Controller
 	public function delete($vehicle_id = 0)
 	{
 		try {
+			if(!Helper::checkPermission('delete-vehicle')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			if($vehicle_id == 0){
-				return back()->with('error', Lang::get('error.vehicle_not_found'));
+				return back()->with('error', trans('error.vehicle_not_found'));
 			}
 			$result = $this->vehicle->delete($vehicle_id);
 			if($result == true) {
-				return back()->with('success', Lang::get('success.vehicle_deleted_successfully'));
+				return back()->with('success', trans('success.vehicle_deleted_successfully'));
 			}
-			return back()->with('error', Lang::get('error.vehicle_not_deleted'));
+			return back()->with('error', trans('error.vehicle_not_deleted'));
 		} catch(\Exception $err){
     		Log::error('Error in delete on VehicleController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());
@@ -140,14 +158,17 @@ class VehicleController extends Controller
 	public function restore($vehicle_id = 0)
 	{
 		try {
+			if(!Helper::checkPermission('delete-vehicle')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			if($vehicle_id == 0){
-				return back()->with('error', Lang::get('error.vehicle_not_found'));
+				return back()->with('error', trans('error.vehicle_not_found'));
 			}
 			$result = $this->vehicle->restore($vehicle_id);
 			if($result == true) {
-				return back()->with('success', Lang::get('success.vehicle_restored_successfully'));
+				return back()->with('success', trans('success.vehicle_restored_successfully'));
 			}
-			return back()->with('error', Lang::get('error.vehicle_not_restored'));
+			return back()->with('error', trans('error.vehicle_not_restored'));
 		} catch(\Exception $err){
     		Log::error('Error in restore on VehicleController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());

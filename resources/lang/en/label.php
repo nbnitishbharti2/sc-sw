@@ -91,4 +91,13 @@ return [
     'module'                        => 'Module',
     'permission_name'               => 'Permission Name',
     'permission_description'        => 'Permission Description',
+    'fee'                           => 'Fee',
+    'fee_name'                      => 'Fee Name',
+    'fee_short_name'                => 'Fee Short Name',
+    'fee_head_id'                   => 'Fee Head',
+    'fee_type_id'                   => 'Fee Type',
+    'frequency_id'                  => 'Frequency',
+    'applied_in_month'              => 'Applied In Month',
+    'fee_for_class'                 => 'Fee For Class',
+    'fee_for_classes'               => 'Fee For Classes',
 ];

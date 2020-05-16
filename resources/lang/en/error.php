@@ -75,5 +75,13 @@ return [
     'room_not_deleted'                      => 'Oops! Room not deleted',
     'roles_not_added'                       => 'Oops! Roles not added',
     'permission_not_added'                  => 'Oops! Permission not added',
-    'role_not_updated'                      => 'Oops! Role not updated'
+    'role_not_updated'                      => 'Oops! Role not updated',
+    'fee_not_added'                         => 'Oops! Fee not added',
+    'fee_not_updated'                       => 'Oops! Fee not updated.',
+    'fee_not_found'                         => 'Oops! Fee not found.',
+    'fee_not_restored'                      => 'Oops! Fee not restored.',
+    'fee_not_deleted'                       => 'Oops! Fee not deleted',
+    'fee_for_class_not_added'               => 'Oops! Fee For Classes not added.',
+    'fee_for_class_not_updated'             => 'Oops! Fee For Classes not updated.',
+    'fee_for_class_not_found'               => 'Oops! Fee For Class not found.',
 ];
