@@ -29,9 +29,9 @@ class SchoolDetailsController extends Controller
     public function index()
     {
         try {
-            if(!Helper::checkPermission('view-school-details')) {
-                return back()->with('error', trans('error.unauthorized'));
-            }
+            // if(!Helper::checkPermission('view-school-details')) {
+            //     return back()->with('error', trans('error.unauthorized'));
+            // }
             $data = $this->schoolDetails->getSchoolDetails(); // Fetch school Details  
             return view('school_details.index',$data);
         } catch(\Exception $err){

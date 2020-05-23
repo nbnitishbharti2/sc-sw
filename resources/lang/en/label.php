@@ -100,4 +100,11 @@ return [
     'applied_in_month'              => 'Applied In Month',
     'fee_for_class'                 => 'Fee For Class',
     'fee_for_classes'               => 'Fee For Classes',
+    'facility'                      => 'Facility',
+    'type'                          => 'Type',
+    'payment_mode'                  => 'Payment Mode',
+    'category'                      => 'Category',
+    'education'                     => 'Education',
+    'blood_group'                   => 'Blood Group',
+    
 ];

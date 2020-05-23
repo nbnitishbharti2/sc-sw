@@ -167,6 +167,103 @@ function fee_confirm_restore(fee_id) {
     $('#modal-fee-restore').modal('show');
 }
 
+//Delete facility show popup function
+function facility_confirm_delete(facility_id) {
+    var delete_url = $('#delete-facility').attr('href');
+    delete_url = delete_url.replace(/\d+/g, '') + facility_id;
+    $('#delete-facility').attr('href', delete_url);
+    $('#modal-facility-delete').modal('show');
+}
+//Function for show restore popup for facility
+function facility_confirm_restore(facility_id) {
+    var restore_url = $('#restore-facility').attr('href');
+    restore_url = restore_url.replace(/\d+/g, '') + facility_id;
+    $('#restore-facility').attr('href', restore_url);
+    $('#modal-facility-restore').modal('show');
+}
+
+
+//Delete payment_mode show popup function
+function payment_mode_confirm_delete(payment_mode_id) {
+    var delete_url = $('#delete-payment_mode').attr('href');
+    delete_url = delete_url.replace(/\d+/g, '') + payment_mode_id;
+    $('#delete-payment_mode').attr('href', delete_url);
+    $('#modal-payment_mode-delete').modal('show');
+}
+//Function for show restore popup for payment_mode
+function payment_mode_confirm_restore(payment_mode_id) {
+    var restore_url = $('#restore-payment_mode').attr('href');
+    restore_url = restore_url.replace(/\d+/g, '') + payment_mode_id;
+    $('#restore-payment_mode').attr('href', restore_url);
+    $('#modal-payment_mode-restore').modal('show');
+}
+
+
+//Delete type show popup function
+function type_confirm_delete(type_id) {
+    var delete_url = $('#delete-type').attr('href');
+    delete_url = delete_url.replace(/\d+/g, '') + type_id;
+    $('#delete-type').attr('href', delete_url);
+    $('#modal-type-delete').modal('show');
+}
+//Function for show restore popup for type
+function type_confirm_restore(type_id) {
+    var restore_url = $('#restore-type').attr('href');
+    restore_url = restore_url.replace(/\d+/g, '') + type_id;
+    $('#restore-type').attr('href', restore_url);
+    $('#modal-type-restore').modal('show');
+}
+
+
+//Delete category show popup function
+function category_confirm_delete(category_id) {
+    var delete_url = $('#delete-category').attr('href');
+    delete_url = delete_url.replace(/\d+/g, '') + category_id;
+    $('#delete-category').attr('href', delete_url);
+    $('#modal-category-delete').modal('show');
+}
+//Function for show restore popup for category
+function category_confirm_restore(category_id) {
+    var restore_url = $('#restore-category').attr('href');
+    restore_url = restore_url.replace(/\d+/g, '') + category_id;
+    $('#restore-category').attr('href', restore_url);
+    $('#modal-category-restore').modal('show');
+}
+
+
+//Delete education show popup function
+function education_confirm_delete(education_id) {
+    var delete_url = $('#delete-education').attr('href');
+    delete_url = delete_url.replace(/\d+/g, '') + education_id;
+    $('#delete-education').attr('href', delete_url);
+    $('#modal-education-delete').modal('show');
+}
+//Function for show restore popup for education
+function education_confirm_restore(education_id) {
+    var restore_url = $('#restore-education').attr('href');
+    restore_url = restore_url.replace(/\d+/g, '') + education_id;
+    $('#restore-education').attr('href', restore_url);
+    $('#modal-education-restore').modal('show');
+}
+
+
+//Delete blood_group show popup function
+function blood_group_confirm_delete(blood_group_id) {
+    var delete_url = $('#delete-blood_group').attr('href');
+    delete_url = delete_url.replace(/\d+/g, '') + blood_group_id;
+    $('#delete-blood_group').attr('href', delete_url);
+    $('#modal-blood_group-delete').modal('show');
+}
+//Function for show restore popup for blood_group
+function blood_group_confirm_restore(blood_group_id) {
+    var restore_url = $('#restore-blood_group').attr('href');
+    restore_url = restore_url.replace(/\d+/g, '') + blood_group_id;
+    $('#restore-blood_group').attr('href', restore_url);
+    $('#modal-blood_group-restore').modal('show');
+}
+
+
+
 
 //Fee for class index script starts here
 $("#class").on('change', function(){

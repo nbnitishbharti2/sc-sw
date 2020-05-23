@@ -152,6 +152,67 @@ Route::group(['middleware'=>['localization']],function(){
 		Route::post('/update-fee-for-classes', 'FeeForClassController@update')->name('update.fee-for-classes');
 
 
+		/* Facility Routes */
+		Route::get('/view-facility', 'FacilityController@index')->name('view.facility');
+		Route::get('/add-facility', 'FacilityController@create')->name('add.facility');
+		Route::post('/store-facility', 'FacilityController@store')->name('store.facility');
+		Route::get('/edit-facility/{facility_id}', 'FacilityController@edit')->name('edit.facility');
+		Route::post('/update-facility', 'FacilityController@update')->name('update.facility');
+		Route::get('/delete-facility/{facility_id}', 'FacilityController@delete')->name('delete.facility');
+		Route::get('/restore-facility/{facility_id}', 'FacilityController@restore')->name('restore.facility');
+
+
+		/* Type Routes */
+		Route::get('/view-type', 'TypeController@index')->name('view.type');
+		Route::get('/add-type', 'TypeController@create')->name('add.type');
+		Route::post('/store-type', 'TypeController@store')->name('store.type');
+		Route::get('/edit-type/{type_id}', 'TypeController@edit')->name('edit.type');
+		Route::post('/update-type', 'TypeController@update')->name('update.type');
+		Route::get('/delete-type/{type_id}', 'TypeController@delete')->name('delete.type');
+		Route::get('/restore-type/{type_id}', 'TypeController@restore')->name('restore.type');
+
+
+		/* Payment Mode Routes */
+		Route::get('/view-payment-mode', 'PaymentModeController@index')->name('view.payment_mode');
+		Route::get('/add-payment-mode', 'PaymentModeController@create')->name('add.payment_mode');
+		Route::post('/store-payment-mode', 'PaymentModeController@store')->name('store.payment_mode');
+		Route::get('/edit-payment-mode/{payment_mode_id}', 'PaymentModeController@edit')->name('edit.payment_mode');
+		Route::post('/update-payment-mode', 'PaymentModeController@update')->name('update.payment_mode');
+		Route::get('/delete-payment-mode/{payment_mode_id}', 'PaymentModeController@delete')->name('delete.payment_mode');
+		Route::get('/restore-payment-mode/{payment_mode_id}', 'PaymentModeController@restore')->name('restore.payment_mode');
+
+
+		/* Category Routes */
+		Route::get('/view-category', 'CategoryController@index')->name('view.category');
+		Route::get('/add-category', 'CategoryController@create')->name('add.category');
+		Route::post('/store-category', 'CategoryController@store')->name('store.category');
+		Route::get('/edit-category/{category_id}', 'CategoryController@edit')->name('edit.category');
+		Route::post('/update-category', 'CategoryController@update')->name('update.category');
+		Route::get('/delete-category/{category_id}', 'CategoryController@delete')->name('delete.category');
+		Route::get('/restore-category/{category_id}', 'CategoryController@restore')->name('restore.category');
+
+
+		/* Education Routes */
+		Route::get('/view-education', 'EducationController@index')->name('view.education');
+		Route::get('/add-education', 'EducationController@create')->name('add.education');
+		Route::post('/store-education', 'EducationController@store')->name('store.education');
+		Route::get('/edit-education/{education_id}', 'EducationController@edit')->name('edit.education');
+		Route::post('/update-education', 'EducationController@update')->name('update.education');
+		Route::get('/delete-education/{education_id}', 'EducationController@delete')->name('delete.education');
+		Route::get('/restore-education/{education_id}', 'EducationController@restore')->name('restore.education');
+
+
+		/* Blood Group Routes */
+		Route::get('/view-blood-group', 'BloodGroupController@index')->name('view.blood_group');
+		Route::get('/add-blood-group', 'BloodGroupController@create')->name('add.blood_group');
+		Route::post('/store-blood-group', 'BloodGroupController@store')->name('store.blood_group');
+		Route::get('/edit-blood-group/{blood_group_id}', 'BloodGroupController@edit')->name('edit.blood_group');
+		Route::post('/update-blood-group', 'BloodGroupController@update')->name('update.blood_group');
+		Route::get('/delete-blood-group/{blood_group_id}', 'BloodGroupController@delete')->name('delete.blood_group');
+		Route::get('/restore-blood-group/{blood_group_id}', 'BloodGroupController@restore')->name('restore.blood_group');
+
+
+
 
 		/*  All Ajax Routes */
 		Route::post('/get-vehicle-no-from-vehicle', 'VehicleRootMapController@getVehicleNo')->name('get-vehicle-no-from-vehicle');

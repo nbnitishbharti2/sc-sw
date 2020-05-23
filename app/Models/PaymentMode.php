@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Kyslik\ColumnSortable\Sortable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Category extends Model
+
+class PaymentMode extends Model
 {
     use Sortable;
 
@@ -16,4 +17,6 @@ class Category extends Model
 
     public $sortable = ['id', 'name', 'created_at', 'updated_at'];
 
+    
+    
 }

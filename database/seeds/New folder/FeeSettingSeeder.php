@@ -21,11 +21,6 @@ class FeeSettingSeeder extends Seeder
             'demand_slip_reminder_message' =>'No',
             'reminder_date_time'=>date('Y-m-1'),
             'payment_message' =>'No',
-            // 'registration_message' =>'Yes',
-            // 'admission_message' =>'Yes', 
-            // 'registration_fee' =>'Yes',
-            // 'registration_no_auto' =>'Yes',
-            // 'registration_no_start' =>1000,
         ]);
     }
 }

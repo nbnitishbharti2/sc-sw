@@ -95,11 +95,23 @@
           </a>
         </li>
         <li class="nav-item">
-        <a href="{{ route('view.room') }}" class="nav-link">
-          <i class="far fa-circle nav-icon"></i>
-          <p>{{trans('title.room')}}</p>
-        </a>
-      </li>
+          <a href="{{ route('view.room') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>{{trans('title.room')}}</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('view.facility') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>{{trans('title.facility')}}</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('view.type') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>{{trans('title.type')}}</p>
+          </a>
+        </li>
       </ul>
     </li>
     @endif
@@ -168,6 +180,42 @@
             <p>{{trans('title.fee_for_class')}}</p>
           </a>
         </li>
+      </ul>
+    </li>
+
+    <li class="nav-item has-treeview">
+      <a href="#" class="nav-link">
+        <i class="fas fa-cogs"></i>
+        <p> 
+          New
+          <i class="fas fa-angle-left right"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        <li class="nav-item">
+          <a href="{{ route('view.payment_mode') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>{{trans('title.payment_mode')}}</p>
+          </a>
+        </li> 
+        <li class="nav-item">
+          <a href="{{ route('view.category') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>{{trans('title.category')}}</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('view.education') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>{{trans('title.education')}}</p>
+          </a>
+        </li>  
+        <li class="nav-item">
+          <a href="{{ route('view.blood_group') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>{{trans('title.blood_group')}}</p>
+          </a>
+        </li> 
       </ul>
     </li>
 
