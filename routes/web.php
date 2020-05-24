@@ -219,11 +219,11 @@ Route::group(['middleware'=>['localization']],function(){
 		Route::post('/update-student-registration', 'StudentRegistrationController@update')->name('update.student.registration');
 		Route::get('/delete-student-registration/{room_id}', 'StudentRegistrationController@delete')->name('delete.student.registration');
 		Route::get('/restore-student-registration/{room_id}', 'StudentRegistrationController@restore')->name('restore.student.registration');
-		Route::get('/student-registration-address/{id}', 'StudentRegistrationController@edit_address')->name('edit.student.registration.address');
+		Route::get('/student-registration-address/{id}/{map_id}', 'StudentRegistrationController@edit_address')->name('edit.student.registration.address');
 		 Route::post('/update-student-registration-address', 'StudentRegistrationController@update_address')->name('update.student.registration.address');
-		 Route::get('/student-registration-parent/{id}', 'StudentRegistrationController@edit_parent')->name('edit.student.registration.parent');
+		 Route::get('/student-registration-parent/{id}/{map_id}', 'StudentRegistrationController@edit_parent')->name('edit.student.registration.parent');
 		 Route::post('/update-student-registration-parent', 'StudentRegistrationController@update_parent')->name('update.student.registration.parent');
- 		Route::get('/student-registration-charge/{id}', 'StudentRegistrationController@edit_charge')->name('edit.student.registration.charge');
+ 		Route::get('/student-registration-charge/{id}/{map_id}', 'StudentRegistrationController@edit_charge')->name('edit.student.registration.charge');
 		 Route::post('/update-student-registration-charge', 'StudentRegistrationController@update_charge')->name('update.student.registration.charge');
 
 		/*  All Ajax Routes */

@@ -52,7 +52,7 @@ class StudentRegistrationController extends Controller
         try {
             $result = $this->studentRegistration->store($request);
             if($result['status'] == true) {
-                 return redirect()->route('edit.student.registration.address',['id' => $result['id']])->with('success', Lang::get('success.student_registerd_successfully')); 
+                 return redirect()->route('edit.student.registration.address',['id' => $result['id'],'map_id' => $result['map_id']])->with('success', Lang::get('success.student_registerd_successfully')); 
 
             }
             return back()->with('error', Lang::get('error.student_not_registerd'));
@@ -107,11 +107,11 @@ class StudentRegistrationController extends Controller
         //
     }
 
-     public function edit_address($id)
+     public function edit_address($id,$map_id)
     {
        
         try {
-            $data = $this->studentRegistration->edit_address($id); 
+            $data = $this->studentRegistration->edit_address($id,$map_id); 
             return view('student.registration.student-details', $data);
         } catch(\Exception $err){
             Log::error('Error in edit_address on StudentRegistrationController :'. $err->getMessage());
@@ -123,8 +123,7 @@ class StudentRegistrationController extends Controller
         try {
             $result = $this->studentRegistration->update_address($request);
             if($result['status'] == true) {
-                 return redirect()->route('edit.student.registration.parent',['id' => $result['id']])->with('success', Lang::get('success.student_address_updated_successfully')); 
-
+                 return redirect()->route('edit.student.registration.parent',['id' => $result['id'],'map_id' => $result['map_id']])->with('success', Lang::get('success.student_address_updated_successfully')); 
             }
             return back()->with('error', Lang::get('error.student_address_not_updated'));
         } catch(\Exception $err){
@@ -132,10 +131,10 @@ class StudentRegistrationController extends Controller
             return back()->with('error', $err->getMessage());
         }
     }
-     public function edit_parent($id)
+     public function edit_parent($id,$map_id)
     { 
         try {
-            $data = $this->studentRegistration->edit_parent($id); 
+            $data = $this->studentRegistration->edit_parent($id,$map_id); 
             return view('student.registration.student-details', $data);
         } catch(\Exception $err){
             Log::error('Error in edit_parent on StudentRegistrationController :'. $err->getMessage());
@@ -147,7 +146,7 @@ class StudentRegistrationController extends Controller
         try {
             $result = $this->studentRegistration->update_parent($request);
             if($result['status'] == true) {
-                 return redirect()->route('edit.student.registration.charge',['id' => $result['id']])->with('success', Lang::get('success.student_parent_updated_successfully')); 
+                 return redirect()->route('edit.student.registration.charge',['id' => $result['id'],'map_id' => $result['map_id']])->with('success', Lang::get('success.student_parent_updated_successfully')); 
 
             }
             return back()->with('error', Lang::get('error.student_parent_not_updated'));
@@ -156,10 +155,10 @@ class StudentRegistrationController extends Controller
             return back()->with('error', $err->getMessage());
         }
     }
-     public function edit_charge($id)
+     public function edit_charge($id,$map_id)
     { 
         try {
-            $data = $this->studentRegistration->edit_charge($id); 
+            $data = $this->studentRegistration->edit_charge($id,$map_id); 
             return view('student.registration.student-details', $data);
         } catch(\Exception $err){
             Log::error('Error in edit_charge on StudentRegistrationController :'. $err->getMessage());

@@ -48,15 +48,14 @@
 											</thead>
 											<tbody>
 												@php $i = 0; @endphp
-												@foreach($fee as $item)
-												 
+												@foreach($fee as $item) 
 													<tr>
 														<td>{!! ++$i !!}</td>
 														<td>{!! $item->fee_name !!}</td>
 														<td>{!! $item->fee_short_name !!}</td>
 														<td>{!! $item->fee_head->name !!}</td>
 														<td>{!! $item->fee_type->name !!}</td>
-														<td>{!! $item->fee_frequency->name !!}</td>
+														<td>{!! ($item->fee_frequency!=null)?$item->fee_frequency->name:'None' !!}</td>
 														<td>{!! Carbon\Carbon::parse($item->created_at)->format(config('app.date_time_format')) !!}</td>
 														<td>
 															@if(empty($item->deleted_at))

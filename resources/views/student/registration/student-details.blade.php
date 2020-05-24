@@ -33,9 +33,9 @@
                 <div class="card-header p-2">
                   <ul class="nav nav-pills">
                     <li class="nav-item" @if($student_registration_id!=0) onclick="location.href='{{ route('add.student.registration',['id' => $student_registration_id]) }}';" @endif><a class="nav-link {{ ($tab=='student_details')?'active':'' }}" href="#personal_details" data-toggle="tab">{{ trans('label.personal_details') }}</a></li>
-                    <li class="nav-item" @if($student_registration_id!=0) onclick="location.href='{{ route('edit.student.registration.address',['id' => $student_registration_id]) }}';" @endif><a class="nav-link {{ ($tab=='student_address')?'active':'' }}" href="#residential_details" data-toggle="tab" >{{ trans('label.residential_address') }}</a></li>
-                    <li class="nav-item" @if($student_registration_id!=0) onclick="location.href='{{ route('edit.student.registration.parent',['id' => $student_registration_id]) }}';" @endif><a class="nav-link {{ ($tab=='student_parent')?'active':'' }}" href="#guardians_details" data-toggle="tab">{{ trans('label.guardians_details') }}</a></li> 
-                    <li class="nav-item" @if($student_registration_id!=0) onclick="location.href='{{ route('edit.student.registration.charge',['id' => $student_registration_id]) }}';" @endif><a class="nav-link {{ ($tab=='student_charge')?'active':'' }}" href="#fee_details" data-toggle="tab">{{ trans('label.charge') }}</a></li>
+                    <li class="nav-item" @if($student_registration_id!=0) onclick="location.href='{{ route('edit.student.registration.address',['id' => $student_registration_id,'map_id' => $map_id]) }}';" @endif><a class="nav-link {{ ($tab=='student_address')?'active':'' }}"  >{{ trans('label.residential_address') }}</a></li>
+                    <li class="nav-item" @if($student_registration_id!=0) onclick="location.href='{{ route('edit.student.registration.parent',['id' => $student_registration_id,'map_id' => $map_id]) }}';" @endif><a class="nav-link {{ ($tab=='student_parent')?'active':'' }}" >{{ trans('label.guardians_details') }}</a></li> 
+                    <li class="nav-item" @if($student_registration_id!=0) onclick="location.href='{{ route('edit.student.registration.charge',['id' => $student_registration_id,'map_id' => $map_id]) }}';" @endif><a class="nav-link {{ ($tab=='student_charge')?'active':'' }}"  >{{ trans('label.charge') }}</a></li>
                   </ul>
                 </div><!-- /.card-header -->
                 <div class="card-body">
@@ -198,7 +198,7 @@
                     </div>
                     <div class="offset-sm-8 col-sm-10">
                       @if($student_registration_id!=0)
-                         <a href="{{ route('edit.student.registration.address',['id' => $student_registration_id]) }}"> <button type="button" class="btn btn-primary">{{ trans('button.skip') }}</button></a>
+                         <a href="{{ route('edit.student.registration.address',['id' => $student_registration_id,'map_id' => $map_id]) }}"> <button type="button" class="btn btn-primary">{{ trans('button.skip') }}</button></a>
                          @endif
                       <button type="submit" class="btn btn-danger">{{ trans('button.submit') }}</button>
                     </div>
@@ -214,6 +214,7 @@
                  <div class="form-group row"> 
                   <div class="col-sm-6">
                     <input type="hidden" name="student_registration_id" value="{{ $student_registration_id }}">
+                    <input type="hidden" name="map_id" value="{{ $map_id }}">
                     <label for="inputName" class="col-sm-12 col-form-label">{{ trans('label.country') }}</label>
                     <input type="text" value="{{ ($country) ? $country : old('country') }}" class="form-control" id="inputName" name="country" placeholder="{{ trans('placeholder.country') }}">
                      @if($errors->has('country'))
@@ -277,7 +278,7 @@
                     </div>
                     <div class="offset-sm-8 col-sm-10">
                       @if($student_registration_id!=0)
-                         <a href="{{ route('edit.student.registration.parent',['id' => $student_registration_id]) }}"> <button type="button" class="btn btn-primary">{{ trans('button.skip') }}</button></a>
+                         <a href="{{ route('edit.student.registration.parent',['id' => $student_registration_id,'map_id' => $map_id]) }}"> <button type="button" class="btn btn-primary">{{ trans('button.skip') }}</button></a>
                          @endif
                       <button type="submit" class="btn btn-danger">{{ trans('button.submit') }}</button>
                     </div>
@@ -294,6 +295,7 @@
                <div class="form-group row"> 
                 <div class="col-sm-6">
                    <input type="hidden" name="student_registration_id" value="{{ $student_registration_id }}">
+                    <input type="hidden" name="map_id" value="{{ $map_id }}">
                     <label for="inputName" class="col-sm-12 col-form-label">{{ trans('label.father_name') }}</label>
                     <input type="text" value="{{ ($father_name) ? $father_name : old('father_name') }}" class="form-control" id="inputName" name="father_name" placeholder="{{ trans('placeholder.father_name') }}">
                      @if($errors->has('father_name'))
@@ -392,7 +394,7 @@
                 <div class="offset-sm-8 col-sm-10">  </div>
                     <div class="offset-sm-8 col-sm-10">
                       @if($student_registration_id!=0)
-                         <a href="{{ route('edit.student.registration.charge',['id' => $student_registration_id]) }}"> <button type="button" class="btn btn-primary">{{ trans('button.skip') }}</button></a>
+                         <a href="{{ route('edit.student.registration.charge',['id' => $student_registration_id,'map_id' => $map_id]) }}"> <button type="button" class="btn btn-primary">{{ trans('button.skip') }}</button></a>
                          @endif
                       <button type="submit" class="btn btn-danger">{{ trans('button.submit') }}</button>
                     </div>
@@ -401,24 +403,40 @@
             @endif
           </div> 
           <div class="tab-pane {{ ($tab=='student_charge')?'active':'' }}" id="fee_details">
+            @if($tab=='student_charge')
             <form class="form-horizontal">
              <div class="form-group row"> 
-              <div class="col-sm-6">
-                <label for="inputName" class="col-sm-12 col-form-label">Admission Fee:</label>
-                <input type="email" class="form-control" id="inputName" placeholder="Name">
+             @php $total=0 @endphp
+              @foreach($fee['fees'] as $key =>$value)
+               @php $total=$total+$value->charge @endphp
+              <div class="col-sm-6"> 
+                <label for="inputName" class="col-sm-12 col-form-label">{{ $value->fee->fee_name }}</label>
+                <input type="email" class="form-control" id="inputName" placeholder="Charge" readonly="" value="{{ $value->charge }}">
               </div>
-              <div class="col-sm-6">
-                <label for="inputName" class="col-sm-12 col-form-label">Miscellaneous Charge:</label>
-                <input type="email" class="form-control" id="inputName" placeholder="Name">
-              </div>
-              <div class="col-sm-6">
-                <label for="inputName" class="col-sm-12 col-form-label">Registration:</label>
-                <input type="email" class="form-control" id="inputName" placeholder="Name">
-              </div>
+              @endforeach
+              
+              
 
               <div class="col-sm-6">
-                <label for="inputName" class="col-sm-12 col-form-label">I Card:</label>
-                <input type="email" class="form-control" id="inputName" placeholder="Name">
+                <label for="inputName" class="col-sm-12 col-form-label">Total:</label>
+                <input type="email" class="form-control" id="inputName" placeholder="Name" readonly="" value="{{ $total }}">
+              </div>
+              <div class="col-sm-6">
+                <label for="inputName" class="col-sm-12 col-form-label">Remarks:</label>
+                <input type="email" class="form-control" id="inputName" placeholder="Remarks"  >
+              </div>
+              <div class="col-sm-6">
+                <label for="inputName" class="col-sm-12 col-form-label">Transaction No:</label>
+                <input type="email" class="form-control" id="inputName" placeholder="Transaction No" >
+              </div>
+              <div class="col-sm-6">
+                <label for="inputName" class="col-sm-12 col-form-label">Payment Mode:</label>
+                <select class="form-control">
+                  <option>Cash</option>
+                  <option>DD</option>
+                  <option>NEFT</option>
+                  <option>Other</option>
+                </select>
               </div>
 
             </div>
@@ -429,6 +447,7 @@
               </div>
             </div>
           </form>
+          @endif
         </div>
         <!-- /.tab-pane -->
       </div>

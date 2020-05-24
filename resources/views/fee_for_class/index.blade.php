@@ -45,7 +45,7 @@ use App\Models\FeeFrequency;
 
 											<div class="short_by new-filter col-sm-2"> 
 												<label>Class</label>
-												<select id="class" name="class">
+												<select id="class" name="class form-control">
 													<option value="">Choose Class</option>
 													@php $classes=Classes::getAllClassForListing(); @endphp
 													@if($classes->count())

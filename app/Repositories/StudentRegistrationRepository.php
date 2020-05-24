@@ -12,6 +12,9 @@ use App\Helpers\CommanHelper;
 use App\Models\FeeSetting;
 use App\Models\StudentRegistration;
 use App\Models\StudentRegistrationMap;
+use App\Models\FeeForClass;
+use App\Models\StudentRegistrationPayment;
+use App\Models\StudentRegistrationTransaction;
 use Log;
 use Lang;
 use Session;
@@ -39,14 +42,15 @@ class StudentRegistrationRepository {
             $session_id=CommanHelper::getSessionId(CommanHelper::getCurrentSessionForAdmission());
             if($id!=0){
                 $student=StudentRegistration::FindOrFail($id); 
+                $student_session=StudentRegistrationMap::where('student_registration_id','=',$id)->orderBy('id','desc')->first();
                 $registration_no=$this->getRegistrationNo($session_id);
                 $data = [
                     'action'            => route('update.student.registration'),
                     'page_title'    => Lang::get('label.student_registration'),
                     'title'         => Lang::get('title.student_registration'),
                     'class_list'    => Classes::getAllClassForListing($session_id),
-                    'class_id'      => (old('class')) ? old('class') : $student->class_id,
-                    'section_id'      => (old('section')) ? old('section') :  $student->section_id,
+                    'class_id'      => (old('class')) ? old('class') : $student_session->class_id,
+                    'section_id'      => (old('section')) ? old('section') :  $student_session->section_id,
                     'gender_list'    => Gender::getAllGenderListing(),
                     'gender_id'      => (old('gender')) ? old('gender') : $student->gender_id,
                     'category_list'    => Category::getAllCategoryListing(),
@@ -62,6 +66,7 @@ class StudentRegistrationRepository {
                     'email'  => (old('email')) ? old('email') : $student->email,
                     'aadhar_no'  => (old('aadhar_no')) ? old('aadhar_no') : $student->aadhar_no,
                     'student_registration_id'    => $id,
+                    'map_id'=>$student_session->id,
                 ];
             }else{
                 $registration_no=$this->getRegistrationNo($session_id);
@@ -139,6 +144,7 @@ class StudentRegistrationRepository {
             if($student->exists) {
                 $responce['status']=true;
                 $responce['id']=$student->id;
+                $responce['map_id']=$data->id;
                 return $responce;
             }else{
                 return $responce;
@@ -207,7 +213,7 @@ class StudentRegistrationRepository {
        }  
        return $registration_no; 
    }
-   public function edit_address($id)
+   public function edit_address($id,$map_id)
    {
       try {
         $student=StudentRegistration::FindOrFail($id); 
@@ -223,6 +229,7 @@ class StudentRegistrationRepository {
             'pin_code'      => (old('pin_code')) ? old('pin_code') : $student->zip_code,
             'tab'         => 'student_address',   
             'student_registration_id'    => $id, 
+            'map_id'=>$map_id,
         ];
         return $data;
     } catch(\Exception $err){
@@ -245,6 +252,7 @@ public function update_address($request)
     if ($student->wasChanged()) {  
         $responce['status']=true;
         $responce['id']=$student->id;
+        $responce['map_id']=$request->map_id;
         return $responce; 
     } else {
        return $responce;
@@ -254,7 +262,7 @@ public function update_address($request)
     return back()->with('error', $err->getMessage());
 }
 }
-   public function edit_parent($id)
+   public function edit_parent($id,$map_id)
    {
       try {
         $student=StudentRegistration::FindOrFail($id); 
@@ -274,6 +282,7 @@ public function update_address($request)
             'occupation_list'    => Occupation::getAllOccupationForListing(),
             'tab'         => 'student_parent',   
             'student_registration_id'    => $id, 
+            'map_id'=>$map_id,
         ];
         return $data;
     } catch(\Exception $err){
@@ -303,6 +312,7 @@ public function update_address($request)
     if ($student->wasChanged()) {  
         $responce['status']=true;
         $responce['id']=$student->id;
+        $responce['map_id']=$request->map_id;
         return $responce; 
     } else {
        return $responce;
@@ -312,22 +322,26 @@ public function update_address($request)
     return back()->with('error', $err->getMessage());
 }
 }
-   public function edit_charge($id)
+
+   public function edit_charge($id,$map_id)
    {
       try {
         $student=StudentRegistration::FindOrFail($id); 
+        $student_session=StudentRegistrationMap::FindOrFail($map_id);
+
+        $fee=$this->getRegistrationFee($student_session->session_id,$student_session->class_id,1,1);
+       $student_registration_transaction=StudentRegistrationTransaction::where('session_id','=', $student_session->session_id)->where('st_regm_id','=',$map_id)->get();
+         $student_registration_payment=StudentRegistrationPayment::where('session_id','=',$student_session->session_id)->where('st_regm_id','=',$map_id)->get();
         $data = [
             'action'            => route('update.student.registration.address'),
             'page_title'    => Lang::get('label.address'),
             'title'         => Lang::get('title.address'), 
-            'address'      => (old('address')) ? old('address') : $student->address,
-            'city'      => (old('city')) ? old('city') : $student->city,
-            'district'      => (old('district')) ? old('district') : $student->district,
-            'state'      => (old('state')) ? old('state') : $student->state,
-            'country'      => (old('country')) ? old('country') : $student->country,
-            'pin_code'      => (old('pin_code')) ? old('pin_code') : $student->zip_code,
+            'fee'      => $fee,
+            'student_registration_transaction'      => $student_registration_transaction,
+            'student_registration_payment'      => $student_registration_payment,
             'tab'         => 'student_charge',   
-            'student_registration_id'    => $id, 
+            'student_registration_id'    => $id,
+            'map_id'=>$map_id, 
         ];
         return $data;
     } catch(\Exception $err){
@@ -335,4 +349,19 @@ public function update_address($request)
         return back()->with('error', $err->getMessage());
     }
 }
+ public function getRegistrationFee($session_id,$class,$fee_head,$fee_type)
+    { 
+        $data['fee']='No';
+       try{
+            $feeDetails=FeeSetting::getFeeDetails($session_id); 
+            if($feeDetails->registration_fee=='Yes'){
+                $data['fee']='Yes';
+                $fee=FeeForClass::getFeeApplicable($session_id,$class,$fee_head,$fee_type);
+                $data['fees']=$fee;
+            }
+           }catch(\Exception $err){
+                 Log::error('message error in getRegistrationFee on StudentRegistrationRepository :'. $err->getMessage());
+           } 
+        return $data;   
+   }
 }
