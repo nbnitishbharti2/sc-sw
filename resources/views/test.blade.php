@@ -32,33 +32,82 @@
             <div class="card">
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
-                  <li class="nav-item"><a class="nav-link active" href="#school_details" data-toggle="tab">School Details</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#sms_details" data-toggle="tab">SMS Details new </a></li>
-                  <li class="nav-item"><a class="nav-link" href="#smtp" data-toggle="tab">SMTP</a></li>
+                  <li class="nav-item"><a class="nav-link active" href="#personal_details" data-toggle="tab">Personal Details</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#residential_details" data-toggle="tab">Residential Details</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#guardians_details" data-toggle="tab">Guardians Details</a></li> 
+                    <li class="nav-item"><a class="nav-link" href="#fee_details" data-toggle="tab">Fee Details</a></li>
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
                 <div class="tab-content">
-                  <div class="active tab-pane" id="school_details">
+                  <div class="active tab-pane" id="personal_details">
                      <form class="form-horizontal">
                       <div class="form-group row"> 
                         <div class="col-sm-6">
-                          <label for="inputName" class="col-sm-12 col-form-label">School Name</label>
+                          <label for="inputName" class="col-sm-12 col-form-label">Admission No</label>
                           <input type="email" class="form-control" id="inputName" placeholder="Name">
                         </div>
                         <div class="col-sm-6">
-                          <label for="inputName" class="col-sm-12 col-form-label">School Short Name</label>
+                          <label for="inputName" class="col-sm-12 col-form-label">Name</label>
                           <input type="email" class="form-control" id="inputName" placeholder="Name">
                         </div>
-
-                      </div>
-                    <!--   <div class="form-group row">
-                        <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                        <div class="col-sm-10">
-                          <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                        <div class="col-sm-6">
+                          <label for="inputName" class="col-sm-12 col-form-label">Class</label>
+                          <input type="email" class="form-control" id="inputName" placeholder="Name">
                         </div>
-                      </div> -->
-                       
+                        <div class="col-sm-6">
+                          <label for="inputName" class="col-sm-12 col-form-label">Section</label>
+                          <input type="email" class="form-control" id="inputName" placeholder="Name">
+                        </div>
+                        <div class="col-sm-6">
+                          <label for="inputName" class="col-sm-12 col-form-label">Roll Number:</label>
+                          <input type="email" class="form-control" id="inputName" placeholder="Name">
+                        </div>
+                        <div class="col-sm-6">
+                          <label for="inputName" class="col-sm-12 col-form-label">Gender</label>
+                          <input type="email" class="form-control" id="inputName" placeholder="Name">
+                        </div>
+                        <div class="col-sm-6">
+                          <label for="inputName" class="col-sm-12 col-form-label">Date of Admission:</label>
+                          <input type="email" class="form-control" id="inputName" placeholder="Name">
+                        </div>
+                        <div class="col-sm-6">
+                          <label for="inputName" class="col-sm-12 col-form-label">Date of Birth</label>
+                          <input type="email" class="form-control" id="inputName" placeholder="Name">
+                        </div>
+                        <div class="col-sm-6">
+                          <label for="inputName" class="col-sm-12 col-form-label">Blood Group:</label>
+                          <input type="email" class="form-control" id="inputName" placeholder="Name">
+                        </div>
+                        <div class="col-sm-6">
+                          <label for="inputName" class="col-sm-12 col-form-label">No. of Siblings:</label>
+                          <input type="email" class="form-control" id="inputName" placeholder="Name">
+                        </div>
+                        <div class="col-sm-6">
+                          <label for="inputName" class="col-sm-12 col-form-label">Category:</label>
+                          <input type="email" class="form-control" id="inputName" placeholder="Name">
+                        </div>
+                        <div class="col-sm-6">
+                          <label for="inputName" class="col-sm-12 col-form-label">Aadhaar No:</label>
+                          <input type="email" class="form-control" id="inputName" placeholder="Name">
+                        </div>
+                        <div class="col-sm-6">
+                          <label for="inputName" class="col-sm-12 col-form-label">Caste</label>
+                          <input type="email" class="form-control" id="inputName" placeholder="Name">
+                        </div>
+                        <div class="col-sm-6">
+                          <label for="inputName" class="col-sm-12 col-form-label">Session:</label>
+                          <input type="email" class="form-control" id="inputName" placeholder="Name">
+                        </div>
+                        <div class="col-sm-6">
+                          <label for="inputName" class="col-sm-12 col-form-label">Mobile No</label>
+                          <input type="email" class="form-control" id="inputName" placeholder="Name">
+                        </div>
+                        <div class="col-sm-6">
+                          <label for="inputName" class="col-sm-12 col-form-label">Email Id:</label>
+                          <input type="email" class="form-control" id="inputName" placeholder="Name">
+                        </div>
+                      </div>
                      
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
@@ -68,17 +117,30 @@
                     </form>
                   </div>
                   <!-- /.tab-pane -->
-                  <div class="tab-pane" id="sms_details">
+                  <div class="tab-pane" id="residential_details">
                     <form class="form-horizontal">
                        <div class="form-group row"> 
                         <div class="col-sm-6">
-                          <label for="inputName" class="col-sm-12 col-form-label">Sender Name</label>
+                          <label for="inputName" class="col-sm-12 col-form-label">Address:</label>
                           <input type="email" class="form-control" id="inputName" placeholder="Name">
                         </div>
                         <div class="col-sm-6">
-                          <label for="inputName" class="col-sm-12 col-form-label">URL</label>
+                          <label for="inputName" class="col-sm-12 col-form-label">City:</label>
                           <input type="email" class="form-control" id="inputName" placeholder="Name">
                         </div>
+                        <div class="col-sm-6">
+                          <label for="inputName" class="col-sm-12 col-form-label">District:</label>
+                          <input type="email" class="form-control" id="inputName" placeholder="Name">
+                        </div>
+                        <div class="col-sm-6">
+                          <label for="inputName" class="col-sm-12 col-form-label">State:</label>
+                          <input type="email" class="form-control" id="inputName" placeholder="Name">
+                        </div>
+                        <div class="col-sm-6">
+                          <label for="inputName" class="col-sm-12 col-form-label">Zip Code/Pin Code:</label>
+                          <input type="email" class="form-control" id="inputName" placeholder="Name">
+                        </div>
+                         
 
                       </div>
                       
@@ -91,15 +153,69 @@
                   </div>
                   <!-- /.tab-pane -->
 
-                  <div class="tab-pane" id="smtp">
+                  <div class="tab-pane" id="guardians_details">
                     <form class="form-horizontal">
                        <div class="form-group row"> 
                         <div class="col-sm-6">
-                          <label for="inputName" class="col-sm-12 col-form-label">User Name</label>
+                          <label for="inputName" class="col-sm-12 col-form-label">Father's Name:</label>
                           <input type="email" class="form-control" id="inputName" placeholder="Name">
                         </div>
                         <div class="col-sm-6">
-                          <label for="inputName" class="col-sm-12 col-form-label">Password</label>
+                          <label for="inputName" class="col-sm-12 col-form-label">Father Mobile No</label>
+                          <input type="email" class="form-control" id="inputName" placeholder="Name">
+                        </div>
+                         <div class="col-sm-6">
+                          <label for="inputName" class="col-sm-12 col-form-label">Father's Occupation</label>
+                          <input type="email" class="form-control" id="inputName" placeholder="Name">
+                        </div>
+                        <div class="col-sm-6">
+                          <label for="inputName" class="col-sm-12 col-form-label">Father education:</label>
+                          <input type="email" class="form-control" id="inputName" placeholder="Name">
+                        </div>
+                           <div class="col-sm-6">
+                          <label for="inputName" class="col-sm-12 col-form-label">Mother's  Name:</label>
+                          <input type="email" class="form-control" id="inputName" placeholder="Name">
+                        </div>
+                        <div class="col-sm-6">
+                          <label for="inputName" class="col-sm-12 col-form-label">Mother's Mobile No</label>
+                          <input type="email" class="form-control" id="inputName" placeholder="Name">
+                        </div>
+                         <div class="col-sm-6">
+                          <label for="inputName" class="col-sm-12 col-form-label">Mother's  Occupation</label>
+                          <input type="email" class="form-control" id="inputName" placeholder="Name">
+                        </div>
+                        <div class="col-sm-6">
+                          <label for="inputName" class="col-sm-12 col-form-label">Mother's  education:</label>
+                          <input type="email" class="form-control" id="inputName" placeholder="Name">
+                        </div>
+                        
+                      </div>
+                      
+                      <div class="form-group row">
+                        <div class="offset-sm-2 col-sm-10">
+                          <button type="submit" class="btn btn-danger">Submit</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div> 
+                  <div class="tab-pane" id="fee_details">
+                    <form class="form-horizontal">
+                       <div class="form-group row"> 
+                        <div class="col-sm-6">
+                          <label for="inputName" class="col-sm-12 col-form-label">Admission Fee:</label>
+                          <input type="email" class="form-control" id="inputName" placeholder="Name">
+                        </div>
+                        <div class="col-sm-6">
+                          <label for="inputName" class="col-sm-12 col-form-label">Miscellaneous Charge:</label>
+                          <input type="email" class="form-control" id="inputName" placeholder="Name">
+                        </div>
+                         <div class="col-sm-6">
+                          <label for="inputName" class="col-sm-12 col-form-label">Registration:</label>
+                          <input type="email" class="form-control" id="inputName" placeholder="Name">
+                        </div>
+
+                         <div class="col-sm-6">
+                          <label for="inputName" class="col-sm-12 col-form-label">I Card:</label>
                           <input type="email" class="form-control" id="inputName" placeholder="Name">
                         </div>
 

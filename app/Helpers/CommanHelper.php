@@ -28,7 +28,20 @@ class CommanHelper
 		}
 		return $session;
 	}
-
+	public static function getCurrentSessionForAdmission()
+	{
+		$year		= date('Y');
+		$month		= date('m');
+		$session	= ''; 
+		$session = $year.'-'.($year+1);
+		return $session;
+	}
+	public static function getSessionId($academic_year)
+	{
+		$session=AcademicYear::where('academic_year','=',$academic_year)->first();
+		$session_id=$session->id;
+		return $session_id;
+	}
 	/**
 	* Method to check user permission
 	* @param string $permission

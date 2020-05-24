@@ -162,4 +162,7 @@ return [
     'edit_blood_group'          => 'Edit Blood Group',
     'delete_blood_group'        => 'Delete Blood Group',
     'restore_blood_group'       => 'Restore Blood Group',
+    'student_registration'      => 'Student Registration', 
+    'guardians_details'         =>'Guardians Details',
+
 ];

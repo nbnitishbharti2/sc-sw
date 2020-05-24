@@ -178,4 +178,14 @@ class SectionRepository {
             return back()->with('error', $err->getMessage());
         }
     }
+    public function getSectionList($class_id,$session_id)
+    { 
+       try {   
+        $classes=Section::select('sections.id', 'sections.section_short')->leftjoin('sessions', 'sessions.id', 'sections.session_id')->where('sessions.id', $session_id)->where('sections.classes_id', $class_id)->get()->pluck('section_short', 'id'); 
+        return $classes;
+        } catch(\Exception $err){
+            Log::error('message error in getSectionList on SectionRepository :'. $err->getMessage());
+            return back()->with('error', $err->getMessage());
+        }
+    }
 }

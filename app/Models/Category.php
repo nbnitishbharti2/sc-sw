@@ -16,4 +16,8 @@ class Category extends Model
 
     public $sortable = ['id', 'name', 'created_at', 'updated_at'];
 
+    public static function getAllCategoryListing()
+    { 
+        return Category::select('categories.id', 'categories.name')->get();
+    }
 }

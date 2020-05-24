@@ -196,4 +196,14 @@ class ClassController extends Controller
     		return back()->with('error', $err->getMessage());
     	}
 	}
+	public function getClassListSession(Request $request)
+	{ 
+		try {
+			$data = $this->class->getClassList($request->session_id);
+			return json_encode($data);
+		} catch(\Exception $err){
+			Log::error('Error in getClassListSession on ClassController :'. $err->getMessage());
+			return back()->with('error', $err->getMessage());
+		}
+	}
 }

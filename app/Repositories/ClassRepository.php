@@ -18,11 +18,11 @@ class ClassRepository {
     public function getAllClass()
     {
     	try {
-    		return  $query = Classes::where('session_id',Session::get('session'))->withTrashed()->get();  
-    	} catch(\Exception $err){
-    		Log::error('message error in getAllClass on ClassRepository :'. $err->getMessage());
-    		return back()->with('error', $err->getMessage());
-    	}
+            return  $query = Classes::where('session_id',Session::get('session'))->withTrashed()->get();  
+        } catch(\Exception $err){
+          Log::error('message error in getAllClass on ClassRepository :'. $err->getMessage());
+          return back()->with('error', $err->getMessage());
+        }
     }
 
     /**
@@ -66,15 +66,15 @@ class ClassRepository {
             
             $class = Classes::create($data);
             if ($class->exists) {
-               return true;
-            } else {
-               return false;
-            }
-        } catch(\Exception $err){
-            Log::error('message error in store on ClassRepository :'. $err->getMessage());
-            return back()->with('error', $err->getMessage());
-        }
+             return true;
+         } else {
+             return false;
+         }
+     } catch(\Exception $err){
+        Log::error('message error in store on ClassRepository :'. $err->getMessage());
+        return back()->with('error', $err->getMessage());
     }
+}
 
     /**
     * Method to fetch edit resource data
@@ -114,15 +114,15 @@ class ClassRepository {
             $class->updated_by  = Auth::user()->id;
             $class->save(); // Update data
             if ($class->wasChanged()) { //Check if data was updated
-               return true;
-            } else {
-               return false;
-            }
-        } catch(\Exception $err){
-            Log::error('message error in update on ClassRepository :'. $err->getMessage());
-            return back()->with('error', $err->getMessage());
-        }
+             return true;
+         } else {
+             return false;
+         }
+     } catch(\Exception $err){
+        Log::error('message error in update on ClassRepository :'. $err->getMessage());
+        return back()->with('error', $err->getMessage());
     }
+}
 
     /**
     * Method to delete resource
@@ -134,15 +134,15 @@ class ClassRepository {
         try {
             $class = Classes::destroy($class_id);
             if ($class) { //Check if data was updated
-               return true;
-            } else {
-               return false;
-            }
-        } catch(\Exception $err){
-            Log::error('message error in delete on ClassRepository :'. $err->getMessage());
-            return back()->with('error', $err->getMessage());
-        }
+             return true;
+         } else {
+             return false;
+         }
+     } catch(\Exception $err){
+        Log::error('message error in delete on ClassRepository :'. $err->getMessage());
+        return back()->with('error', $err->getMessage());
     }
+}
 
     /**
     * Method to delete resource
@@ -154,15 +154,15 @@ class ClassRepository {
         try {
             $class = Classes::withTrashed()->find($class_id)->restore();
             if ($class) { //Check if data was updated
-               return true;
-            } else {
-               return false;
-            }
-        } catch(\Exception $err){
-            Log::error('message error in restore on ClassRepository :'. $err->getMessage());
-            return back()->with('error', $err->getMessage());
-        }
+             return true;
+         } else {
+             return false;
+         }
+     } catch(\Exception $err){
+        Log::error('message error in restore on ClassRepository :'. $err->getMessage());
+        return back()->with('error', $err->getMessage());
     }
+}
 
     /**
     * Method to import previous session classes
@@ -177,17 +177,17 @@ class ClassRepository {
             $class = Classes::where('session_id',$prevsession)->with('sections')->get();
             
             if ($class->count() == 0) { //Check if data was not found in previous session
-               return false;
-            } else {
-                foreach ($class as $key => $value) {
-                    $data = [
-                        'session_id'    => $nextSession,
-                        'class_name'    => $value->class_name,
-                        'class_short'   => $value->class_short,
-                        'added_by'      => Auth::user()->id,
-                        'updated_by'    => Auth::user()->id
-                    ];
-                    $check_class = Classes::where(['class_name' => $value->class_name, 'session_id' => $nextSession])->count(); 
+             return false;
+         } else {
+            foreach ($class as $key => $value) {
+                $data = [
+                    'session_id'    => $nextSession,
+                    'class_name'    => $value->class_name,
+                    'class_short'   => $value->class_short,
+                    'added_by'      => Auth::user()->id,
+                    'updated_by'    => Auth::user()->id
+                ];
+                $check_class = Classes::where(['class_name' => $value->class_name, 'session_id' => $nextSession])->count(); 
                     if($check_class == 0) { // If class is not inserted in current session
                         $class = Classes::create($data); //Insert classes data
                         // Insert Section data
@@ -210,10 +210,21 @@ class ClassRepository {
                         }
                     }
                 }
-               return true;
+                return true;
             }
         } catch(\Exception $err){
             Log::error('message error in delete on ClassRepository :'. $err->getMessage());
+            return back()->with('error', $err->getMessage());
+        }
+    }
+    public function getClassList($session_id)
+    {
+       try {   
+        $classes=Classes::select('classes.id', 'classes.class_short')->leftjoin('sessions', 'sessions.id', 'classes.session_id')->where('sessions.id', $session_id)->get()->pluck('class_short', 'id');
+
+        return $classes;
+        } catch(\Exception $err){
+            Log::error('message error in getClassList on ClassRepository :'. $err->getMessage());
             return back()->with('error', $err->getMessage());
         }
     }

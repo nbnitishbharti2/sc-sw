@@ -114,5 +114,7 @@ return [
     'blood_group_not_found'                 => 'Oops! Blood Group not found.',
     'blood_group_not_restored'              => 'Oops! Blood Group not restored.',
     'blood_group_not_deleted'               => 'Oops! Blood Group not deleted',
-
+    'student_not_registerd'                 => 'Oops! Student not registerd',
+    'student_address_not_updated'           => 'Oops! Student address not updated',
+    'student_parent_not_updated'            => 'Oops! Student parent not updated',
 ];

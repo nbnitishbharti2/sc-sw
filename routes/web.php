@@ -211,8 +211,20 @@ Route::group(['middleware'=>['localization']],function(){
 		Route::get('/delete-blood-group/{blood_group_id}', 'BloodGroupController@delete')->name('delete.blood_group');
 		Route::get('/restore-blood-group/{blood_group_id}', 'BloodGroupController@restore')->name('restore.blood_group');
 
-
-
+		/* Student Registration */
+		Route::get('/view-student-registration', 'StudentRegistrationController@index')->name('view.student.registration');
+		Route::get('/add-student-registration/{id?}', 'StudentRegistrationController@create')->name('add.student.registration');
+		Route::post('/store-student-registration', 'StudentRegistrationController@store')->name('store.student.registration');
+		Route::get('/edit-student-registration/{id}', 'StudentRegistrationController@edit')->name('edit.student.registration');
+		Route::post('/update-student-registration', 'StudentRegistrationController@update')->name('update.student.registration');
+		Route::get('/delete-student-registration/{room_id}', 'StudentRegistrationController@delete')->name('delete.student.registration');
+		Route::get('/restore-student-registration/{room_id}', 'StudentRegistrationController@restore')->name('restore.student.registration');
+		Route::get('/student-registration-address/{id}', 'StudentRegistrationController@edit_address')->name('edit.student.registration.address');
+		 Route::post('/update-student-registration-address', 'StudentRegistrationController@update_address')->name('update.student.registration.address');
+		 Route::get('/student-registration-parent/{id}', 'StudentRegistrationController@edit_parent')->name('edit.student.registration.parent');
+		 Route::post('/update-student-registration-parent', 'StudentRegistrationController@update_parent')->name('update.student.registration.parent');
+ 		Route::get('/student-registration-charge/{id}', 'StudentRegistrationController@edit_charge')->name('edit.student.registration.charge');
+		 Route::post('/update-student-registration-charge', 'StudentRegistrationController@update_charge')->name('update.student.registration.charge');
 
 		/*  All Ajax Routes */
 		Route::post('/get-vehicle-no-from-vehicle', 'VehicleRootMapController@getVehicleNo')->name('get-vehicle-no-from-vehicle');
@@ -221,6 +233,10 @@ Route::group(['middleware'=>['localization']],function(){
 		Route::post('/get-fee-head-frequency-from-fee-setting', 'FeeController@getFeeHeadFrequency')->name('get-fee-head-frequency-from-fee-setting');
 		Route::post('/get-fee-frequency-from-fee-frequency', 'FeeController@getFeeFrequency')->name('get-fee-frequency-from-fee-frequency');
 		Route::post('/get-frequency-value-from-fee-frequency', 'FeeController@getFeeFrequencyValue')->name('get-frequency-value-from-fee-frequency');
-		/*Route::get('/test', 'HomeController@test')->name('test');*/
+		
+
+		Route::post('/get-class-list-with-session', 'ClassController@getClassListSession')->name('get-class-list-with-session');
+		Route::post('/get-session-list', 'SectionController@getSessionList')->name('get-session-list');
+		Route::get('/test', 'HomeController@test')->name('test');
 	});
 });

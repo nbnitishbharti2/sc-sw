@@ -95,7 +95,7 @@ return [
     'blood_group_updated_successfully'          => 'Blood Group updated successfully!',
     'blood_group_deleted_successfully'          => 'Blood Group deleted successfully!',
     'blood_group_restored_successfully'         => 'Blood Group restored successfully!',
-
-
-    
+    'student_registerd_successfully'            =>'Student registerd successfully',
+    'student_address_updated_successfully'      =>'Student address updated successfully',
+    'student_parent_updated_successfully'       =>'Student parent updated successfully'
 ];

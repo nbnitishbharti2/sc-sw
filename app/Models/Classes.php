@@ -27,9 +27,10 @@ class Classes extends Model
     /**
      * Get the class list for listing.
      */
-    public static function getAllClassForListing()
+    public static function getAllClassForListing($session=null)
     {
-        return Classes::select('classes.id', 'classes.class_short')->leftjoin('sessions', 'sessions.id', 'classes.session_id')->where('sessions.id', Session::get('session'))->get();
+        $session_id=($session)?$session:Session::get('session');
+        return Classes::select('classes.id', 'classes.class_short')->leftjoin('sessions', 'sessions.id', 'classes.session_id')->where('sessions.id', $session_id)->get();
     }
 
     /**

@@ -19,10 +19,6 @@ class SectionController extends Controller
     public function __construct(SectionRepository $section)
     {
         $this->section = $section;
-        // if(!Auth::user()->locale) {
-        //  App::setLocale('en');
-        // }
-        App::setLocale('en');
     }
     /**
      * Display a listing of the resource.
@@ -194,5 +190,15 @@ class SectionController extends Controller
     		return back()->with('error', $err->getMessage());
     	}
     }
-    
+
+    public function getSessionList(Request $request)
+    { 
+        try {
+            $data = $this->section->getSectionList($request->class_id,$request->session_id); 
+            return json_encode($data);
+        } catch(\Exception $err){
+            Log::error('Error in getSessionList on SectionController :'. $err->getMessage());
+            return back()->with('error', $err->getMessage());
+        }
+    }
 }
