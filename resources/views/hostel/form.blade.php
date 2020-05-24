@@ -14,7 +14,7 @@
 							<h1>{!! $page_title !!}</h1>
 						</div>
 						<div class="col-md-2 text-right">
-							<a href="{!! route('view.hostel') !!}" class="btn btn-success"><i class="fa fa-arrow-left"></i> &nbsp; {{Lang::get('button.back')}}</a>
+							<a href="{!! route('view.hostel') !!}" class="btn btn-success"><i class="fa fa-arrow-left"></i> &nbsp; {{trans('button.back')}}</a>
 						</div>
 					</div>
 				</div><!-- /.container-fluid -->
@@ -39,8 +39,8 @@
 									<div class="card-body">
 										<div class="form-group row">
 											<div class="col-sm-6 form-group">
-												<label for="name">{{Lang::get('label.name')}}</label>
-												<input type="text" class="form-control" value="{{ ($name) ? $name : old('name') }}" id="name" name="name" placeholder="{{Lang::get('placeholder.name')}}">
+												<label for="name">{{trans('label.name')}}</label>
+												<input type="text" class="form-control" value="{{ ($name) ? $name : old('name') }}" id="name" name="name" placeholder="{{trans('placeholder.name')}}">
 
 												@if($errors->has('name'))
 												<span class="alert-notice" role="alert">
@@ -51,8 +51,8 @@
 											
 
 											<div class="col-sm-6 form-group">
-												<label for="address">{{Lang::get('label.address')}}</label>
-												<textarea type="text" class="form-control" id="name" name="address" placeholder="{{Lang::get('placeholder.address')}}">{{ ($address) ? $address : old('address') }}</textarea>
+												<label for="address">{{trans('label.address')}}</label>
+												<textarea type="text" class="form-control" id="name" name="address" placeholder="{{trans('placeholder.address')}}">{{ ($address) ? $address : old('address') }}</textarea>
 
 												@if($errors->has('address'))
 												<span class="alert-notice" role="alert">
@@ -65,7 +65,7 @@
 										
 
 										<div class="form-group">
-											<label for="facilities_ids">{{Lang::get('label.facilities_ids')}}</label>
+											<label for="facilities_ids">{{trans('label.facilities_ids')}}</label>
 										</div>
 										<div class="row form-group">
 											@foreach($facilities_list as $facility => $value)
@@ -88,8 +88,8 @@
 										<div class="form-group row">
 
 											<div class="col-sm-6 form-group">
-												<label for="no_of_rooms">{{Lang::get('label.no_of_rooms')}}</label>
-												<input type="text" class="form-control" value="{{ ($no_of_rooms) ? $no_of_rooms : old('no_of_rooms') }}" id="no_of_rooms" name="no_of_rooms" placeholder="{{Lang::get('placeholder.no_of_rooms')}}">
+												<label for="no_of_rooms">{{trans('label.no_of_rooms')}}</label>
+												<input type="text" class="form-control" value="{{ ($no_of_rooms) ? $no_of_rooms : old('no_of_rooms') }}" id="no_of_rooms" name="no_of_rooms" placeholder="{{trans('placeholder.no_of_rooms')}}">
 
 												@if($errors->has('no_of_rooms'))
 												<span class="alert-notice" role="alert">
@@ -100,8 +100,8 @@
 											
 
 											<div class="col-sm-6 form-group">
-												<label for="warden_name">{{Lang::get('label.warden_name')}}</label>
-												<input type="text" class="form-control" value="{{ ($warden_name) ? $warden_name : old('warden_name') }}" id="warden_name" name="warden_name" placeholder="{{Lang::get('placeholder.warden_name')}}">
+												<label for="warden_name">{{trans('label.warden_name')}}</label>
+												<input type="text" class="form-control" value="{{ ($warden_name) ? $warden_name : old('warden_name') }}" id="warden_name" name="warden_name" placeholder="{{trans('placeholder.warden_name')}}">
 
 												@if($errors->has('warden_name'))
 												<span class="alert-notice" role="alert">
@@ -113,9 +113,9 @@
 										</div>
 											
 										<div class="card-footer">
-											<button type="submit" class="btn btn-primary">{{Lang::get('button.submit')}}</button>
-											<button type="reset" class="btn btn-danger">{{Lang::get('button.reset')}}</button>
-											<a href="{{ route('view.vehicle_type') }}" class="btn btn-success">{{Lang::get('button.back')}}</a>
+											<button type="submit" class="btn btn-primary">{{trans('button.submit')}}</button>
+											<button type="reset" class="btn btn-danger">{{trans('button.reset')}}</button>
+											<a href="{{ route('view.vehicle_type') }}" class="btn btn-success">{{trans('button.back')}}</a>
 										</div>
 
 									</div>

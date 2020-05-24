@@ -14,7 +14,7 @@
 							<h1>{!! $page_title !!}</h1>
 						</div>
 						<div class="col-md-2 text-right">
-							<a href="{!! route('view.root') !!}" class="btn btn-success"><i class="fa fa-arrow-left"></i> &nbsp; {{Lang::get('button.back')}}</a>
+							<a href="{!! route('view.root') !!}" class="btn btn-success"><i class="fa fa-arrow-left"></i> &nbsp; {{trans('button.back')}}</a>
 						</div>
 					</div>
 				</div><!-- /.container-fluid -->
@@ -38,8 +38,8 @@
 									<input type="hidden" name="root_id" value="{{ $root_id }}">
 									<div class="card-body">
 										<div class="form-group">
-											<label for="root_name">{{Lang::get('label.root_name')}}</label>
-											<input type="text" class="form-control" value="{{ ($name) ? $name : old('name') }}" id="name" name="name" placeholder="{{Lang::get('placeholder.root_name')}}">
+											<label for="root_name">{{trans('label.root_name')}}</label>
+											<input type="text" class="form-control" value="{{ ($name) ? $name : old('name') }}" id="name" name="name" placeholder="{{trans('placeholder.root_name')}}">
 										</div>
 										@if($errors->has('name'))
 											<span class="alert-notice" role="alert">
@@ -48,9 +48,9 @@
 				                        @endif
 										
 										<div class="card-footer">
-						                  	<button type="submit" class="btn btn-primary">{{Lang::get('button.submit')}}</button>
-						                  	<button type="reset" class="btn btn-danger">{{Lang::get('button.reset')}}</button>
-						                  	<a href="{{ route('view.root') }}" class="btn btn-success">{{Lang::get('button.back')}}</a>
+						                  	<button type="submit" class="btn btn-primary">{{trans('button.submit')}}</button>
+						                  	<button type="reset" class="btn btn-danger">{{trans('button.reset')}}</button>
+						                  	<a href="{{ route('view.root') }}" class="btn btn-success">{{trans('button.back')}}</a>
 						                </div>
 									</div>
 									<!-- /.card-body -->

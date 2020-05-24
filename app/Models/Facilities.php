@@ -4,11 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Kyslik\ColumnSortable\Sortable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Hostel;
 
 class Facilities extends Model
 {
     use Sortable;
+
+    use SoftDeletes;
 
     protected $fillable = [ 'name'];
 

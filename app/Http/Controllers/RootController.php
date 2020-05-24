@@ -8,10 +8,10 @@ use App\Http\Requests\RootRequest;
 use App\Models\Root;
 use Validator;
 use Auth;
-use Lang;
 use Log;
 use App;
 use Session;
+use Helper;
 
 class RootController extends Controller
 {
@@ -28,6 +28,9 @@ class RootController extends Controller
 	public function index()
 	{
 		try {
+			if(!Helper::checkPermission('view-root')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			$data['root'] = $this->root->getAllRoot(); // Fetch all root data
 			return view('root.index', $data);
 		} catch(\Exception $err){
@@ -44,6 +47,9 @@ class RootController extends Controller
 	public function create()
 	{
 		try {
+			if(!Helper::checkPermission('add-root')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			$data = $this->root->create();
 			return view('root.form', $data);
 		} catch(\Exception $err){
@@ -60,11 +66,14 @@ class RootController extends Controller
 	public function store(RootRequest $root_request)
 	{
 		try {
+			if(!Helper::checkPermission('add-root')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			$result = $this->root->store($root_request);
 			if($result == true) {
-				return back()->with('success', Lang::get('success.root_added_successfully'));
+				return back()->with('success', trans('success.root_added_successfully'));
 			}
-			return back()->with('error', Lang::get('error.root_not_added'));
+			return back()->with('error', trans('error.root_not_added'));
 		} catch(\Exception $err){
     		Log::error('Error in store on RootController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());
@@ -79,8 +88,11 @@ class RootController extends Controller
 	public function edit($root_id = 0)
 	{
 		try {
+			if(!Helper::checkPermission('edit-root')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			if($root_id == 0){
-				return back()->with('error', Lang::get('error.root_not_found'));
+				return back()->with('error', trans('error.root_not_found'));
 			}
 			$data = $this->root->edit($root_id);
 			return view('root.form', $data);
@@ -98,11 +110,14 @@ class RootController extends Controller
 	public function update(RootRequest $request)
 	{
 		try {
+			if(!Helper::checkPermission('edit-root')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			$result = $this->root->update($request);
 			if($result == true) {
-				return redirect('view-root')->with('success', Lang::get('success.root_updated_successfully'));
+				return redirect('view-root')->with('success', trans('success.root_updated_successfully'));
 			}
-			return back()->with('error', Lang::get('error.root_not_updated'));
+			return back()->with('error', trans('error.root_not_updated'));
 		} catch(\Exception $err){
 			Log::error('Error in update on RootController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());
@@ -117,14 +132,17 @@ class RootController extends Controller
 	public function delete($root_id = 0)
 	{
 		try {
+			if(!Helper::checkPermission('delete-root')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			if($root_id == 0){
-				return back()->with('error', Lang::get('error.root_not_found'));
+				return back()->with('error', trans('error.root_not_found'));
 			}
 			$result = $this->root->delete($root_id);
 			if($result == true) {
-				return back()->with('success', Lang::get('success.root_deleted_successfully'));
+				return back()->with('success', trans('success.root_deleted_successfully'));
 			}
-			return back()->with('error', Lang::get('error.root_not_deleted'));
+			return back()->with('error', trans('error.root_not_deleted'));
 		} catch(\Exception $err){
     		Log::error('Error in delete on RootController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());
@@ -139,14 +157,17 @@ class RootController extends Controller
 	public function restore($root_id = 0)
 	{
 		try {
+			if(!Helper::checkPermission('delete-root')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			if($root_id == 0){
-				return back()->with('error', Lang::get('error.root_not_found'));
+				return back()->with('error', trans('error.root_not_found'));
 			}
 			$result = $this->root->restore($root_id);
 			if($result == true) {
-				return back()->with('success', Lang::get('success.root_restored_successfully'));
+				return back()->with('success', trans('success.root_restored_successfully'));
 			}
-			return back()->with('error', Lang::get('error.root_not_restored'));
+			return back()->with('error', trans('error.root_not_restored'));
 		} catch(\Exception $err){
     		Log::error('Error in restore on RootController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());

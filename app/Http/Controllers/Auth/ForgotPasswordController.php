@@ -8,8 +8,7 @@ use App\Models\SchoolDetails;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Http\Request;
 use App\User;
-use App\Models\SaveOtp;
-use Lang;
+use App\Models\SaveOtp; 
 use Log;
 class ForgotPasswordController extends Controller
 {
@@ -140,18 +139,18 @@ class ForgotPasswordController extends Controller
             if($user->id>0){ 
             if($this->sendOtp($mobile,$user->id)){ 
 
-                $this->message=Lang::get('success.otp_send_successfully_varify_otp');
+                $this->message=trans('success.otp_send_successfully_varify_otp');
                 $this->type="success";
             }else{
-                $this->message=Lang::get('error.mobile_no_not_valid');
+                $this->message=trans('error.mobile_no_not_valid');
                 $this->type="error"; 
             }
         }else{ 
-            $this->message=Lang::get('error.mobile_no_not_exist'); 
+            $this->message=trans('error.mobile_no_not_exist'); 
                 $this->type="error"; 
         }
         }catch(\Exception $err){ 
-           $this->message=Lang::get('error.mobile_no_not_exist'); 
+           $this->message=trans('error.mobile_no_not_exist'); 
              Log::error('Error in forgote on ForgotePasswordController :'. $err->getMessage());
                 $this->type="error"; 
 }
@@ -162,7 +161,7 @@ return;
     { 
         $otp=rand(100000,999999);
         if($this->saveotp($id,$otp)){ 
-             $this->message=Lang::get('message.forgote_password_otp').' '.$otp;
+             $this->message=trans('message.forgote_password_otp').' '.$otp;
              return 1; 
         }else{ 
             return 0;

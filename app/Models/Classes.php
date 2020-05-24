@@ -31,4 +31,12 @@ class Classes extends Model
     {
         return Classes::select('classes.id', 'classes.class_short')->leftjoin('sessions', 'sessions.id', 'classes.session_id')->where('sessions.id', Session::get('session'))->get();
     }
+
+    /**
+     * Get the single class list for listing. // edit of fee for class
+     */
+    public static function getSingleClassForListing($class_id)
+    {
+        return Classes::select('classes.id', 'classes.class_short')->where('classes.id',$class_id)->leftjoin('sessions', 'sessions.id', 'classes.session_id')->where('sessions.id', Session::get('session'))->get();
+    }
 }

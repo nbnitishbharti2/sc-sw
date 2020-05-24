@@ -15,7 +15,9 @@
 						</div>
 						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 right-align">
 							<a href="{!! url('/') !!}" class="btn btn-success"><i class="fa fa-arrow-left"></i> &nbsp; {{trans('button.back')}}</a>
+							@if(Helper::checkPermission('add-room'))
 							<a href="{!! route('add.room') !!}" class="btn btn-primary"><i class="fa fa-plus"></i>  &nbsp; {{trans('button.add')}}</a>
+							@endif
 						</div>
 					</div>
 				</div><!-- /.container-fluid -->
@@ -60,10 +62,21 @@
 														<td>{!! Carbon\Carbon::parse($item->created_at)->format(config('app.date_time_format')) !!}</td>
 														<td>
 															@if(empty($item->deleted_at))
+
+																@if(Helper::checkPermission('edit-room'))
 																<a href="{!! route('edit.room', $item->id) !!}"  title="Edit" class="btn-sm btn btn-primary"><i class="fa fa-edit"></i>  </a>
+																@endif
+
+																@if(Helper::checkPermission('delete-room'))
 																<button class="btn-sm btn btn-danger" title="Delete" onclick="room_confirm_delete({{ $item->id }})"><i class="fa fa-trash"></i></button>
+																@endif
+																
 															@else
+
+															    @if(Helper::checkPermission('delete-room'))
 																<button class="btn-sm btn btn-success" title="Restore" onclick="room_confirm_restore({{ $item->id }})"><i class="fa fa-undo"></i></button>
+																@endif
+																
 															@endif
 														</td>
 													</tr>

@@ -42,8 +42,8 @@ class HostelRepository {
         try {
             $data = [
                 'action'          => route('store.hostel'),
-                'page_title'      => Lang::get('label.hostel'),
-                'title'           => Lang::get('title.add_hostel'),
+                'page_title'      => trans('label.hostel'),
+                'title'           => trans('title.add_hostel'),
                 'hostel_id'       => 0,
                 'name'            => (old('name')) ? old('name') : '',
                 'address'         => (old('address')) ? old('address') : '',
@@ -101,8 +101,8 @@ class HostelRepository {
             // Create data for edit form
             $data = [
                 'action'          => route('update.hostel'),
-                'page_title'      => Lang::get('label.hostel'),
-                'title'           => Lang::get('title.edit_hostel'),
+                'page_title'      => trans('label.hostel'),
+                'title'           => trans('title.edit_hostel'),
                 'hostel_id'       => $hostel->id,
                 'name'            => ($hostel->name) ? $hostel->name : old('name'),
                 'address'         => ($hostel->name) ? $hostel->name : old('address'),

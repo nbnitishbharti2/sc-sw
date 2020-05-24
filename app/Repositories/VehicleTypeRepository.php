@@ -4,8 +4,8 @@ namespace App\Repositories;
 
 use App\Models\VehicleType;
 use Log;
-use Lang;
 use Session;
+
 class VehicleTypeRepository {
 
     /**
@@ -34,8 +34,8 @@ class VehicleTypeRepository {
         try {
             $data = [
                 'action'          => route('store.vehicle_type'),
-                'page_title'      => Lang::get('label.vehicle_type'),
-                'title'           => Lang::get('title.add_vehicle_type'),
+                'page_title'      => trans('label.vehicle_type'),
+                'title'           => trans('title.add_vehicle_type'),
                 'vehicle_type_id' => 0,
                 'name'            => (old('name')) ? old('name') : '',
             ];
@@ -81,8 +81,8 @@ class VehicleTypeRepository {
             $vehicle_type = VehicleType::findOrFail($vehicle_type_id); //Fetch vehicle type data 
             $data = [
                 'action'          => route('update.vehicle_type'),
-                'page_title'      => Lang::get('label.vehicle_type'),
-                'title'           => Lang::get('title.edit_vehicle_type'),
+                'page_title'      => trans('label.vehicle_type'),
+                'title'           => trans('title.edit_vehicle_type'),
                 'vehicle_type_id' => $vehicle_type->id,
                 'name'      => ($vehicle_type->name) ? $vehicle_type->name : old('name')
             ];

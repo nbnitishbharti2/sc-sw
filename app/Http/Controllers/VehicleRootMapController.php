@@ -11,10 +11,10 @@ use App\Models\VehicleType;
 use App\Models\Vehicle;
 use Validator;
 use Auth;
-use Lang;
 use Log;
 use App;
 use Session;
+use Helper;
 
 class VehicleRootMapController extends Controller
 {
@@ -31,6 +31,9 @@ class VehicleRootMapController extends Controller
 	public function index()
 	{
 		try {
+			if(!Helper::checkPermission('view-vehicle-root-map')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			$data['vehicle_root_map'] = $this->vehicle_root_map->getAllVehicleRootMap(); // Fetch all Vehicle root map data
 			return view('vehicle_root_map.index', $data);
 		} catch(\Exception $err){
@@ -47,6 +50,9 @@ class VehicleRootMapController extends Controller
 	public function create()
 	{
 		try {
+			if(!Helper::checkPermission('add-vehicle-root-map')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			$data = $this->vehicle_root_map->create();
 			return view('vehicle_root_map.form', $data);
 		} catch(\Exception $err){
@@ -74,11 +80,14 @@ class VehicleRootMapController extends Controller
 	public function store(VehicleRootMapRequest $vehicle_root_map_request)
 	{
 		try {
+			if(!Helper::checkPermission('add-vehicle-root-map')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			$result = $this->vehicle_root_map->store($vehicle_root_map_request);
 			if($result == true) {
-				return back()->with('success', Lang::get('success.vehicle_root_map_added_successfully'));
+				return back()->with('success', trans('success.vehicle_root_map_added_successfully'));
 			}
-			return back()->with('error', Lang::get('error.vehicle_root_map_not_added'));
+			return back()->with('error', trans('error.vehicle_root_map_not_added'));
 		} catch(\Exception $err){
     		Log::error('Error in store on VehicleRootMapController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());
@@ -93,8 +102,11 @@ class VehicleRootMapController extends Controller
 	public function edit($vehicle_root_map_id = 0)
 	{
 		try {
+			if(!Helper::checkPermission('edit-vehicle-root-map')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			if($vehicle_root_map_id == 0){
-				return back()->with('error', Lang::get('error.vehicle_root_map_not_found'));
+				return back()->with('error', trans('error.vehicle_root_map_not_found'));
 			}
 			$data = $this->vehicle_root_map->edit($vehicle_root_map_id);
 			return view('vehicle_root_map.form', $data);
@@ -112,11 +124,14 @@ class VehicleRootMapController extends Controller
 	public function update(VehicleRootMapRequest $request)
 	{
 		try {
+			if(!Helper::checkPermission('edit-vehicle-root-map')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			$result = $this->vehicle_root_map->update($request);
 			if($result == true) {
-				return redirect('view-vehicle-root-map')->with('success', Lang::get('success.vehicle_root_map_updated_successfully'));
+				return redirect('view-vehicle-root-map')->with('success', trans('success.vehicle_root_map_updated_successfully'));
 			}
-			return back()->with('error', Lang::get('error.vehicle_root_map_not_updated'));
+			return back()->with('error', trans('error.vehicle_root_map_not_updated'));
 		} catch(\Exception $err){
 			Log::error('Error in update on VehicleRootMapController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());
@@ -131,14 +146,17 @@ class VehicleRootMapController extends Controller
 	public function delete($vehicle_root_map_id = 0)
 	{
 		try {
+			if(!Helper::checkPermission('delete-vehicle-root-map')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			if($vehicle_root_map_id == 0){
-				return back()->with('error', Lang::get('error.vehicle_root_map_not_found'));
+				return back()->with('error', trans('error.vehicle_root_map_not_found'));
 			}
 			$result = $this->vehicle_root_map->delete($vehicle_root_map_id);
 			if($result == true) {
-				return back()->with('success', Lang::get('success.vehicle_root_map_deleted_successfully'));
+				return back()->with('success', trans('success.vehicle_root_map_deleted_successfully'));
 			}
-			return back()->with('error', Lang::get('error.vehicle_root_map_not_deleted'));
+			return back()->with('error', trans('error.vehicle_root_map_not_deleted'));
 		} catch(\Exception $err){
     		Log::error('Error in delete on VehicleRootMapController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());
@@ -153,14 +171,17 @@ class VehicleRootMapController extends Controller
 	public function restore($vehicle_root_map_id = 0)
 	{
 		try {
+			if(!Helper::checkPermission('delete-vehicle-root-map')) {
+                return back()->with('error', trans('error.unauthorized'));
+            }
 			if($vehicle_root_map_id == 0){
-				return back()->with('error', Lang::get('error.vehicle_root_map_not_found'));
+				return back()->with('error', trans('error.vehicle_root_map_not_found'));
 			}
 			$result = $this->vehicle_root_map->restore($vehicle_root_map_id);
 			if($result == true) {
-				return back()->with('success', Lang::get('success.vehicle_root_map_restored_successfully'));
+				return back()->with('success', trans('success.vehicle_root_map_restored_successfully'));
 			}
-			return back()->with('error', Lang::get('error.vehicle_root_map_not_restored'));
+			return back()->with('error', trans('error.vehicle_root_map_not_restored'));
 		} catch(\Exception $err){
     		Log::error('Error in restore on VehicleRootMapController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());

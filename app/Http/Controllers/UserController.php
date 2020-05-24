@@ -81,9 +81,9 @@ class UserController extends Controller
 	        $input = $request->except('_token, profile_image');
     		$result = $this->user->updateProfile($input);
     		if($result == true) {
-    			return redirect('profile')->with('success', Lang::get('success.profile_updated'));
+    			return redirect('profile')->with('success', trans('success.profile_updated'));
     		}
-    		return redirect('profile')->with('error', Lang::get('error.profile_not_updated'));
+    		return redirect('profile')->with('error', trans('error.profile_not_updated'));
     	} catch(\Exception $err){
     		Log::error('Error in updateUserProfile on UserController :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());
@@ -113,19 +113,19 @@ class UserController extends Controller
                     $data->password = Hash::make($request->password); 
                     if($data->save()) { 
                         SaveOtp::where('user_id','=',$user->id)->delete(); 
-                        $this->message = Lang::get('success.password_changed_successfully'); 
+                        $this->message = trans('success.password_changed_successfully'); 
                         $this->type="success"; 
                         return redirect('login')->with($this->type, $this->message); 
                     } else {
-                       $this->message = Lang::get('error.somthing_wrong'); 
+                       $this->message = trans('error.somthing_wrong'); 
                         $this->type="error";  
                     }
                 } else {
-                    $this->message = Lang::get('error.invalid_otp'); 
+                    $this->message = trans('error.invalid_otp'); 
                 $this->type="error";  
                 }
             } else {
-                 $this->message = Lang::get('error.mobile_no_not_exist'); 
+                 $this->message = trans('error.mobile_no_not_exist'); 
                 $this->type="error"; 
             }
          }catch(\Exception $err){

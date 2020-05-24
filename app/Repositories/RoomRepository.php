@@ -7,7 +7,6 @@ use App\Models\Type;
 use App\Models\Hostel;
 use App\Models\RoomType;
 use Log;
-use Lang;
 use Session;
 
 class RoomRepository {
@@ -21,12 +20,12 @@ class RoomRepository {
     {
 
     	try {
-         return  $query = Room::where('session_id',Session::get('session'))->with(['type','hostel','room_type'])->withTrashed()->get();  
-     } catch(\Exception $err){
-      Log::error('message error in getAllRoom on RoomRepository :'. $err->getMessage());
-      return back()->with('error', $err->getMessage());
+           return  $query = Room::where('session_id',Session::get('session'))->with(['type','hostel','room_type'])->withTrashed()->get();  
+       } catch(\Exception $err){
+          Log::error('message error in getAllRoom on RoomRepository :'. $err->getMessage());
+          return back()->with('error', $err->getMessage());
+      }
   }
-}
 
     /**
     * Method to fetch create resource data
@@ -38,8 +37,8 @@ class RoomRepository {
         try {
             $data = [
                 'action'          => route('store.room'),
-                'page_title'      => Lang::get('label.room'),
-                'title'           => Lang::get('title.add_room'),
+                'page_title'      => trans('label.room'),
+                'title'           => trans('title.add_room'),
                 'room_id'         => 0,
                 'name'            => (old('name')) ? old('name') : '',
                 'type_list'       => Type::getAllTypeForListing(),
@@ -80,15 +79,15 @@ class RoomRepository {
             
             $room = Room::create($data);
             if ($room->exists) {
-               return true;
-           } else {
-               return false;
-           }
-       } catch(\Exception $err){
-        Log::error('message error in store on RoomRepository :'. $err->getMessage());
-        return back()->with('error', $err->getMessage());
+                return true;
+            } else {
+                return false;
+            }
+        } catch(\Exception $err){
+            Log::error('message error in store on RoomRepository :'. $err->getMessage());
+            return back()->with('error', $err->getMessage());
+        }
     }
-}
 
     /**
     * Method to fetch edit resource data
@@ -102,8 +101,8 @@ class RoomRepository {
             // Create data for edit form
             $data = [
                 'action'                => route('update.room'),
-                'page_title'            => Lang::get('label.room'),
-                'title'                 => Lang::get('title.edit_room'),
+                'page_title'            => trans('label.room'),
+                'title'                 => trans('title.edit_room'),
                 'room_id'               => $room->id,
                 'name'                  => ($room->name) ? $room->name : old('name'),
                 'type_list'             => Type::getAllTypeForListing(),
@@ -141,15 +140,15 @@ class RoomRepository {
             $room->charge                = $request->charge;
             $room->save(); // Update data
             if ($room->wasChanged()) { //Check if data was updated
-               return true;
-           } else {
-               return false;
-           }
-       } catch(\Exception $err){
-        Log::error('message error in update on RoomRepository :'. $err->getMessage());
-        return back()->with('error', $err->getMessage());
+                return true;
+            } else {
+                return false;
+            }
+        } catch(\Exception $err){
+            Log::error('message error in update on RoomRepository :'. $err->getMessage());
+            return back()->with('error', $err->getMessage());
+        }
     }
-}
 
     /**
     * Method to delete resource
@@ -161,15 +160,15 @@ class RoomRepository {
         try {
             $room = Room::destroy($room_id);
             if ($room) { //Check if data was deleted
-               return true;
-           } else {
-               return false;
-           }
-       } catch(\Exception $err){
-        Log::error('message error in delete on RoomRepository :'. $err->getMessage());
-        return back()->with('error', $err->getMessage());
+                 return true;
+            } else {
+                 return false;
+            }
+        } catch(\Exception $err){
+            Log::error('message error in delete on RoomRepository :'. $err->getMessage());
+            return back()->with('error', $err->getMessage());
+        }
     }
-}
 
     /**
     * Method to delete resource
@@ -182,14 +181,14 @@ class RoomRepository {
             $room = Room::withTrashed()->find($room_id)->restore();
             if ($room) { //Check if data was restored
                return true;
-           } else {
+            } else {
                return false;
-           }
-       } catch(\Exception $err){
-        Log::error('message error in restore on RoomRepository :'. $err->getMessage());
-        return back()->with('error', $err->getMessage());
+            }
+        } catch(\Exception $err){
+            Log::error('message error in restore on RoomRepository :'. $err->getMessage());
+            return back()->with('error', $err->getMessage());
+        }
     }
-}
 
 
 }

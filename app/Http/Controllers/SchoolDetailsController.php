@@ -10,10 +10,10 @@ use App\Http\Requests\SmtpDetails;
 use App\User;
 use Validator;
 use Auth;
-use Lang;
 use Log;
 use App;
 use Session;
+use Helper;
 
 class SchoolDetailsController extends Controller
 {
@@ -29,6 +29,9 @@ class SchoolDetailsController extends Controller
     public function index()
     {
         try {
+            // if(!Helper::checkPermission('view-school-details')) {
+            //     return back()->with('error', trans('error.unauthorized'));
+            // }
             $data = $this->schoolDetails->getSchoolDetails(); // Fetch school Details  
             return view('school_details.index',$data);
         } catch(\Exception $err){
@@ -92,9 +95,9 @@ class SchoolDetailsController extends Controller
         try {
             $result = $this->schoolDetails->update($request); 
             if($result == true) {
-                return redirect('sms-details')->with('success', Lang::get('success.school_detaisl_updated_successfully')); 
+                return redirect('sms-details')->with('success', trans('success.school_detaisl_updated_successfully')); 
             }
-            return back()->with('error', Lang::get('error.school_detaisl_updated'));
+            return back()->with('error', trans('error.school_detaisl_updated'));
         } catch(\Exception $err){
             Log::error('Error in update on SchoolDetailsController :'. $err->getMessage());
             return back()->with('error', $err->getMessage());
@@ -126,9 +129,9 @@ class SchoolDetailsController extends Controller
        try {
             $result = $this->schoolDetails->updateSmsDetails($request); 
             if($result == true) {
-                return redirect('smtp-details')->with('success', Lang::get('success.sms_detaisl_updated_successfully')); 
+                return redirect('smtp-details')->with('success', trans('success.sms_detaisl_updated_successfully')); 
             }
-            return back()->with('error', Lang::get('error.sms_detaisl_updated'));
+            return back()->with('error', trans('error.sms_detaisl_updated'));
         } catch(\Exception $err){
             Log::error('Error in update_sms on SchoolDetailsController :'. $err->getMessage());
             return back()->with('error', $err->getMessage());
@@ -149,9 +152,9 @@ class SchoolDetailsController extends Controller
        try {
             $result = $this->schoolDetails->updateSmtpDetails($request); 
             if($result == true) {
-                return redirect('smtp-details')->with('success', Lang::get('success.smtp_detaisl_updated_successfully')); 
+                return redirect('smtp-details')->with('success', trans('success.smtp_detaisl_updated_successfully')); 
             }
-            return back()->with('error', Lang::get('error.smtp_detaisl_updated'));
+            return back()->with('error', trans('error.smtp_detaisl_updated'));
         } catch(\Exception $err){
             Log::error('Error in update_smtp on SchoolDetailsController :'. $err->getMessage());
             return back()->with('error', $err->getMessage());

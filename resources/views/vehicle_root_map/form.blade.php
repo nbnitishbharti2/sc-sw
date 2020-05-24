@@ -14,7 +14,7 @@
 							<h1>{!! $page_title !!}</h1>
 						</div>
 						<div class="col-md-2 text-right">
-							<a href="{!! route('view.vehicle_root_map') !!}" class="btn btn-success"><i class="fa fa-arrow-left"></i> &nbsp; {{Lang::get('button.back')}}</a>
+							<a href="{!! route('view.vehicle_root_map') !!}" class="btn btn-success"><i class="fa fa-arrow-left"></i> &nbsp; {{trans('button.back')}}</a>
 						</div>
 					</div>
 				</div><!-- /.container-fluid -->
@@ -39,11 +39,13 @@
 									<div class="card-body">
 										
 				                        <div class="form-group">
-											<label for="vehicle_type_id">{{Lang::get('label.root_id')}}</label>
-											<select name="root_id" class="form-control">
+											<label for="root_id">{{trans('label.root_id')}}</label>
+											<select name="root_id" class="form-control"> 
+												<option value="">Choose Root</option> 
 												@foreach($root_list as $root)
-													<option value="{!! $root->id !!}" {{ ( $root->id == $root_id ) ? 'selected' : '' }}>{!! $root->name !!}</option>
-												@endforeach
+													<option value="{!! $root->id !!}" {{ old("root_id",$root_id) == $root->id ? 'selected' : '' }} >{!! $root->name !!}</option>
+												@endforeach 
+												{{-- ( $root->id == $root_id ) ? 'selected' : '' --}}
 											</select>
 										</div>
 										@if($errors->has('root_id'))
@@ -51,10 +53,11 @@
 			                                <strong>{{ $errors->first('root_id') }}</strong>
 			                            </span>
 				                        @endif
-
+	
 				                        <div class="form-group">
-											<label for="vehicle_type_id">{{Lang::get('label.vehicle_type_id')}}</label>
+											<label for="vehicle_type_id">{{trans('label.vehicle_type_id')}}</label>
 											<select name="vehicle_type_id" id="vehicle_type_id" class="form-control">
+												<option value="">Choose Vehicle Type</option>
 												@foreach($vehicle_type_list as $vehicle_type)
 													<option value="{!! $vehicle_type->id !!}" {{ ( $vehicle_type->id == $vehicle_type_id ) ? 'selected' : '' }}>{!! $vehicle_type->name !!}</option>
 												@endforeach
@@ -67,8 +70,9 @@
 				                        @endif
 
 				                        <div class="form-group">
-											<label for="vehicle_id">{{Lang::get('label.vehicle_id')}}</label>
+											<label for="vehicle_id">{{trans('label.vehicle_id')}}</label>
 											<select name="vehicle_id" id="vehicle_id" class="form-control">
+												<option value="">Choose Vehicle</option>
 											</select>
 										</div>
 										@if($errors->has('vehicle_id'))
@@ -77,12 +81,10 @@
 			                            </span>
 				                        @endif
 										
-
-					                        
 										<div class="card-footer">
-						                  	<button type="submit" class="btn btn-primary">{{Lang::get('button.submit')}}</button>
-						                  	<button type="reset" class="btn btn-danger">{{Lang::get('button.reset')}}</button>
-						                  	<a href="{{ route('view.vehicle_type') }}" class="btn btn-success">{{Lang::get('button.back')}}</a>
+						                  	<button type="submit" class="btn btn-primary">{{trans('button.submit')}}</button>
+						                  	<button type="reset" class="btn btn-danger">{{trans('button.reset')}}</button>
+						                  	<a href="{{ route('view.vehicle_root_map') }}" class="btn btn-success">{{trans('button.back')}}</a>
 						                </div>
 									</div>
 									<!-- /.card-body -->
@@ -129,12 +131,13 @@
 			            contentType: false,
 			            processData: false,
 			            success:function(data) { 
-			            $.each(data, function(key, value) {
-			                var select='';
-			                if(old_vehicle_id==key){select='selected';}
-			                $('select[name="vehicle_id"]').append('<option value="'+ key +'" "'+select+'" >'+ value +'</option>');
-			                });
-			            $("#vehicle_id").val(old_vehicle_id);
+				            $('select[name="vehicle_id"]').append('<option value="" >Choose Vehicle</option>');
+				            $.each(data, function(key, value) {
+				                var select='';
+				                if(old_vehicle_id==key){select='selected';}
+				                $('select[name="vehicle_id"]').append('<option value="'+ key +'" "'+select+'" >'+ value +'</option>');
+				            });
+				            $("#vehicle_id").val(old_vehicle_id);
 			            }
 			        });
 		        }
@@ -159,9 +162,10 @@
 	                contentType: false,
 	                processData: false,
 	                success:function(data) { 
-	                $('#vehicle_id option').remove();
-	                $.each(data, function(key, value) {
-	                    $('select[name="vehicle_id"]').append('<option value="'+ key +'" selected >'+ value +'</option>');
+		                $('#vehicle_id option').remove();
+		                $('select[name="vehicle_id"]').append('<option value="" >Choose Vehicle</option>');
+		                $.each(data, function(key, value) {
+		                    $('select[name="vehicle_id"]').append('<option value="'+ key +'" selected >'+ value +'</option>');
 	                    });
 	                }
 	            });

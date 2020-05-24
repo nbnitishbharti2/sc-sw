@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Models\Root;
 use Log;
-use Lang;
 use Session;
 
 class RootRepository {
@@ -35,8 +34,8 @@ class RootRepository {
         try {
             $data = [
                 'action'          => route('store.root'),
-                'page_title'      => Lang::get('label.root'),
-                'title'           => Lang::get('title.add_root'),
+                'page_title'      => trans('label.root'),
+                'title'           => trans('title.add_root'),
                 'root_id' => 0,
                 'name'            => (old('name')) ? old('name') : '',
             ];
@@ -82,8 +81,8 @@ class RootRepository {
             $root = Root::findOrFail($root_id); //Fetch root data 
             $data = [
                 'action'          => route('update.root'),
-                'page_title'      => Lang::get('label.root'),
-                'title'           => Lang::get('title.edit_root'),
+                'page_title'      => trans('label.root'),
+                'title'           => trans('title.edit_root'),
                 'root_id' => $root->id,
                 'name'      => ($root->name) ? $root->name : old('name')
             ];

@@ -32,7 +32,11 @@
               <div class="card">
                 <div class="card-header p-2">
                   <ul class="nav nav-pills">
+
+                    @if(Helper::checkPermission('view-school-details'))
                     <li class="nav-item" onclick="location.href='{{ route('view.school-details') }}';"><a class="nav-link {{ ($tab=='school_details')?'active':'' }}" href="{{ route('view.school-details') }}" data-toggle="tab">{{ trans('title.school_details') }}</a></li>
+                    @endif
+
                    {{--  @if(isset($school_details['id'])) --}}
                     <li class="nav-item" onclick="location.href='{{ route('view.sms-details') }}';"><a class="nav-link {{ ($tab=='sms')?'active':'' }}" href="#sms_details" data-toggle="tab">{{ trans('title.sms_details') }}</a></li>
                   {{--   @endif --}}

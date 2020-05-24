@@ -14,7 +14,7 @@
 							<h1>{!! $page_title !!}</h1>
 						</div>
 						<div class="col-md-2 text-right">
-							<a href="{!! route('view.vehicle') !!}" class="btn btn-success"><i class="fa fa-arrow-left"></i> &nbsp; {{Lang::get('button.back')}}</a>
+							<a href="{!! route('view.vehicle') !!}" class="btn btn-success"><i class="fa fa-arrow-left"></i> &nbsp; {{trans('button.back')}}</a>
 						</div>
 					</div>
 				</div><!-- /.container-fluid -->
@@ -39,8 +39,8 @@
 									<div class="card-body">
 										<div class="form-group row">
 											<div class="col-sm-6 form-group">
-												<label for="driver_name">{{Lang::get('label.driver_name')}}</label>
-												<input type="text" class="form-control" value="{{ ($driver_name) ? $driver_name : old('driver_name') }}" id="driver_name" name="driver_name" placeholder="{{Lang::get('placeholder.driver_name')}}">
+												<label for="driver_name">{{trans('label.driver_name')}}</label>
+												<input type="text" class="form-control" value="{{ ($driver_name) ? $driver_name : old('driver_name') }}" id="driver_name" name="driver_name" placeholder="{{trans('placeholder.driver_name')}}">
 
 												@if($errors->has('driver_name'))
 												<span class="alert-notice" role="alert">
@@ -51,8 +51,8 @@
 											
 
 					                        <div class="col-sm-6 form-group">
-												<label for="driver_contact_no">{{Lang::get('label.driver_contact_no')}}</label>
-												<input type="text" class="form-control" value="{{ ($driver_contact_no) ? $driver_contact_no : old('driver_contact_no') }}" id="driver_contact_no" name="driver_contact_no" placeholder="{{Lang::get('placeholder.driver_contact_no')}}">
+												<label for="driver_contact_no">{{trans('label.driver_contact_no')}}</label>
+												<input type="text" class="form-control" value="{{ ($driver_contact_no) ? $driver_contact_no : old('driver_contact_no') }}" id="driver_contact_no" name="driver_contact_no" placeholder="{{trans('placeholder.driver_contact_no')}}">
 
 												@if($errors->has('driver_contact_no'))
 												<span class="alert-notice" role="alert">
@@ -64,8 +64,8 @@
 
 					                    <div class="form-group row">
 					                        <div class="col-sm-6 form-group">
-												<label for="helper_name">{{Lang::get('label.helper_name')}}</label>
-												<input type="text" class="form-control" value="{{ ($helper_name) ? $helper_name : old('helper_name') }}" id="helper_name" name="helper_name" placeholder="{{Lang::get('placeholder.helper_name')}}">
+												<label for="helper_name">{{trans('label.helper_name')}}</label>
+												<input type="text" class="form-control" value="{{ ($helper_name) ? $helper_name : old('helper_name') }}" id="helper_name" name="helper_name" placeholder="{{trans('placeholder.helper_name')}}">
 
 												@if($errors->has('helper_name'))
 												<span class="alert-notice" role="alert">
@@ -76,8 +76,8 @@
 											
 
 					                        <div class="col-sm-6 form-group">
-												<label for="helper_contact_no">{{Lang::get('label.helper_contact_no')}}</label>
-												<input type="text" class="form-control" value="{{ ($helper_contact_no) ? $helper_contact_no : old('helper_contact_no') }}" id="helper_contact_no" name="helper_contact_no" placeholder="{{Lang::get('placeholder.helper_contact_no')}}">
+												<label for="helper_contact_no">{{trans('label.helper_contact_no')}}</label>
+												<input type="text" class="form-control" value="{{ ($helper_contact_no) ? $helper_contact_no : old('helper_contact_no') }}" id="helper_contact_no" name="helper_contact_no" placeholder="{{trans('placeholder.helper_contact_no')}}">
 
 												@if($errors->has('helper_contact_no'))
 												<span class="alert-notice" role="alert">
@@ -89,7 +89,7 @@
 
 										<div class="form-group row">
 					                        <div class="col-sm-6 form-group">
-												<label for="vehicle_type_id">{{Lang::get('label.vehicle_type_id')}}</label>
+												<label for="vehicle_type_id">{{trans('label.vehicle_type_id')}}</label>
 												<select name="vehicle_type_id" class="form-control">
 													@foreach($vehicle_type_list as $vehicle_type)
 														<option value="{!! $vehicle_type->id !!}" {{ ( $vehicle_type->id == $vehicle_type_id ) ? 'selected' : '' }}>{!! $vehicle_type->name !!}</option>
@@ -105,8 +105,8 @@
 											
 
 					                        <div class="col-sm-6 form-group">
-												<label for="vehicle_no">{{Lang::get('label.vehicle_no')}}</label>
-												<input type="text" class="form-control" value="{{ ($vehicle_no) ? $vehicle_no : old('vehicle_no') }}" id="vehicle_no" name="vehicle_no" placeholder="{{Lang::get('placeholder.vehicle_no')}}">
+												<label for="vehicle_no">{{trans('label.vehicle_no')}}</label>
+												<input type="text" class="form-control" value="{{ ($vehicle_no) ? $vehicle_no : old('vehicle_no') }}" id="vehicle_no" name="vehicle_no" placeholder="{{trans('placeholder.vehicle_no')}}">
 
 												@if($errors->has('vehicle_no'))
 												<span class="alert-notice" role="alert">
@@ -117,9 +117,9 @@
 					                    </div>
 										
 										<div class="card-footer">
-						                  	<button type="submit" class="btn btn-primary">{{Lang::get('button.submit')}}</button>
-						                  	<button type="reset" class="btn btn-danger">{{Lang::get('button.reset')}}</button>
-						                  	<a href="{{ route('view.vehicle_type') }}" class="btn btn-success">{{Lang::get('button.back')}}</a>
+						                  	<button type="submit" class="btn btn-primary">{{trans('button.submit')}}</button>
+						                  	<button type="reset" class="btn btn-danger">{{trans('button.reset')}}</button>
+						                  	<a href="{{ route('view.vehicle_type') }}" class="btn btn-success">{{trans('button.back')}}</a>
 						                </div>
 									</div>
 									<!-- /.card-body -->

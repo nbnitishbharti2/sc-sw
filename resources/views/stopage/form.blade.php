@@ -14,7 +14,7 @@
 							<h1>{!! $page_title !!}</h1>
 						</div>
 						<div class="col-md-2 text-right">
-							<a href="{!! route('view.stopage') !!}" class="btn btn-success"><i class="fa fa-arrow-left"></i> &nbsp; {{Lang::get('button.back')}}</a>
+							<a href="{!! route('view.stopage') !!}" class="btn btn-success"><i class="fa fa-arrow-left"></i> &nbsp; {{trans('button.back')}}</a>
 						</div>
 					</div>
 				</div><!-- /.container-fluid -->
@@ -39,8 +39,8 @@
 									<div class="card-body">
 
 										<div class="form-group">
-											<label for="stopage_name">{{Lang::get('label.stopage_name')}}</label>
-											<input type="text" class="form-control" value="{{ ($stopage_name) ? $stopage_name : old('stopage_name') }}" id="stopage_name" name="stopage_name" placeholder="{{Lang::get('placeholder.stopage_name')}}">
+											<label for="stopage_name">{{trans('label.stopage_name')}}</label>
+											<input type="text" class="form-control" value="{{ ($stopage_name) ? $stopage_name : old('stopage_name') }}" id="stopage_name" name="stopage_name" placeholder="{{trans('placeholder.stopage_name')}}">
 										</div>
 										@if($errors->has('stopage_name'))
 										<span class="alert-notice" role="alert">
@@ -49,8 +49,9 @@
 				                        @endif
 										
 				                        <div class="form-group">
-											<label for="vehicle_type_id">{{Lang::get('label.root_id')}}</label>
+											<label for="root_id">{{trans('label.root_id')}}</label>
 											<select name="root_id" id="root_id" class="form-control">
+												<option value="" selected >Choose Root</option>
 												@foreach($root_list as $root)
 													<option value="{!! $root->id !!}" {{ ( $root->id == $root_id ) ? 'selected' : '' }}>{!! $root->name !!}</option>
 												@endforeach
@@ -63,9 +64,9 @@
 				                        @endif
 
 				                        <div class="form-group">
-											<label for="vehicle_type_id">{{Lang::get('label.vehicle_type_id')}}</label>
+											<label for="vehicle_type_id">{{trans('label.vehicle_type_id')}}</label>
 											<select name="vehicle_type_id" id="vehicle_type_id" class="form-control">
-												
+												<option value="" selected >Choose Vehicle Type</option>
 											</select>
 										</div>
 										@if($errors->has('vehicle_type_id'))
@@ -75,8 +76,9 @@
 				                        @endif
 
 				                        <div class="form-group">
-											<label for="vehicle_id">{{Lang::get('label.vehicle_id')}}</label>
+											<label for="vehicle_id">{{trans('label.vehicle_id')}}</label>
 											<select name="vehicle_id" id="vehicle_id" class="form-control">
+												<option value="" selected >Choose Vehicle</option>
 											</select>
 										</div>
 										@if($errors->has('vehicle_id'))
@@ -86,21 +88,19 @@
 				                        @endif
 
 				                        <div class="form-group">
-											<label for="charge">{{Lang::get('label.charge')}}</label>
-											<input type="text" class="form-control" value="{{ ($charge) ? $charge : old('charge') }}" id="charge" name="charge" placeholder="{{Lang::get('placeholder.charge')}}">
+											<label for="charge">{{trans('label.charge')}}</label>
+											<input type="text" class="form-control" value="{{ ($charge) ? $charge : old('charge') }}" id="charge" name="charge" placeholder="{{trans('placeholder.charge')}}">
 										</div>
 										@if($errors->has('charge'))
 										<span class="alert-notice" role="alert">
 			                                <strong>{{ $errors->first('charge') }}</strong>
 			                            </span>
 				                        @endif
-										
-
 					                        
 										<div class="card-footer">
-						                  	<button type="submit" class="btn btn-primary">{{Lang::get('button.submit')}}</button>
-						                  	<button type="reset" class="btn btn-danger">{{Lang::get('button.reset')}}</button>
-						                  	<a href="{{ route('view.vehicle_type') }}" class="btn btn-success">{{Lang::get('button.back')}}</a>
+						                  	<button type="submit" class="btn btn-primary">{{trans('button.submit')}}</button>
+						                  	<button type="reset" class="btn btn-danger">{{trans('button.reset')}}</button>
+						                  	<a href="{{ route('view.stopage') }}" class="btn btn-success">{{trans('button.back')}}</a>
 						                </div>
 									</div>
 									<!-- /.card-body -->
@@ -147,12 +147,13 @@
 			            contentType: false,
 			            processData: false,
 			            success:function(data) { 
-			            $.each(data, function(key, value) {
-			                var select='';
-			                if(old_vehicle_type_id==key){select='selected';}
-			                $('select[name="vehicle_type_id"]').append('<option value="'+ key +'" "'+select+'" >'+ value +'</option>');
-			            });
-			            $("#vehicle_type_id").val(old_vehicle_type_id);
+				            $('select[name="vehicle_type_id"]').append('<option value="" >Choose Vehicle Type</option>');
+				            $.each(data, function(key, value) {
+				                var select='';
+				                if(old_vehicle_type_id==key){select='selected';}
+				                $('select[name="vehicle_type_id"]').append('<option value="'+ key +'" "'+select+'" >'+ value +'</option>');
+				            });
+				            $("#vehicle_type_id").val(old_vehicle_type_id);
 			            }
 			        });
 		        }
@@ -180,12 +181,13 @@
 			            contentType: false,
 			            processData: false,
 			            success:function(data) { 
-			            $.each(data, function(key, value) {
-			                var select='';
-			                if(old_vehicle_id==key){select='selected';}
-			                $('select[name="vehicle_id"]').append('<option value="'+ key +'" "'+select+'" >'+ value +'</option>');
-			            });
-			            $("#vehicle_id").val(old_vehicle_id);
+				            $('select[name="vehicle_id"]').append('<option value="" >Choose Vehicle</option>');
+				            $.each(data, function(key, value) {
+				                var select='';
+				                if(old_vehicle_id==key){select='selected';}
+				                $('select[name="vehicle_id"]').append('<option value="'+ key +'" "'+select+'" >'+ value +'</option>');
+				            });
+				            $("#vehicle_id").val(old_vehicle_id);
 			            }
 			        });
 		        }
@@ -211,10 +213,11 @@
 	                contentType: false,
 	                processData: false,
 	                success:function(data) { 
-	                $('#vehicle_type_id option').remove();
-	                $.each(data, function(key, value) {
-	                    $('select[name="vehicle_type_id"]').append('<option value="'+ key +'" selected >'+ value +'</option>');
-	                    });
+		                $('#vehicle_type_id option').remove();
+		                $('select[name="vehicle_type_id"]').append('<option value="" >Choose Vehicle Type</option>');
+		                $.each(data, function(key, value) {
+		                    $('select[name="vehicle_type_id"]').append('<option value="'+ key +'" selected >'+ value +'</option>');
+		                });
 	                }
 	            });
 			});
@@ -236,10 +239,11 @@
 	                contentType: false,
 	                processData: false,
 	                success:function(data) { 
-	                $('#vehicle_id option').remove();
-	                $.each(data, function(key, value) {
-	                    $('select[name="vehicle_id"]').append('<option value="'+ key +'" selected >'+ value +'</option>');
-	                    });
+		                $('#vehicle_id option').remove();
+		                $('select[name="vehicle_id"]').append('<option value="" >Choose Vehicle</option>');
+		                $.each(data, function(key, value) {
+		                    $('select[name="vehicle_id"]').append('<option value="'+ key +'" selected >'+ value +'</option>');
+		                });
 	                }
 	            });
 			});

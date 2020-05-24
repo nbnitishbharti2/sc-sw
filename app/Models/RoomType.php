@@ -9,7 +9,7 @@ class RoomType extends Model
     
 
     /**
-     * Get the vehicle type list for listing.
+     * Get the room type list for listing.
      */
     public static function getAllRoomTypeForListing()
     {

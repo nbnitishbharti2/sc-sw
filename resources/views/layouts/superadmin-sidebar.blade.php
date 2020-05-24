@@ -8,6 +8,7 @@
         <p>Dashboard</p>
       </a>
     </li> 
+    @if(Helper::checkPermission('view-class'))
     <li class="nav-item has-treeview">
       <a href="#" class="nav-link">
         <i class="fa fa-bars"></i>
@@ -31,7 +32,9 @@
         </li>
       </ul>
     </li>
+    @endif
 
+    @if(Helper::checkPermission('view-vehicle-type'))
     <li class="nav-item has-treeview">
       <a href="#" class="nav-link">
         <i class="fas fa-bus"></i>
@@ -44,35 +47,38 @@
         <li class="nav-item">
           <a href="{{ route('view.vehicle_type') }}" class="nav-link">
              <i class="far fa-circle nav-icon"></i>
-            <p>{{Lang::get('title.vehicle_type')}}</p>
+            <p>{{trans('title.vehicle_type')}}</p>
           </a>
         </li>
         <li class="nav-item">
           <a href="{{ route('view.vehicle') }}" class="nav-link">
              <i class="far fa-circle nav-icon"></i>
-            <p>{{Lang::get('title.vehicle')}}</p>
+            <p>{{trans('title.vehicle')}}</p>
           </a>
         </li>
         <li class="nav-item">
           <a href="{{ route('view.root') }}" class="nav-link">
              <i class="far fa-circle nav-icon"></i>
-            <p>{{Lang::get('title.root')}}</p>
+            <p>{{trans('title.root')}}</p>
           </a>
         </li>
         <li class="nav-item">
           <a href="{{ route('view.vehicle_root_map') }}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
-            <p>{{Lang::get('title.vehicle_root_map')}}</p>
+            <p>{{trans('title.vehicle_root_map')}}</p>
           </a>
         </li>
         <li class="nav-item">
           <a href="{{ route('view.stopage') }}" class="nav-link">
              <i class="far fa-circle nav-icon"></i>
-            <p>{{Lang::get('title.stopage')}}</p>
+            <p>{{trans('title.stopage')}}</p>
           </a>
         </li> 
       </ul>
     </li>
+    @endif
+
+    @if(Helper::checkPermission('view-hostel'))
     <li class="nav-item has-treeview">
       <a href="#" class="nav-link">
         <i class="fas fa-hotel"></i>
@@ -85,17 +91,33 @@
         <li class="nav-item">
           <a href="{{ route('view.hostel') }}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
-            <p>{{Lang::get('title.hostel')}}</p>
+            <p>{{trans('title.hostel')}}</p>
           </a>
         </li>
         <li class="nav-item">
-        <a href="{{ route('view.room') }}" class="nav-link">
-          <i class="far fa-circle nav-icon"></i>
-          <p>{{trans('title.room')}}</p>
-        </a>
-      </li>
+          <a href="{{ route('view.room') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>{{trans('title.room')}}</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('view.facility') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>{{trans('title.facility')}}</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('view.type') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>{{trans('title.type')}}</p>
+          </a>
+        </li>
       </ul>
     </li>
+    @endif
+
+
+    
     <li class="nav-item has-treeview">
       <a href="#" class="nav-link">
         <i class="fas fa-cogs"></i>
@@ -136,5 +158,66 @@
         </li>
       </ul>
     </li>
+
+    <li class="nav-item has-treeview">
+      <a href="#" class="nav-link">
+        <i class="fa fa-user" aria-hidden="true"></i>
+        <p>
+          {{trans('title.fee')}}
+          <i class="fas fa-angle-left right"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        <li class="nav-item">
+          <a href="{{ route('view.fee') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>{{trans('title.fee')}}</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('view.fee-for-classes') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>{{trans('title.fee_for_class')}}</p>
+          </a>
+        </li>
+      </ul>
+    </li>
+
+    <li class="nav-item has-treeview">
+      <a href="#" class="nav-link">
+        <i class="fas fa-cogs"></i>
+        <p> 
+          New
+          <i class="fas fa-angle-left right"></i>
+        </p>
+      </a>
+      <ul class="nav nav-treeview">
+        <li class="nav-item">
+          <a href="{{ route('view.payment_mode') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>{{trans('title.payment_mode')}}</p>
+          </a>
+        </li> 
+        <li class="nav-item">
+          <a href="{{ route('view.category') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>{{trans('title.category')}}</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('view.education') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>{{trans('title.education')}}</p>
+          </a>
+        </li>  
+        <li class="nav-item">
+          <a href="{{ route('view.blood_group') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>{{trans('title.blood_group')}}</p>
+          </a>
+        </li> 
+      </ul>
+    </li>
+
   </ul>
 </nav>
