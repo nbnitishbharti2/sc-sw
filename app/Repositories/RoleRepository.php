@@ -8,6 +8,8 @@ use App\Models\Module;
 use App\Models\RolePermission;
 use Log;
 use Session;
+
+
 class RoleRepository {
 
     /**
@@ -17,7 +19,6 @@ class RoleRepository {
     */
     public function getRoles()
     {
-
     	try {
             return $query = Role::get();
         } catch(\Exception $err){
@@ -63,15 +64,16 @@ class RoleRepository {
             
             $roles = Role::create($data);
             if ($roles->exists) {
-             return true;
-         } else {
-             return false;
-         }
-     } catch(\Exception $err){
-        Log::error('message error in store on RoleRepository :'. $err->getMessage());
-        return back()->with('error', $err->getMessage());
+                return true;
+            } else {
+                return false;
+            }
+        } catch(\Exception $err){
+            Log::error('message error in store on RoleRepository :'. $err->getMessage());
+            return back()->with('error', $err->getMessage());
+        }
     }
-}
+
 
     /**
     * Method to fetch edit resource data
@@ -168,15 +170,15 @@ class RoleRepository {
         try {
             $class = Classes::withTrashed()->find($class_id)->restore();
             if ($class) { //Check if data was updated
-             return true;
-         } else {
-             return false;
-         }
-     } catch(\Exception $err){
-        Log::error('message error in restore on RoleRepository :'. $err->getMessage());
-        return back()->with('error', $err->getMessage());
+                return true;
+            } else {
+                return false;
+            }
+        } catch(\Exception $err){
+            Log::error('message error in restore on RoleRepository :'. $err->getMessage());
+            return back()->with('error', $err->getMessage());
+        }
     }
-}
 
     /**
     * Method to import previous session classes
@@ -191,17 +193,17 @@ class RoleRepository {
             $class = Classes::where('session_id',$prevsession)->with('sections')->get();
             
             if ($class->count() == 0) { //Check if data was not found in previous session
-             return false;
-         } else {
-            foreach ($class as $key => $value) {
-                $data = [
-                    'session_id'    => $nextSession,
-                    'class_name'    => $value->class_name,
-                    'class_short'   => $value->class_short,
-                    'added_by'      => Auth::user()->id,
-                    'updated_by'    => Auth::user()->id
-                ];
-                $check_class = Classes::where(['class_name' => $value->class_name, 'session_id' => $nextSession])->count(); 
+                return false;
+            } else {
+                foreach ($class as $key => $value) {
+                    $data = [
+                        'session_id'    => $nextSession,
+                        'class_name'    => $value->class_name,
+                        'class_short'   => $value->class_short,
+                        'added_by'      => Auth::user()->id,
+                        'updated_by'    => Auth::user()->id
+                    ];
+                    $check_class = Classes::where(['class_name' => $value->class_name, 'session_id' => $nextSession])->count(); 
                     if($check_class == 0) { // If class is not inserted in current session
                         $class = Classes::create($data); //Insert classes data
                         // Insert Section data
@@ -232,6 +234,7 @@ class RoleRepository {
         }
     }
 
+
     /**
     * Method to fetch create resource data
     *
@@ -256,6 +259,7 @@ class RoleRepository {
         }
     }
 
+
     /**
     * Method to create resource
     * @param $request
@@ -273,13 +277,15 @@ class RoleRepository {
             
             $permission = Permission::create($data);
             if ($permission->exists) {
-             return true;
-         } else {
-             return false;
-         }
-     } catch(\Exception $err){
-        Log::error('message error in storePermission on RoleRepository :'. $err->getMessage());
-        return back()->with('error', $err->getMessage());
+                return true;
+            } else {
+                return false;
+            }
+        } catch(\Exception $err){
+            Log::error('message error in storePermission on RoleRepository :'. $err->getMessage());
+            return back()->with('error', $err->getMessage());
+        }
     }
-}
+
+    
 }

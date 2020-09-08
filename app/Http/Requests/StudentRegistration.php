@@ -26,7 +26,7 @@ class StudentRegistration extends FormRequest
         return [
             'session'=>'required',
             'class'=>'required',
-            'section'=>'required',
+            // 'section'=>'required',
             'gender' =>'required',
             'category'=>'required',
             'blood_group'=>'required',

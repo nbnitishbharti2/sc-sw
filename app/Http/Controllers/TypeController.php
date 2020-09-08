@@ -13,6 +13,7 @@ use App;
 use Session;
 use Helper;
 
+
 class TypeController extends Controller
 {
    	public function __construct(TypeRepository $type)

@@ -39,6 +39,17 @@ class FeeController extends Controller
     	}
 	}
 
+	public function getFee(Request $request)
+	{
+		try {
+			$data = $this->fee->getFee($request->fee_head_id,$request->fee_type_id);
+			return $data;
+		} catch(\Exception $err){
+    		Log::error('Error in getFee on FeeController :'. $err->getMessage());
+    		return back()->with('error', $err->getMessage());
+    	}
+	}
+
 	/**
 	* Method to show form for create resource
 	*
@@ -148,7 +159,7 @@ class FeeController extends Controller
                 return back()->with('error', trans('error.unauthorized'));
             }
 			$result = $this->fee->update($request); 
-			if($result == true) {
+			if($result == "true") { //double quote added by shiwali
 				return redirect('view-fee')->with('success', trans('success.fee_updated_successfully'));
 			}
 			return back()->with('error', trans('error.fee_not_updated'));

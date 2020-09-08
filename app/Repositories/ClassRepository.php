@@ -59,7 +59,7 @@ class ClassRepository {
             $data = [
                 'session_id'    => Session::get('session'),
                 'class_name'    => $request->class_name,
-                'class_short'    => $request->class_short,
+                'class_short'   => $request->class_short,
                 'added_by'      => Auth::user()->id,
                 'updated_by'    => Auth::user()->id
             ];
@@ -177,17 +177,17 @@ class ClassRepository {
             $class = Classes::where('session_id',$prevsession)->with('sections')->get();
             
             if ($class->count() == 0) { //Check if data was not found in previous session
-             return false;
-         } else {
-            foreach ($class as $key => $value) {
-                $data = [
-                    'session_id'    => $nextSession,
-                    'class_name'    => $value->class_name,
-                    'class_short'   => $value->class_short,
-                    'added_by'      => Auth::user()->id,
-                    'updated_by'    => Auth::user()->id
-                ];
-                $check_class = Classes::where(['class_name' => $value->class_name, 'session_id' => $nextSession])->count(); 
+                return false;
+            }else {
+                foreach ($class as $key => $value) {
+                    $data = [
+                        'session_id'    => $nextSession,
+                        'class_name'    => $value->class_name,
+                        'class_short'   => $value->class_short,
+                        'added_by'      => Auth::user()->id,
+                        'updated_by'    => Auth::user()->id
+                    ];
+                    $check_class = Classes::where(['class_name' => $value->class_name, 'session_id' => $nextSession])->count(); 
                     if($check_class == 0) { // If class is not inserted in current session
                         $class = Classes::create($data); //Insert classes data
                         // Insert Section data
@@ -212,11 +212,14 @@ class ClassRepository {
                 }
                 return true;
             }
-        } catch(\Exception $err){
+             
+        }catch(\Exception $err){
             Log::error('message error in delete on ClassRepository :'. $err->getMessage());
             return back()->with('error', $err->getMessage());
         }
     }
+
+
     public function getClassList($session_id)
     {
        try {   
@@ -228,4 +231,6 @@ class ClassRepository {
             return back()->with('error', $err->getMessage());
         }
     }
+
+    
 }

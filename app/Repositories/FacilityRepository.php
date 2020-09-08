@@ -15,7 +15,6 @@ class FacilityRepository {
     */
     public function getAllFacility()
     {
-       
     	try {
     		return  $query = Facilities::withTrashed()->get();  
     	} catch(\Exception $err){
@@ -23,6 +22,7 @@ class FacilityRepository {
     		return back()->with('error', $err->getMessage());
     	}
     }
+
 
     /**
     * Method to fetch create resource data
@@ -45,6 +45,7 @@ class FacilityRepository {
             return back()->with('error', $err->getMessage());
         }
     }
+
 
     /**
     * Method to create resource
@@ -70,6 +71,7 @@ class FacilityRepository {
         }
     }
 
+
     /**
     * Method to fetch edit resource data
     * @param int $facility_id
@@ -93,6 +95,7 @@ class FacilityRepository {
         }
     }
 
+
     /**
     * Method to update resource
     * @param Illuminate\Http\Request
@@ -115,6 +118,7 @@ class FacilityRepository {
         }
     }
 
+
     /**
     * Method to delete resource
     * @param Illuminate\Http\Request
@@ -134,6 +138,7 @@ class FacilityRepository {
             return back()->with('error', $err->getMessage());
         }
     }
+    
 
     /**
     * Method to delete resource

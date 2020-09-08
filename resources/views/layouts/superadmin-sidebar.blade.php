@@ -18,9 +18,21 @@
       </a>
       <ul class="nav nav-treeview">
         <li class="nav-item">
-          <a href="{{ route('add.student.registration') }}" class="nav-link">
+          <a href="{{ route('view.student.registration') }}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
-            <p>{{ trans('title.add_registration') }}</p>
+            <p>{{ trans('title.registration') }}</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('view.student.admission') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>{{ trans('title.view_admission') }}</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('add.student.admission') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>{{ trans('title.add_student') }}</p>
           </a>
         </li> 
       </ul>
@@ -219,6 +231,12 @@
           <a href="{{ route('view.fee-for-classes') }}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>{{trans('title.fee_for_class')}}</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('view.hostel-fee') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>{{trans('title.hostel_fee')}}</p>
           </a>
         </li>
       </ul>

@@ -33,8 +33,13 @@
                 <div class="card-header p-2">
                   <ul class="nav nav-pills">
                     <li class="nav-item" @if($student_registration_id!=0) onclick="location.href='{{ route('add.student.registration',['id' => $student_registration_id]) }}';" @endif><a class="nav-link {{ ($tab=='student_details')?'active':'' }}" href="#personal_details" data-toggle="tab">{{ trans('label.personal_details') }}</a></li>
+
                     <li class="nav-item" @if($student_registration_id!=0) onclick="location.href='{{ route('edit.student.registration.address',['id' => $student_registration_id,'map_id' => $map_id]) }}';" @endif><a class="nav-link {{ ($tab=='student_address')?'active':'' }}"  >{{ trans('label.residential_address') }}</a></li>
+
                     <li class="nav-item" @if($student_registration_id!=0) onclick="location.href='{{ route('edit.student.registration.parent',['id' => $student_registration_id,'map_id' => $map_id]) }}';" @endif><a class="nav-link {{ ($tab=='student_parent')?'active':'' }}" >{{ trans('label.guardians_details') }}</a></li> 
+
+                    <li class="nav-item" @if($student_registration_id!=0) onclick="location.href='{{ route('edit.student.registration.multiple_upload',['id' => $student_registration_id,'map_id' => $map_id]) }}';" @endif><a class="nav-link {{ ($tab=='multiple_document_upload')?'active':'' }}"  >{{ trans('label.multiple_document') }}</a></li>
+
                     <li class="nav-item" @if($student_registration_id!=0) onclick="location.href='{{ route('edit.student.registration.charge',['id' => $student_registration_id,'map_id' => $map_id]) }}';" @endif><a class="nav-link {{ ($tab=='student_charge')?'active':'' }}"  >{{ trans('label.charge') }}</a></li>
                   </ul>
                 </div><!-- /.card-header -->
@@ -71,7 +76,7 @@
                           </div> 
                           <div class="col-sm-6">
                             <label for="inputName" class="col-sm-12 col-form-label">{{ trans('label.name') }}</label>
-                            <input type="text" class="form-control" value="{{ ($name) ? $name : old('name') }}" id="inputName" name="name" placeholder="{{ trans('placeholder.name') }}" > 
+                            <input type="text" class="form-control" value="{{ ($name) ? $name : old('name') }}" id="inputName" name="name" placeholder="{{ trans('placeholder.name') }}" autocomplete="off"> 
                             @if($errors->has('name'))
                             <span class="alert-notice" role="alert">
                               <strong>{{ $errors->first('name') }}</strong>
@@ -90,7 +95,7 @@
                         <div class="col-sm-6">
                           <label for="inputName" class="col-sm-12 col-form-label">{{ trans('label.class') }}</label> 
                           <select name="class" id="class" class="form-control">
-                            <option value="">Chouse Class</option>
+                            <option value="">Choose Class</option>
                             @foreach($class_list as $class)
                             <option value="{!! $class->id !!}" {{ ( $class->id == $class_id ) ? 'selected' : '' }}>{!! $class->class_short !!}</option>
                             @endforeach
@@ -101,21 +106,21 @@
                           </span>
                           @endif
                         </div>
-                        <div class="col-sm-6">
+                        <!-- <div class="col-sm-6">
                          <label for="inputName" class="col-sm-12 col-form-label">{{ trans('label.section') }}</label> 
                          <select name="section" id="section" class="form-control">
-                          <option value="">Chouse Section</option> 
+                          <option value="">Choose Section</option> 
                         </select>
                         @if($errors->has('section'))
                         <span class="alert-notice" role="alert">
                           <strong>{{ $errors->first('section') }}</strong>
                         </span>
                         @endif
-                      </div>
+                      </div> -->
                       <div class="col-sm-6">
                         <label for="inputName" class="col-sm-12 col-form-label">{{ trans('label.gender') }}</label> 
                         <select name="gender" class="form-control">
-                          <option value="">Chouse Gender</option>
+                          <option value="">Choose Gender</option>
                           @foreach($gender_list as $gender)
                           <option value="{!! $gender->id !!}" {{ ( $gender->id == $gender_id ) ? 'selected' : '' }}>{!! $gender->name !!}</option>
                           @endforeach
@@ -129,7 +134,7 @@
                       <div class="col-sm-6">
                        <label for="inputName" class="col-sm-12 col-form-label">{{ trans('label.blood_group') }}</label> 
                        <select name="blood_group" class="form-control">
-                        <option value="">Chouse Blood Group</option>
+                        <option value="">Choose Blood Group</option>
                         @foreach($blood_group_list as $blood_group)
                         <option value="{!! $blood_group->id !!}" {{ ( $blood_group->id == $blood_group_id ) ? 'selected' : '' }}>{!! $blood_group->name !!}</option>
                         @endforeach
@@ -143,7 +148,7 @@
                     <div class="col-sm-6">
                       <label for="inputName" class="col-sm-12 col-form-label">{{ trans('label.category') }}</label> 
                       <select name="category" class="form-control">
-                        <option value="">Chouse Category</option>
+                        <option value="">Choose Category</option>
                         @foreach($category_list as $category)
                         <option value="{!! $category->id !!}" {{ ( $category->id == $category_id ) ? 'selected' : '' }}>{!! $category->name !!}</option>
                         @endforeach
@@ -206,6 +211,8 @@
                 </form>
                 @endif
               </div>
+
+
               <!-- /.tab-pane -->
               <div class="{{ ($tab=='student_address')?'active':'' }} tab-pane" id="residential_details">
                 @if($tab=='student_address')
@@ -286,8 +293,9 @@
               </form>
               @endif
             </div>
-            <!-- /.tab-pane -->
 
+
+            <!-- /.tab-pane -->
             <div class="tab-pane {{ ($tab=='student_parent')?'active':'' }}" id="guardians_details">
                @if($tab=='student_parent')
              <form class="form-horizontal"  action="{{ $action }}" method="POST">
@@ -316,7 +324,7 @@
                 <div class="col-sm-6">
                   <label for="inputName" class="col-sm-12 col-form-label">{{ trans('label.father_occupation') }}</label> 
                       <select name="father_occupation" class="form-control">
-                        <option value="">Chouse Father Occupation</option>
+                        <option value="">Choose Father Occupation</option>
                         @foreach($occupation_list as $occupation)
                         <option value="{!! $occupation->id !!}" {{ ( $occupation->id == $father_occupation ) ? 'selected' : '' }}>{!! $occupation->name !!}</option>
                         @endforeach
@@ -330,7 +338,7 @@
                 <div class="col-sm-6">
                   <label for="inputName" class="col-sm-12 col-form-label">{{ trans('label.father_education') }}</label> 
                       <select name="father_education" class="form-control">
-                        <option value="">Chouse Father Education</option>
+                        <option value="">Choose Father Education</option>
                         @foreach($education_list as $education)
                         <option value="{!! $education->id !!}" {{ ( $education->id == $father_education ) ? 'selected' : '' }}>{!! $education->name !!}</option>
                         @endforeach
@@ -362,7 +370,7 @@
                 <div class="col-sm-6">
                   <label for="inputName" class="col-sm-12 col-form-label">{{ trans('label.mother_occupation') }}</label> 
                       <select name="mother_occupation" class="form-control">
-                        <option value="">Chouse Mother Occupation</option>
+                        <option value="">Choose Mother Occupation</option>
                         @foreach($occupation_list as $occupation)
                         <option value="{!! $occupation->id !!}" {{ ( $occupation->id == $mother_occupation ) ? 'selected' : '' }}>{!! $occupation->name !!}</option>
                         @endforeach
@@ -376,7 +384,7 @@
                 <div class="col-sm-6">
                   <label for="inputName" class="col-sm-12 col-form-label">{{ trans('label.mother_education') }}</label> 
                       <select name="mother_education" class="form-control">
-                        <option value="">Chouse Mother Education</option>
+                        <option value="">Choose Mother Education</option>
                         @foreach($education_list as $education)
                         <option value="{!! $education->id !!}" {{ ( $education->id == $mother_education ) ? 'selected' : '' }}>{!! $education->name !!}</option>
                         @endforeach
@@ -393,8 +401,8 @@
               <div class="form-group row">
                 <div class="offset-sm-8 col-sm-10">  </div>
                     <div class="offset-sm-8 col-sm-10">
-                      @if($student_registration_id!=0)
-                         <a href="{{ route('edit.student.registration.charge',['id' => $student_registration_id,'map_id' => $map_id]) }}"> <button type="button" class="btn btn-primary">{{ trans('button.skip') }}</button></a>
+                      @if($student_registration_id!=0)  
+                         <a href="{{ route('edit.student.registration.multiple_upload',['id' => $student_registration_id,'map_id' => $map_id]) }}"> <button type="button" class="btn btn-primary">{{ trans('button.skip') }}</button></a>
                          @endif
                       <button type="submit" class="btn btn-danger">{{ trans('button.submit') }}</button>
                     </div>
@@ -402,6 +410,62 @@
             </form>
             @endif
           </div> 
+
+
+          <!-- /.tab-pane -->
+            <div class="{{ ($tab=='multiple_document_upload')?'active':'' }} tab-pane" id="multiple_document">
+              @if($tab=='multiple_document_upload')
+              <form class="form-horizontal"  action="{{ $action }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="form-group row multipleUpload"> 
+                  <!-- <div class="col-sm-12 multipleUpload"> -->
+                    <input type="hidden" name="student_registration_id" value="{{ $student_registration_id }}">
+                    <input type="hidden" name="map_id" value="{{ $map_id }}">
+
+                    <div class="col-sm-12 multipleUploadWrapper">
+                      <div>
+                        <div class="form-group col-sm-6">
+                            <label>{{ trans('label.file_name') }}</label>
+                            <input type="text" class="form-control" name="file_name[]"  placeholder="{{ trans('placeholder.file_name') }}"> 
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>{{ trans('label.file') }}</label>
+                            <input type="file" class="form-control" name="file[]" >  
+                        </div>
+                      </div>
+                      @if($errors->has('file_name'))
+                      <span class="alert-notice" role="alert">
+                        <strong>{{ $errors->first('file_name') }}</strong>
+                      </span>
+                      @endif
+                      @if($errors->has('file'))
+                      <span class="alert-notice" role="alert">
+                        <strong>{{ $errors->first('file') }}</strong>
+                      </span>
+                      @endif
+                    </div>
+                    <div class="col-sm-6">
+                      <button class="add_more">Add More Fields</button>
+                    </div>
+                  <!-- </div> -->
+                </div>
+
+              <div class="form-group row">
+               <div class="offset-sm-8 col-sm-10"> 
+                  </div>
+                  <div class="offset-sm-8 col-sm-10">
+                    @if($student_registration_id!=0)
+                       <a href="{{ route('edit.student.registration.charge',['id' => $student_registration_id,'map_id' => $map_id]) }}"> <button type="button" class="btn btn-primary">{{ trans('button.skip') }}</button></a>
+                       @endif
+                    <button type="submit" class="btn btn-danger">{{ trans('button.submit') }}</button>
+                  </div>
+              </div>
+            </form>
+            @endif
+          </div>
+          
+
+          <!-- /.tab-pane -->
           <div class="tab-pane {{ ($tab=='student_charge')?'active':'' }}" id="fee_details">
             @if($tab=='student_charge')
             <form class="form-horizontal">
@@ -526,36 +590,65 @@
         processData: false,
         success:function(data) { 
           $('#class option').remove();
-          $('select[name="class"]').append('<option value="" >Chouse Class</option>');
+          $('select[name="class"]').append('<option value="" >Choose Class</option>');
           $.each(data, function(key, value) {
             $('select[name="class"]').append('<option value="'+ key +'">'+ value +'</option>');
           });
         }
       });
     });
-    $('#class').on('change', function(){
-      var class_id = $(this).val();
-      var session_id=$("#session").val();
-      var form_data = new FormData();
-      form_data.append('class_id',class_id);
-      form_data.append('session_id',session_id);
-      form_data.append('_token', '{{csrf_token()}}');
-      $.ajax({
-        url: "{{route('get-session-list')}}",
-        data: form_data,
-        type: 'POST',
-        dataType: "json",
-        contentType: false,
-        processData: false,
-        success:function(data) { 
-          $('#section option').remove();
-          $('select[name="section"]').append('<option value="" >Chouse Section</option>');
-          $.each(data, function(key, value) {
-            $('select[name="section"]').append('<option value="'+ key +'">'+ value +'</option>');
-          });
+
+    // $('#class').on('change', function(){
+    //   var class_id = $(this).val();
+    //   var session_id=$("#session").val();
+    //   var form_data = new FormData();
+    //   form_data.append('class_id',class_id);
+    //   form_data.append('session_id',session_id);
+    //   form_data.append('_token', '{{csrf_token()}}');
+    //   $.ajax({
+    //     url: "{{route('get-session-list')}}",
+    //     data: form_data,
+    //     type: 'POST',
+    //     dataType: "json",
+    //     contentType: false,
+    //     processData: false,
+    //     success:function(data) { 
+    //       $('#section option').remove();
+    //       $('select[name="section"]').append('<option value="" >Choose Section</option>');
+    //       $.each(data, function(key, value) {
+    //         $('select[name="section"]').append('<option value="'+ key +'">'+ value +'</option>');
+    //       });
+    //     }
+    //   });
+    // });
+
+    //---------------------------- custom field -------------------------------
+    var max = 5; //Maximum allowed input fields 
+    var multipleUploadWrapper    = $(".multipleUploadWrapper"); //Input fields wrapper
+    var add_btn = $(".add_more"); //Add button class or ID
+    var count = 1; //Initial input field is set to 1
+ 
+    //When user click on add input button
+    $(add_btn).click(function(e){
+        e.preventDefault();
+        //Check maximum allowed input fields
+        if(count < max){ 
+            count++; //input field increment
+            //add input field
+            $(multipleUploadWrapper).append('<div><div class="form-group col-sm-6"><label>'+'{{ trans("label.document_name") }}'+'</label><input type="text" class="form-control col-sm-12" name="file_name[]"  placeholder="'+'{{ trans("placeholder.document_name") }}'+'"></div><div class="form-group col-sm-6"><label>'+'{{ trans("label.document") }}'+'</label><input type="file" class="form-control col-sm-12" name="file[]" ></div><img src="http://localhost/gws/school/sc-sw/public/image/wrong.png" class="remove" width="30" height="30"></div>');
+
+            // <div><div class="form-group col-sm-6"><label>'
+            // +'{{ trans('label.document_name') }}'+'</label><input type="text" class="form-control col-sm-12" name="file_name[]"  placeholder="'+'{{ trans('placeholder.document_name') }}'+'"></div><div class="form-group col-sm-6"><label>'+'{{ trans('label.document') }}'+'</label><input type="file" class="form-control col-sm-12" name="file[]" ></div><img src="http://localhost/gws/school/sc-sw/public/image/wrong.png" class="remove" width="30" height="30"></div>
         }
-      });
     });
+     
+    //when user click on remove button
+    $(multipleUploadWrapper).on("click",".remove", function(e){ 
+        e.preventDefault();
+        $(this).parent('div').remove(); //remove inout field
+        count--; //inout field decrement
+    });
+
   });
 </script>
 @endsection

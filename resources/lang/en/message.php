@@ -45,4 +45,8 @@ return [
     'restore_education'                 => 'Are you sure? You want to Restore Education.',
     'delete_blood_group'                => 'Are you sure? You want to Delete Blood Group.',
     'restore_blood_group'               => 'Are you sure? You want to Restore Blood Group.',
+    'delete_student_registration'       => 'Are you sure? You want to Delete Student Registration.',
+    'restore_student_registration'      => 'Are you sure? You want to Restore Student Registration.',
+    'delete_hostel_fee'                 => 'Are you sure? You want to Delete Hostel Fee.',
+    'restore_hostel_fee'                => 'Are you sure? You want to Restore Hostel Fee.',
 ];

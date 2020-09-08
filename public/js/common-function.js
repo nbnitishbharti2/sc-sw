@@ -263,6 +263,56 @@ function blood_group_confirm_restore(blood_group_id) {
 }
 
 
+//Delete student_registration show popup function
+function student_registration_confirm_delete(student_registration_id) {
+    var delete_url = $('#delete-student_registration').attr('href');
+    delete_url = delete_url.replace(/\d+/g, '') + student_registration_id;
+    $('#delete-student_registration').attr('href', delete_url);
+    $('#modal-student_registration-delete').modal('show');
+}
+//Function for show restore popup for student_registration
+function student_registration_confirm_restore(student_registration_id) {
+    var restore_url = $('#restore-student_registration').attr('href');
+    restore_url = restore_url.replace(/\d+/g, '') + student_registration_id;
+    $('#restore-student_registration').attr('href', restore_url);
+    $('#modal-student_registration-restore').modal('show');
+}
+
+
+
+//Delete student_admission show popup function
+function student_admission_confirm_delete(student_admission_id) {
+    var delete_url = $('#delete-student_admission').attr('href');
+    delete_url = delete_url.replace(/\d+/g, '') + student_admission_id;
+    $('#delete-student_admission').attr('href', delete_url);
+    $('#modal-student_admission-delete').modal('show');
+}
+//Function for show restore popup for student_admission
+function student_admission_confirm_restore(student_admission_id) {
+    var restore_url = $('#restore-student_admission').attr('href');
+    restore_url = restore_url.replace(/\d+/g, '') + student_admission_id;
+    $('#restore-student_admission').attr('href', restore_url);
+    $('#modal-student_admission-restore').modal('show');
+}
+
+
+//Delete hostel fee show popup function
+function hostel_fee_confirm_delete(hostel_fee_id) {
+    var delete_url = $('#delete-hostel_fee').attr('href');
+    delete_url = delete_url.replace(/\d+/g, '') + hostel_fee_id;
+    $('#delete-hostel_fee').attr('href', delete_url);
+    $('#modal-hostel_fee-delete').modal('show');
+}
+//Function for show restore popup for hostel fee
+function hostel_fee_confirm_restore(hostel_fee_id) {
+    var restore_url = $('#restore-hostel_fee').attr('href');
+    restore_url = restore_url.replace(/\d+/g, '') + hostel_fee_id;
+    $('#restore-hostel_fee').attr('href', restore_url);
+    $('#modal-hostel_fee-restore').modal('show');
+}
+
+
+
 
 
 //Fee for class index script starts here

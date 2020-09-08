@@ -79,4 +79,10 @@ return [
     'father_mobile_no'          => 'Enter Father Mobile No', 
     'mother_name'               => 'Enter Mother Name', 
     'mother_mobile_no'          => 'Enter Mother Mobile No', 
+    'file_name'                 => 'Enter File Name',
+    'admission_no'              => 'Enter Admission No',
+    'roll_no'                   => 'Enter Roll No',
+    'siblings'                  => 'Enter Siblings',
+    'amount'                    => 'Amount',
+    'bed_no'                    => 'Bed No',
 ];

@@ -20,6 +20,8 @@ class SectionController extends Controller
     {
         $this->section = $section;
     }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -38,6 +40,7 @@ class SectionController extends Controller
             return back()->with('error', $err->getMessage());
         }
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -58,6 +61,7 @@ class SectionController extends Controller
             return back()->with('error', $err->getMessage());
         }
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -82,6 +86,7 @@ class SectionController extends Controller
     	}
     }
 
+
     /**
      * Display the specified resource.
      *
@@ -92,6 +97,7 @@ class SectionController extends Controller
     {
         //
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -116,6 +122,7 @@ class SectionController extends Controller
     	}
     }
 
+
     /**
      * Update the specified resource in storage.
      *
@@ -139,6 +146,7 @@ class SectionController extends Controller
     		return back()->with('error', $err->getMessage());
     	}
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -166,6 +174,7 @@ class SectionController extends Controller
     	}
     }
 
+
     /**
 	* Method to restore resource
 	* @param int $section_id
@@ -191,7 +200,8 @@ class SectionController extends Controller
     	}
     }
 
-    public function getSessionList(Request $request)
+
+    public function getSectionList(Request $request)
     { 
         try {
             $data = $this->section->getSectionList($request->class_id,$request->session_id); 
@@ -201,4 +211,6 @@ class SectionController extends Controller
             return back()->with('error', $err->getMessage());
         }
     }
+
+    
 }

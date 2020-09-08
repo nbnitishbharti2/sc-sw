@@ -15,7 +15,6 @@ class RootRepository {
     */
     public function getAllRoot()
     {
-       
     	try {
     		return  $query = Root::withTrashed()->get();  
     	} catch(\Exception $err){
@@ -23,6 +22,7 @@ class RootRepository {
     		return back()->with('error', $err->getMessage());
     	}
     }
+
 
     /**
     * Method to fetch create resource data
@@ -36,7 +36,7 @@ class RootRepository {
                 'action'          => route('store.root'),
                 'page_title'      => trans('label.root'),
                 'title'           => trans('title.add_root'),
-                'root_id' => 0,
+                'root_id'         => 0,
                 'name'            => (old('name')) ? old('name') : '',
             ];
             return $data;
@@ -45,6 +45,7 @@ class RootRepository {
             return back()->with('error', $err->getMessage());
         }
     }
+
 
     /**
     * Method to create resource
@@ -70,6 +71,7 @@ class RootRepository {
         }
     }
 
+
     /**
     * Method to fetch edit resource data
     * @param int $root_id
@@ -83,8 +85,8 @@ class RootRepository {
                 'action'          => route('update.root'),
                 'page_title'      => trans('label.root'),
                 'title'           => trans('title.edit_root'),
-                'root_id' => $root->id,
-                'name'      => ($root->name) ? $root->name : old('name')
+                'root_id'         => $root->id,
+                'name'            => ($root->name) ? $root->name : old('name')
             ];
             return $data;
         } catch(\Exception $err){ 
@@ -92,6 +94,7 @@ class RootRepository {
             return back()->with('error', $err->getMessage());
         }
     }
+
 
     /**
     * Method to update resource
@@ -105,15 +108,16 @@ class RootRepository {
             $root->name  = $request->name;
             $root->save(); // Update data
             if ($root->wasChanged()) { //Check if data was updated
-               return true;
+                return true;
             } else {
-               return false;
+                return false;
             }
         } catch(\Exception $err){
             Log::error('message error in update on RootRepository :'. $err->getMessage());
             return back()->with('error', $err->getMessage());
         }
     }
+
 
     /**
     * Method to delete resource
@@ -135,6 +139,7 @@ class RootRepository {
         }
     }
 
+    
     /**
     * Method to delete resource
     * @param Illuminate\Http\Request

@@ -54,7 +54,7 @@
 												<label for="type_id">{{trans('label.type_id')}}</label>
 												<select name="type_id" class="form-control">
 													@foreach($type_list as $type)
-														<option value="{!! $type->id !!}" {{ ( $type->id == $type_id ) ? 'selected' : '' }}>{!! $type->name !!}</option>
+														<option value="{!! $type->id !!}" {{ (old('type_id',$type_id) == $type->id ) ? 'selected' : '' }}>{!! $type->name !!}</option>
 													@endforeach
 												</select>
 
@@ -72,6 +72,7 @@
 					                        <div class="col-sm-6 form-group">
 												<label for="hostel_id">{{trans('label.hostel_id')}}</label>
 												<select name="hostel_id" class="form-control">
+													<option value="">Choose Hostel</option>
 													@foreach($hostel_list as $hostel)
 														<option value="{!! $hostel->id !!}" {{ ( $hostel->id == $hostel_id ) ? 'selected' : '' }}>{!! $hostel->name !!}</option>
 													@endforeach
@@ -87,8 +88,9 @@
 											<div class="col-sm-6 form-group">
 												<label for="room_type_id">{{trans('label.room_type_id')}}</label>
 												<select name="room_type_id" class="form-control">
+													<option value="">Choose Room Type</option>
 													@foreach($room_type_list as $room_type)
-														<option value="{!! $room_type->id !!}" {{ ( $room_type->id == $room_type_id ) ? 'selected' : '' }}>{!! $room_type->name !!}</option>
+														<option value="{!! $room_type->id !!}" {{ (old('room_type_id',$room_type_id) == $room_type->id) ? 'selected' : '' }}>{!! $room_type->name !!}</option>
 													@endforeach
 												</select>
 

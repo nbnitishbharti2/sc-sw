@@ -6,8 +6,10 @@ use App\Models\Room;
 use App\Models\Type;
 use App\Models\Hostel;
 use App\Models\RoomType;
+use App\Models\StudentHostelDetail;
 use Log;
 use Session;
+
 
 class RoomRepository {
 
@@ -18,14 +20,13 @@ class RoomRepository {
     */
     public function getAllRoom()
     {
-
     	try {
            return  $query = Room::where('session_id',Session::get('session'))->with(['type','hostel','room_type'])->withTrashed()->get();  
-       } catch(\Exception $err){
+        } catch(\Exception $err){
           Log::error('message error in getAllRoom on RoomRepository :'. $err->getMessage());
           return back()->with('error', $err->getMessage());
-      }
-  }
+        }
+    }
 
     /**
     * Method to fetch create resource data
@@ -58,6 +59,7 @@ class RoomRepository {
         }
     }
 
+
     /**
     * Method to create resource
     * @param $request
@@ -89,6 +91,7 @@ class RoomRepository {
         }
     }
 
+
     /**
     * Method to fetch edit resource data
     * @param int $room_id
@@ -98,6 +101,7 @@ class RoomRepository {
     {
         try {
             $room = Room::withTrashed()->with(['type','hostel','room_type'])->where('id',$room_id)->first(); //Fetch room data
+
             // Create data for edit form
             $data = [
                 'action'                => route('update.room'),
@@ -121,6 +125,7 @@ class RoomRepository {
             return back()->with('error', $err->getMessage());
         }
     }
+
 
     /**
     * Method to update resource
@@ -150,6 +155,7 @@ class RoomRepository {
         }
     }
 
+
     /**
     * Method to delete resource
     * @param Illuminate\Http\Request
@@ -170,6 +176,7 @@ class RoomRepository {
         }
     }
 
+
     /**
     * Method to delete resource
     * @param Illuminate\Http\Request
@@ -189,6 +196,48 @@ class RoomRepository {
             return back()->with('error', $err->getMessage());
         }
     }
+
+
+    public function getRoomList($hostel_id,$session_id)
+    { 
+        try { 
+            $room_ids=Room::select('rooms.id', 'rooms.name')->leftjoin('sessions', 'sessions.id', 'rooms.session_id')->where('sessions.id', $session_id)->where('rooms.hostel_id', $hostel_id)->get()->pluck('name', 'id'); 
+            return $room_ids;
+        } catch(\Exception $err){
+            Log::error('message error in getRoomList on RoomRepository :'. $err->getMessage());
+            return back()->with('error', $err->getMessage());
+        }
+    }
+
+    public function getCharge($room_id,$session_id)
+    { 
+        try { 
+            $room =Room::where(['id'=>$room_id, 'session_id'=>$session_id])->first();
+            $charge=$room->charge; 
+            $room_capacity = $room->room_capacity;
+            
+            $alloted_bed_numbers = StudentHostelDetail::where(['room_id'=>$room_id, 'session_id'=>$session_id])->pluck('bed_no','bed_no')->toArray();
+            
+            $bed_no_list = array();
+           
+            for($i=1; $i<=$room_capacity; $i++)
+            {
+                if(!in_array($i,$alloted_bed_numbers)){
+                   array_push($bed_no_list, $i);
+                }   
+            }
+            
+            $data = [
+                'charge' => $charge,
+                'bed_no_list' => $bed_no_list,
+            ];
+            return $data;
+        } catch(\Exception $err){
+            Log::error('message error in getRoomList on RoomRepository :'. $err->getMessage());
+            return back()->with('error', $err->getMessage());
+        }
+    }
+
 
 
 }

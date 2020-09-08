@@ -8,6 +8,7 @@ use App\Models\FeeForClass;
 use Log;
 use Session;
 
+
 class FeeForClassRepository{
 
     /**
@@ -46,8 +47,6 @@ class FeeForClassRepository{
                 $fee_frequency=$request->fee_frequency;
                 $query = $query->where('fee_frequency_id', '=', $fee_frequency); 
             }
-
-            //return  $query=$query->paginate(10);
             return  $query;
         } catch(\Exception $err){
             Log::error('message error in getAllFeeForClass on FeeForClassRepository :'. $err->getMessage());
@@ -58,13 +57,11 @@ class FeeForClassRepository{
     
     public function addFeeForClasses($fee_id)
     {
-        
         try {
             $fee = Fee::findOrFail($fee_id);
 
             $class_id = FeeForClass::with(['fee','class'])->where('fee_id',$fee_id)->pluck('charge','class_id')->toArray();
 
-            
             // Create data for add form
             $data = [
                 'action'             => route('store.fee-for-classes'),
@@ -82,6 +79,7 @@ class FeeForClassRepository{
             return back()->with('error', $err->getMessage());
         }
     }
+
 
     public function storeFeeForClasses($request)
     {
@@ -157,6 +155,7 @@ class FeeForClassRepository{
             return back()->with('error', $err->getMessage());
         }
     }
+    
 
     /**
     * Method to update resource

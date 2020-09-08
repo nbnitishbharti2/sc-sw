@@ -42,6 +42,8 @@ class VehicleType extends Model
     {
     	return VehicleType::select('vehicle_types.id', 'vehicle_types.name')->get();
     }
+
+    
     
 
 

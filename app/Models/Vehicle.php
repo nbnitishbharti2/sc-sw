@@ -55,4 +55,6 @@ class Vehicle extends Model
         return Vehicle::select('vehicles.id', 'vehicles.vehicle_no', 'vehicles.driver_name')->get();
     }
 
+    
+
 }

@@ -165,7 +165,7 @@
 		                $('#vehicle_id option').remove();
 		                $('select[name="vehicle_id"]').append('<option value="" >Choose Vehicle</option>');
 		                $.each(data, function(key, value) {
-		                    $('select[name="vehicle_id"]').append('<option value="'+ key +'" selected >'+ value +'</option>');
+		                    $('select[name="vehicle_id"]').append('<option value="'+ key +'">'+ value +'</option>');
 	                    });
 	                }
 	            });

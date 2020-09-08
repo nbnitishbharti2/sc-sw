@@ -15,7 +15,6 @@ class CategoryRepository {
     */
     public function getAllCategory()
     {
-       
     	try {
     		return  $query = Category::withTrashed()->get();  
     	} catch(\Exception $err){
@@ -36,7 +35,7 @@ class CategoryRepository {
                 'action'          => route('store.category'),
                 'page_title'      => trans('label.category'),
                 'title'           => trans('title.add_category'),
-                'category_id' => 0,
+                'category_id'     => 0,
                 'name'            => (old('name')) ? old('name') : '',
             ];
             return $data;

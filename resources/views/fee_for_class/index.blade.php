@@ -107,7 +107,10 @@ use App\Models\FeeFrequency;
 													@endif 
 												</select>
 											</div>
+
 										</div>
+
+										<br/>
 
 										<table id="table" class="table table-bordered table-striped">
 											<thead>

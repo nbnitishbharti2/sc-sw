@@ -15,7 +15,6 @@ class TypeRepository {
     */
     public function getAllType()
     {
-       
     	try {
     		return  $query = Type::withTrashed()->get();  
     	} catch(\Exception $err){
@@ -46,6 +45,7 @@ class TypeRepository {
         }
     }
 
+
     /**
     * Method to create resource
     * @param $request
@@ -70,6 +70,7 @@ class TypeRepository {
         }
     }
 
+
     /**
     * Method to fetch edit resource data
     * @param int $type_id
@@ -93,6 +94,7 @@ class TypeRepository {
         }
     }
 
+
     /**
     * Method to update resource
     * @param Illuminate\Http\Request
@@ -115,6 +117,7 @@ class TypeRepository {
         }
     }
 
+
     /**
     * Method to delete resource
     * @param Illuminate\Http\Request
@@ -135,6 +138,7 @@ class TypeRepository {
         }
     }
 
+
     /**
     * Method to delete resource
     * @param Illuminate\Http\Request
@@ -154,6 +158,7 @@ class TypeRepository {
             return back()->with('error', $err->getMessage());
         }
     }
+    
 
     
 }

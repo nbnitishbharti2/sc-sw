@@ -14,6 +14,8 @@ use Storage;
 use App\Models\SchoolDetails; 
 use App\Models\SaveOtp;
 use Illuminate\Support\Facades\Hash;
+
+
 class UserController extends Controller
 {
 	public function __construct(UserRepository $user)

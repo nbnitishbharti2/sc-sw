@@ -16,6 +16,7 @@ use App;
 use Session;
 use Helper;
 
+
 class VehicleRootMapController extends Controller
 {
    	public function __construct(VehicleRootMapRepository $vehicle_root_map)

@@ -44,6 +44,19 @@ class VehicleRootMap extends Model
         return $this->belongsTo('App\Models\Vehicle', 'vehicle_id', 'id');
     }
 
+
+
+    public static function getVehicleTypeForListing($root_id)
+    {
+        return VehicleRootMap::with('vehicle_types')->distinct()->where('root_id',$root_id)->get()->pluck('vehicle_types.name', 'vehicle_types.id')->toArray();
+    }
+
+
+    public static function getVehicleForListing($root_id, $vehicle_type_id)
+    {
+        return Vehicle::join('vehicle_root_maps','vehicle_root_maps.vehicle_id','=','vehicles.id')->where(['vehicle_root_maps.root_id'=>$root_id,'vehicle_root_maps.vehicle_type_id'=>$vehicle_type_id])->select(\DB::raw("CONCAT(vehicles.vehicle_no, ' (', vehicles.driver_name, ')') AS VEHICLEDETAILS"),'vehicles.id')->get()->pluck('VEHICLEDETAILS', 'id')->toArray();
+    }
+
     
 
     

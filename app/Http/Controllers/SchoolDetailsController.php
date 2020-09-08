@@ -21,6 +21,7 @@ class SchoolDetailsController extends Controller
     {
         $this->schoolDetails = $schoolDetails;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -40,6 +41,7 @@ class SchoolDetailsController extends Controller
         }
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -49,6 +51,7 @@ class SchoolDetailsController extends Controller
     {
         //
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -61,6 +64,7 @@ class SchoolDetailsController extends Controller
         //
     }
 
+
     /**
      * Display the specified resource.
      *
@@ -72,6 +76,7 @@ class SchoolDetailsController extends Controller
         //
     }
 
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -82,6 +87,7 @@ class SchoolDetailsController extends Controller
     {
         //
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -104,6 +110,7 @@ class SchoolDetailsController extends Controller
         }
     }
 
+
     /**
      * Remove the specified resource from storage.
      *
@@ -114,6 +121,8 @@ class SchoolDetailsController extends Controller
     {
         //
     }
+
+
     public function sms_details()
     {
         try {
@@ -124,6 +133,8 @@ class SchoolDetailsController extends Controller
             return back()->with('error', $err->getMessage());
         }
     }
+
+
     public function update_sms(SmsDetails $request)
     {
        try {
@@ -137,6 +148,8 @@ class SchoolDetailsController extends Controller
             return back()->with('error', $err->getMessage());
         }
     }
+
+
     public function smtp_details()
     {
         try {
@@ -147,6 +160,8 @@ class SchoolDetailsController extends Controller
             return back()->with('error', $err->getMessage());
         }
     }
+
+
     public function update_smtp(SmtpDetails $request)
     {
        try {
@@ -160,4 +175,7 @@ class SchoolDetailsController extends Controller
             return back()->with('error', $err->getMessage());
         }
     }
+
+
+    
 }

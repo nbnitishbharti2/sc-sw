@@ -13,6 +13,7 @@ use App;
 use Session;
 use Helper;
 
+
 class PaymentModeController extends Controller
 {
    	public function __construct(PaymentModeRepository $payment_mode)

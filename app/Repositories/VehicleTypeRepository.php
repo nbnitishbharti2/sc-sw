@@ -15,7 +15,6 @@ class VehicleTypeRepository {
     */
     public function getAllVehicleType()
     {
-       
     	try {
     		  return  $query = VehicleType::withTrashed()->get();  
     	} catch(\Exception $err){
@@ -23,6 +22,7 @@ class VehicleTypeRepository {
     		return back()->with('error', $err->getMessage());
     	}
     }
+
 
     /**
     * Method to fetch create resource data
@@ -45,6 +45,7 @@ class VehicleTypeRepository {
             return back()->with('error', $err->getMessage());
         }
     }
+
 
     /**
     * Method to create resource
@@ -69,6 +70,7 @@ class VehicleTypeRepository {
             return back()->with('error', $err->getMessage());
         }
     }
+
 
     /**
     * Method to fetch edit resource data
@@ -110,10 +112,11 @@ class VehicleTypeRepository {
                return false;
             }
         } catch(\Exception $err){
-            Log::error('message error in update on VehicleTypeRepository :'. $err->getMessage());
+            Log::error('message error in update on VehicleTypeRepository :'.$err->getMessage());
             return back()->with('error', $err->getMessage());
         }
     }
+
 
     /**
     * Method to delete resource
@@ -135,6 +138,7 @@ class VehicleTypeRepository {
         }
     }
 
+
     /**
     * Method to delete resource
     * @param Illuminate\Http\Request
@@ -154,6 +158,7 @@ class VehicleTypeRepository {
             return back()->with('error', $err->getMessage());
         }
     }
+
 
     
 }

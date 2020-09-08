@@ -15,7 +15,6 @@ class BloodGroupRepository {
     */
     public function getAllBloodGroup()
     {
-       
     	try {
     		return  $query = BloodGroup::withTrashed()->get();  
     	} catch(\Exception $err){
@@ -36,7 +35,7 @@ class BloodGroupRepository {
                 'action'          => route('store.blood_group'),
                 'page_title'      => trans('label.blood_group'),
                 'title'           => trans('title.add_blood_group'),
-                'blood_group_id' => 0,
+                'blood_group_id'  => 0,
                 'name'            => (old('name')) ? old('name') : '',
             ];
             return $data;
@@ -65,7 +64,7 @@ class BloodGroupRepository {
                return false;
             }
         } catch(\Exception $err){
-            Log::error('message error in store on BloodGroupRepository :'. $err->getMessage());
+            Log::error('message error in store on BloodGroupRepository :'.$err->getMessage());
             return back()->with('error', $err->getMessage());
         }
     }

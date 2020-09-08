@@ -13,6 +13,7 @@ use App;
 use Session;
 use Helper;
 
+
 class VehicleTypeController extends Controller
 {
    	public function __construct(VehicleTypeRepository $vehicle_type)

@@ -176,5 +176,28 @@ class RoomController extends Controller
     	}
 	}
 
+
+	public function getRoomList(Request $request)
+	{
+		try {
+			$data = $this->room->getRoomList($request->hostel_id,$request->session_id);
+			return json_encode($data);
+		} catch(\Exception $err){
+			Log::error('Error in getRoomList on RoomController :'. $err->getMessage());
+			return back()->with('error', $err->getMessage());
+		}
+	}
+
+	public function getCharge(Request $request)
+	{
+		try {
+			$data = $this->room->getCharge($request->room_id,$request->session_id);
+			return json_encode($data);
+		} catch(\Exception $err){
+			Log::error('Error in getCharge on RoomController :'. $err->getMessage());
+			return back()->with('error', $err->getMessage());
+		}
+	}
+
 	
 }

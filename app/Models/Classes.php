@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Kyslik\ColumnSortable\Sortable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Session;
+use App\Models\StudentRegistrationMap;
+use App\Models\StudentSessionDetail;
+
 class Classes extends Model
 {
     use Sortable;
@@ -22,6 +25,17 @@ class Classes extends Model
     public function sections()
     {
         return $this->hasMany('App\Models\Section', 'classes_id', 'id');
+    }
+
+
+    public function student_registration_map()
+    {
+        return $this->hasMany('App\Models\StudentRegistrationMap', 'class_id');
+    }
+
+    public function student_session_detail()
+    {
+        return $this->hasMany('App\Models\StudentSessionDetail', 'class_id');
     }
 
     /**

@@ -7,7 +7,7 @@ use Log;
 use Auth;
 class UserRepository {
 
-    // 
+    
     public function getAllUsers()
     {
     	try {
@@ -17,6 +17,7 @@ class UserRepository {
     		return back()->with('error', $err->getMessage());
     	}
     }
+
 
     public function updateProfile($input)
     {
@@ -29,4 +30,7 @@ class UserRepository {
             return back()->with('error', $err->getMessage());
         }
     }
+
+
+    
 }

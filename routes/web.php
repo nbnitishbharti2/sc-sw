@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::group(['middleware'=>['localization']],function(){
 	Route::get('/', 'Auth\LoginController@showLoginForm');
 	Route::get('/verify-otp', 'UserController@verify_otp')->name('verify-otp');
@@ -152,6 +153,16 @@ Route::group(['middleware'=>['localization']],function(){
 		Route::post('/update-fee-for-classes', 'FeeForClassController@update')->name('update.fee-for-classes');
 
 
+		/* Hostel Fee Routes */
+		Route::get('/view-hostel-fee', 'HostelFeeController@index')->name('view.hostel-fee');
+		Route::get('/add-hostel-fee', 'HostelFeeController@create')->name('add.hostel-fee');
+		Route::post('/store-hostel-fee', 'HostelFeeController@store')->name('store.hostel-fee');
+		Route::get('/edit-hostel-fee/{hostel_fee_id}', 'HostelFeeController@edit')->name('edit.hostel-fee');
+		Route::post('/update-hostel-fee', 'HostelFeeController@update')->name('update.hostel-fee');
+		Route::get('/delete-hostel-fee/{hostel_fee_id}', 'HostelFeeController@delete')->name('delete.hostel-fee');
+		Route::get('/restore-hostel-fee/{hostel_fee_id}', 'HostelFeeController@restore')->name('restore.hostel-fee');
+
+
 		/* Facility Routes */
 		Route::get('/view-facility', 'FacilityController@index')->name('view.facility');
 		Route::get('/add-facility', 'FacilityController@create')->name('add.facility');
@@ -217,14 +228,63 @@ Route::group(['middleware'=>['localization']],function(){
 		Route::post('/store-student-registration', 'StudentRegistrationController@store')->name('store.student.registration');
 		Route::get('/edit-student-registration/{id}', 'StudentRegistrationController@edit')->name('edit.student.registration');
 		Route::post('/update-student-registration', 'StudentRegistrationController@update')->name('update.student.registration');
-		Route::get('/delete-student-registration/{room_id}', 'StudentRegistrationController@delete')->name('delete.student.registration');
-		Route::get('/restore-student-registration/{room_id}', 'StudentRegistrationController@restore')->name('restore.student.registration');
+		// Route::get('/delete-student-registration/{room_id}', 'StudentRegistrationController@delete')->name('delete.student.registration');
+		// Route::get('/restore-student-registration/{room_id}', 'StudentRegistrationController@restore')->name('restore.student.registration');
 		Route::get('/student-registration-address/{id}/{map_id}', 'StudentRegistrationController@edit_address')->name('edit.student.registration.address');
-		 Route::post('/update-student-registration-address', 'StudentRegistrationController@update_address')->name('update.student.registration.address');
-		 Route::get('/student-registration-parent/{id}/{map_id}', 'StudentRegistrationController@edit_parent')->name('edit.student.registration.parent');
-		 Route::post('/update-student-registration-parent', 'StudentRegistrationController@update_parent')->name('update.student.registration.parent');
+		Route::post('/update-student-registration-address', 'StudentRegistrationController@update_address')->name('update.student.registration.address');
+		Route::get('/student-registration-parent/{id}/{map_id}', 'StudentRegistrationController@edit_parent')->name('edit.student.registration.parent');
+		Route::post('/update-student-registration-parent', 'StudentRegistrationController@update_parent')->name('update.student.registration.parent');
+		Route::get('/student-registration-multiple-upload/{id}/{map_id}', 'StudentRegistrationController@edit_multiple_upload')->name('edit.student.registration.multiple_upload');
+		Route::post('/update-student-registration-multiple-upload', 'StudentRegistrationController@update_multiple_upload')->name('update.student.registration.multiple_upload');
  		Route::get('/student-registration-charge/{id}/{map_id}', 'StudentRegistrationController@edit_charge')->name('edit.student.registration.charge');
-		 Route::post('/update-student-registration-charge', 'StudentRegistrationController@update_charge')->name('update.student.registration.charge');
+		Route::post('/update-student-registration-charge', 'StudentRegistrationController@update_charge')->name('update.student.registration.charge');
+
+		Route::get('/delete-student-registration/{student_registration_id}', 'StudentRegistrationController@delete')->name('delete.student-registration');
+		Route::get('/restore-student-registration/{student_registration_id}', 'StudentRegistrationController@restore')->name('restore.student-registration');
+
+		Route::get('/student-registration/personal_details/{id}', 'StudentRegistrationController@viewPersonalDetails')->name('view.student-registration.personal_details');
+		Route::get('/student-registration/address/{id}/{map_id}', 'StudentRegistrationController@viewAddress')->name('view.student-registration.address');
+		Route::get('/student-registration/parent/{id}/{map_id}', 'StudentRegistrationController@viewParent')->name('view.student-registration.parent');
+		Route::get('/student-registration/multiple_upload/{id}/{map_id}', 'StudentRegistrationController@viewMultipleUpload')->name('view.student-registration.multiple_upload');
+		Route::get('/student-registration/charge/{id}/{map_id}', 'StudentRegistrationController@viewCharge')->name('view.student-registration.charge');
+
+
+
+
+		/* Student Admission */
+		Route::get('/view-student-admission', 'StudentController@index')->name('view.student.admission');
+		Route::get('/add-student-admission/{id?}/{session_map_id?}/{type?}', 'StudentController@create')->name('add.student.admission');
+		Route::post('/store-student-admission', 'StudentController@store')->name('store.student.admission');
+
+		Route::get('/edit-student-admission/{id}', 'StudentController@edit')->name('edit.student.admission');
+		Route::post('/update-student-admission', 'StudentController@update')->name('update.student.admission');
+
+		Route::get('/student-admission-address/{id}/{map_id}', 'StudentController@edit_address')->name('edit.student.admission.address');
+		Route::post('/update-student-admission-address', 'StudentController@update_address')->name('update.student.admission.address');
+
+		Route::get('/student-admission-parent/{id}/{map_id}', 'StudentController@edit_parent')->name('edit.student.admission.parent');
+		Route::post('/update-student-admission-parent', 'StudentController@update_parent')->name('update.student.admission.parent');
+
+		Route::get('/student-admission-multiple-upload/{id}/{map_id}', 'StudentController@edit_multiple_upload')->name('edit.student.admission.multiple_upload');
+		Route::post('/update-student-admission-multiple-upload', 'StudentController@update_multiple_upload')->name('update.student.admission.multiple_upload');
+
+		Route::get('/student-admission-transport/{id}/{map_id}', 'StudentController@edit_transport')->name('edit.student.admission.transport');
+		Route::post('/update-student-admission-transport', 'StudentController@update_transport')->name('update.student.admission.transport');
+
+		Route::get('/student-admission-hostel/{id}/{map_id}', 'StudentController@edit_hostel')->name('edit.student.admission.hostel');
+		Route::post('/update-student-admission-hostel', 'StudentController@update_hostel')->name('update.student.admission.hostel');
+
+		Route::get('/student-admission-charge/{id}/{map_id}', 'StudentController@edit_charge')->name('edit.student.admission.charge');
+		Route::post('/update-student-admission-charge', 'StudentController@update_charge')->name('update.student.admission.charge');
+
+		Route::get('/delete-student-admission/{student_admission_id}', 'StudentController@delete')->name('delete.student-admission');
+		Route::get('/restore-student-admission/{student_admission_id}', 'StudentController@restore')->name('restore.student-admission');
+
+
+
+
+
+
 
 		/*  All Ajax Routes */
 		Route::post('/get-vehicle-no-from-vehicle', 'VehicleRootMapController@getVehicleNo')->name('get-vehicle-no-from-vehicle');
@@ -233,8 +293,12 @@ Route::group(['middleware'=>['localization']],function(){
 		Route::post('/get-fee-head-frequency-from-fee-setting', 'FeeController@getFeeHeadFrequency')->name('get-fee-head-frequency-from-fee-setting');
 		Route::post('/get-fee-frequency-from-fee-frequency', 'FeeController@getFeeFrequency')->name('get-fee-frequency-from-fee-frequency');
 		Route::post('/get-frequency-value-from-fee-frequency', 'FeeController@getFeeFrequencyValue')->name('get-frequency-value-from-fee-frequency');
-		
-
+		Route::post('/get-section-list-of-current-session-class', 'SectionController@getSectionList')->name('get-section-list-of-current-session-class');
+		Route::post('/get-room-list-from-hostel-id', 'RoomController@getRoomList')->name('get-room-list-from-hostel-id');
+		Route::post('/get-charge-from-room-id', 'RoomController@getCharge')->name('get-charge-from-room-id');
+		Route::post('/get-stopage-list-from-vehicle-id', 'StopageController@getStopageList')->name('get-stopage-list-from-vehicle-id');
+		Route::post('/get-amount-from-stopage-id', 'StopageController@getAmount')->name('get-amount-from-stopage-id');
+		Route::post('/get-fee-id', 'FeeController@getFee')->name('get-fee-id');
 		Route::post('/get-class-list-with-session', 'ClassController@getClassListSession')->name('get-class-list-with-session');
 		Route::post('/get-session-list', 'SectionController@getSessionList')->name('get-session-list');
 		Route::get('/test', 'HomeController@test')->name('test');

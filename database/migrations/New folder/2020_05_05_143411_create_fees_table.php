@@ -17,7 +17,7 @@ class CreateFeesTable extends Migration
             $table->bigIncrements('id');
             $table->integer('session_id')->unsigned();
             $table->string('fee_name',190);
-            $table->string('fee_short _name',190);
+            $table->string('fee_short_name',190);
             $table->bigInteger('fee_head_id')->unsigned();
             $table->bigInteger('fee_type_id')->unsigned();
             $table->bigInteger('frequency_id')->unsigned()->nullable();

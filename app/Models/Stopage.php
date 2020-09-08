@@ -44,6 +44,11 @@ class Stopage extends Model
         return $this->belongsTo('App\Models\Vehicle', 'vehicle_id', 'id');
     }
 
+    public static function getStopageForListing($root_id, $vehicle_type_id, $vehicle_id)
+    {
+        return $stopages = Stopage::where(['root_id'=>$root_id, 'vehicle_type_id'=>$vehicle_type_id, 'vehicle_id'=>$vehicle_id])->pluck('stopage_name', 'id')->toArray();
+    }
+
     
 
     

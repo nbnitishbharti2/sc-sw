@@ -15,10 +15,9 @@ class EducationRepository {
     */
     public function getAllEducation()
     {
-       
     	try {
     		return  $query = Education::withTrashed()->get();  
-    	} catch(\Exception $err){
+    	}catch(\Exception $err){
     		Log::error('message error in getAllEducation on EducationRepository :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());
     	}
@@ -36,7 +35,7 @@ class EducationRepository {
                 'action'          => route('store.education'),
                 'page_title'      => trans('label.education'),
                 'title'           => trans('title.add_education'),
-                'education_id' => 0,
+                'education_id'    => 0,
                 'name'            => (old('name')) ? old('name') : '',
             ];
             return $data;
@@ -45,6 +44,7 @@ class EducationRepository {
             return back()->with('error', $err->getMessage());
         }
     }
+
 
     /**
     * Method to create resource
@@ -70,6 +70,7 @@ class EducationRepository {
         }
     }
 
+
     /**
     * Method to fetch edit resource data
     * @param int $education_id
@@ -93,6 +94,7 @@ class EducationRepository {
         }
     }
 
+
     /**
     * Method to update resource
     * @param Illuminate\Http\Request
@@ -115,6 +117,7 @@ class EducationRepository {
         }
     }
 
+
     /**
     * Method to delete resource
     * @param Illuminate\Http\Request
@@ -134,6 +137,7 @@ class EducationRepository {
             return back()->with('error', $err->getMessage());
         }
     }
+    
 
     /**
     * Method to delete resource

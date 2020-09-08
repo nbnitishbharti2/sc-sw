@@ -13,6 +13,7 @@ use App;
 use Session;
 use Helper;
 
+
 class HostelController extends Controller
 {
    	public function __construct(HostelRepository $hostel)

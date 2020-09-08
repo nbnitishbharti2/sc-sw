@@ -49,7 +49,7 @@ use App\Models\FeeFrequency;
 												<input type="text" class="form-control" value="{{ ($fee_name) ? $fee_name : old('fee_name') }}" id="fee_name" name="fee_name" placeholder="{{ trans('placeholder.fee_name') }}">
 												
 												@if($errors->has('fee_name'))
-												<span class="//alert-notice" role="//alert">
+												<span class="alert-notice" role="alert">
 					                                <strong>{{ $errors->first('fee_name') }}</strong>
 					                            </span>
 					                        	@endif
@@ -60,7 +60,7 @@ use App\Models\FeeFrequency;
 												<input type="text" class="form-control" id="fee_short_name" placeholder="{{ trans('placeholder.fee_short_name') }}" name="fee_short_name" value="{{ ($fee_short_name) ? $fee_short_name : old('fee_short_name') }}">
 
 												@if($errors->has('fee_short_name'))
-													<span class="//alert-notice" role="//alert">
+													<span class="alert-notice" role="alert">
 						                                <strong>{{ $errors->first('fee_short_name') }}</strong>
 						                            </span>
 						                        @endif
@@ -72,15 +72,11 @@ use App\Models\FeeFrequency;
 
 				                        	<div class="col-sm-4">
 												<label for="fee_head_id">{{trans('label.fee_head_id')}}</label>
-												<select name="fee_head_id" class="form-control" id="fee_head_id"> 
-													<option value="">Choose Fee Head</option> 
-													@foreach($fee_head_list as $fee_head)
-														<option value="{!! $fee_head->id !!}" {{ old("fee_head_id",$fee_head_id) == $fee_head->id ? 'selected' : '' }} >{!! $fee_head->name !!}</option>
-													@endforeach 
-												</select>
+												<input type="hidden" id="fee_head_id" class="form-control" name="fee_head_id" value="1" readonly />
+												<input type="text" id="head-name" class="form-control" name="head_name" value="{{trans('label.school')}}" readonly />
 
 												@if($errors->has('fee_head_id'))
-												<span class="//alert-notice" role="//alert">
+												<span class="alert-notice" role="alert">
 					                                <strong>{{ $errors->first('fee_head_id') }}</strong>
 					                            </span>
 						                        @endif
@@ -96,7 +92,7 @@ use App\Models\FeeFrequency;
 												</select>
 
 												@if($errors->has('fee_type_id'))
-												<span class="//alert-notice" role="//alert">
+												<span class="alert-notice" role="alert">
 					                                <strong>{{ $errors->first('fee_type_id') }}</strong>
 					                            </span>
 						                        @endif
@@ -110,7 +106,7 @@ use App\Models\FeeFrequency;
 												</select>
 
 												@if($errors->has('frequency_id'))
-												<span class="//alert-notice" role="//alert">
+												<span class="alert-notice" role="alert">
 					                                <strong>{{ $errors->first('frequency_id') }}</strong>
 					                            </span>
 						                        @endif
@@ -138,12 +134,12 @@ use App\Models\FeeFrequency;
 											@endforeach
 
 											@if($errors->has('month_ids'))
-											<span class="//alert-notice" role="//alert">
+											<span class="alert-notice" role="alert">
 												<strong>{{ $errors->first('month_ids') }}</strong>
 											</span>
 											@endif
 
-											<span class="//alert-notice">
+											<span class="alert-notice">
 												<strong id="month_error">
 												</strong>
 											</span>
@@ -215,9 +211,10 @@ $(window).on('load',function() {
     {
     	var fee_head_id = $('#fee_head_id').val();
     	var ajaxOn = 'load';
-        var old_frequency_id='{{ $frequency_id }}';
+    	var old_frequency_id= "{{ $frequency_id }}";
+        //var old_frequency_id=($frequency_id) ? $frequency_id : '';
     	if(old_frequency_id == 0) {
-        	$('#frequency_id').html('<option>Choose Frequency</option>');
+        	$('#frequency_id').html('<option value="">Choose Frequency</option>');
         } else {
 	        ajaxForFrequencyId(fee_head_id,ajaxOn,old_frequency_id);
         }
@@ -227,19 +224,46 @@ $(window).on('load',function() {
 
 
 $(document).ready(function(){
-	$('#fee_head_id').on('change', function(){
-		var fee_head_id = $(this).val();
+	// $('#fee_head_id').on('change', function(){
+	// 	alert('fee_head_id changed');
+	// 	var fee_head_id = $(this).val();
+	// 	alert('fee_head_id : '+fee_head_id);
+
+	// 	var ajaxOn = 'ready';
+	// 	//var old_frequency_id = '{{ old("frequency_id") }}';
+	// 	var old_frequency_id = (old('frequency_id')) ? old('frequency_id') : '';
+
+	// 	ajaxForFrequencyId(fee_head_id,ajaxOn,old_frequency_id);
+	// });
+
+	$('#fee_type_id').on('change', function(){
+		alert('fee_type_id changed');
+		var fee_type_id = $(this).val();
+		alert('fee_type_id : '+fee_type_id);
+
+		var fee_head_id = $('#fee_head_id').val();
+		alert('fee_head_id : '+fee_head_id);
+
 		var ajaxOn = 'ready';
-		var old_frequency_id = '{{ old('frequency_id') }}';
+		var old_frequency_id = '{{ old("frequency_id") }}';
+		
 
 		ajaxForFrequencyId(fee_head_id,ajaxOn,old_frequency_id);
 	});
+
+	// var fee_head_id = $('#fee_head_id').val();
+	// alert('fee_head_id : '+fee_head_id);
+	// var ajaxOn = 'ready';
+	// var old_frequency_id = (old('frequency_id')) ? old('frequency_id') : '';
+
+	ajaxForFrequencyId(fee_head_id,ajaxOn,old_frequency_id);
 });
 
 
 function ajaxForFrequencyId(fee_head_id,ajaxOn,old_frequency_id)
 {
 	var fee_head_id = fee_head_id;
+
 	var ajaxOn = ajaxOn;
 
 	var form_data = new FormData();
@@ -354,8 +378,6 @@ function ajaxForFrequencyValue(frequency_id,ajaxOn)
 
 
 }
-
-
 
 
 </script>

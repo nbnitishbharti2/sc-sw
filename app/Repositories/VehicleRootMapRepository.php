@@ -18,14 +18,14 @@ class VehicleRootMapRepository {
     */
     public function getAllVehicleRootMap()
     {
-       
         try {
-              return  $query = VehicleRootMap::withTrashed()->with(['roots','vehicle_types','vehicles'])->get();  
+            return  $query = VehicleRootMap::withTrashed()->with(['roots','vehicle_types','vehicles'])->get();  
         } catch(\Exception $err){
             Log::error('message error in getAllVehicleRootMap on VehicleRootMapRepository :'. $err->getMessage());
             return back()->with('error', $err->getMessage());
         }
     }
+
 
     /**
     * Method to fetch create resource data
@@ -54,6 +54,7 @@ class VehicleRootMapRepository {
         }
     }
 
+
     public function getVehicleNo($vehicle_type_id)
     { 
         try { 
@@ -64,6 +65,7 @@ class VehicleRootMapRepository {
             return back()->with('error', $err->getMessage());
         }
     }
+
 
     /**
     * Method to create resource
@@ -91,6 +93,7 @@ class VehicleRootMapRepository {
         }
     }
 
+
     /**
     * Method to fetch edit resource data
     * @param int $vehicle_root_map_id
@@ -99,8 +102,8 @@ class VehicleRootMapRepository {
     public function edit($vehicle_root_map_id)
     {
         try {
-            $vehicle_root_map = VehicleRootMap::withTrashed()->with(['roots','vehicle_types','vehicles'])
-                ->where('id',$vehicle_root_map_id)->first(); //Fetch vehicle root map data
+            $vehicle_root_map = VehicleRootMap::withTrashed()->with(['roots','vehicle_types','vehicles'])->where('id',$vehicle_root_map_id)->first(); //Fetch vehicle root map data
+
             // Create data for edit form
             $data = [
                 'action'              => route('update.vehicle_root_map'),
@@ -120,6 +123,7 @@ class VehicleRootMapRepository {
         }
     }
 
+
     /**
     * Method to update resource
     * @param Illuminate\Http\Request
@@ -129,10 +133,12 @@ class VehicleRootMapRepository {
     {
         try {
             $vehicle_root_map  = VehicleRootMap::findOrFail($request->vehicle_root_map_id); //Fetch vehicle data
+
             $vehicle_root_map->root_id          =  $request->root_id;
             $vehicle_root_map->vehicle_type_id  =  $request->vehicle_type_id;
             $vehicle_root_map->vehicle_id       =  $request->vehicle_id;
             $vehicle_root_map->save(); // Update data
+
             if ($vehicle_root_map->wasChanged()) { //Check if data was updated
                return true;
             } else {
@@ -143,6 +149,7 @@ class VehicleRootMapRepository {
             return back()->with('error', $err->getMessage());
         }
     }
+
 
     /**
     * Method to delete resource
@@ -164,6 +171,7 @@ class VehicleRootMapRepository {
         }
     }
 
+
     /**
     * Method to delete resource
     * @param Illuminate\Http\Request
@@ -183,6 +191,7 @@ class VehicleRootMapRepository {
             return back()->with('error', $err->getMessage());
         }
     }
+    
 
     
 }

@@ -25,6 +25,7 @@ class SectionRepository {
     	}
     }
 
+
     /**
     * Method to fetch create resource data
     *
@@ -32,7 +33,6 @@ class SectionRepository {
     */
     public function create()
     {
-
         try {
             $data = [
                 'action'        => route('store.section'),
@@ -50,6 +50,7 @@ class SectionRepository {
             return back()->with('error', $err->getMessage());
         }
     }
+
 
     /**
     * Method to create resource
@@ -80,6 +81,7 @@ class SectionRepository {
         }
     }
 
+
     /**
     * Method to fetch edit resource data
     * @param int $section_id
@@ -88,16 +90,13 @@ class SectionRepository {
     public function edit($section_id)
     {
         try {
-            $section = Section::select('sections.*')->leftjoin('sessions', 'sessions.id', 'sections.session_id')
-                                                    ->withTrashed()
-                                                    ->with('class')
-                                                    ->where(['sessions.id' => Session::get('session'), 'sections.id' => $section_id])
-                                                    ->first(); //Fetch section data
+            $section = Section::select('sections.*')->leftjoin('sessions', 'sessions.id', 'sections.session_id')->withTrashed()->with('class')->where(['sessions.id' => Session::get('session'), 'sections.id' => $section_id])->first(); //Fetch section data
+
             // Create data for edit form
             $data = [
                 'action'            => route('update.section'),
-                'page_title'    => trans('label.section'),
-                'title'         => trans('title.edit_section'),
+                'page_title'        => trans('label.section'),
+                'title'             => trans('title.edit_section'),
                 'class_id'          => $section->class->id,
                 'section_id'        => $section->id,
                 'class_list'        => Classes::getAllClassForListing(),
@@ -111,6 +110,7 @@ class SectionRepository {
         }
     }
 
+
     /**
     * Method to update resource
     * @param Illuminate\Http\Request
@@ -118,26 +118,26 @@ class SectionRepository {
     */
     public function update($request)
     {
-        //dd($request);
         try {
-            $section                = Section::findOrFail($request->section_id); //Fetch section data
+            $section = Section::findOrFail($request->section_id); //Fetch section data
 
             $section->classes_id    = $request->class_id;
             $section->section_name  = $request->section_name;
-            $section->section_short   = $request->section_short;
+            $section->section_short = $request->section_short;
             $section->updated_by    = Auth::user()->id;
-             
             $section->save(); // Update data
+
             if ($section->wasChanged()) { //Check if data was updated
-               return true;
+                return true;
             } else {
-               return false;
+                return false;
             }
         } catch(\Exception $err){
             Log::error('message error in update on SectionRepository :'. $err->getMessage());
             return back()->with('error', $err->getMessage());
         }
     }
+
 
     /**
     * Method to delete resource
@@ -159,6 +159,7 @@ class SectionRepository {
         }
     }
 
+
     /**
     * Method to delete resource
     * @param Illuminate\Http\Request
@@ -178,6 +179,8 @@ class SectionRepository {
             return back()->with('error', $err->getMessage());
         }
     }
+
+    
     public function getSectionList($class_id,$session_id)
     { 
        try {   
@@ -188,4 +191,7 @@ class SectionRepository {
             return back()->with('error', $err->getMessage());
         }
     }
+
+
+    
 }

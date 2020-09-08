@@ -43,6 +43,7 @@ class StopageController extends Controller
 		}
 	}
 
+
 	/**
 	* Method to show form for create resource
 	*
@@ -61,6 +62,7 @@ class StopageController extends Controller
 			return back()->with('error', $err->getMessage());
 		}
 	}
+
 
 	public function getVehicleType(Request $request)
 	{
@@ -83,6 +85,29 @@ class StopageController extends Controller
 			return back()->with('error', $err->getMessage());
 		}
 	}
+
+	public function getStopageList(Request $request)
+	{
+		try {
+			$data = $this->stopage->getStopageList($request->root_id,$request->vehicle_type_id,$request->vehicle_id);
+			return json_encode($data);
+		} catch(\Exception $err){
+			Log::error('Error in getStopageList on StopageController :'. $err->getMessage());
+			return back()->with('error', $err->getMessage());
+		}
+	}
+
+	public function getAmount(Request $request)
+	{
+		try {
+			$data = $this->stopage->getAmount($request->stopage_id);
+			return json_encode($data);
+		} catch(\Exception $err){
+			Log::error('Error in getAmount on StopageController :'. $err->getMessage());
+			return back()->with('error', $err->getMessage());
+		}
+	}
+
 
 	/**
 	* Method to create resource
@@ -128,6 +153,7 @@ class StopageController extends Controller
 		}
 	}
 
+
 	/**
 	* Method to update resource
 	* @param Illuminate\Http\Request
@@ -149,6 +175,7 @@ class StopageController extends Controller
 			return back()->with('error', $err->getMessage());
 		}
 	}
+
 
 	/**
 	* Method to delete resource
@@ -175,6 +202,7 @@ class StopageController extends Controller
 		}
 	}
 
+
 	/**
 	* Method to restore resource
 	* @param int $stopage_id
@@ -199,6 +227,8 @@ class StopageController extends Controller
 			return back()->with('error', $err->getMessage());
 		}
 	}
+
+	
 	public function import()
 	{
 		try {

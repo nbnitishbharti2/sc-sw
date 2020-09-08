@@ -1,0 +1,28 @@
+1.Install laravel globally in composer
+composer global require laravel/installer
+
+2.Create Project
+composer create-project --prefer-dist laravel/laravel blog
+
+3.Add Form functionality to project
+
+composer require laravelcollective/html
+
+'providers' => [
+    // ...
+    Collective\Html\HtmlServiceProvider::class,
+    // ...
+  ],
+
+
+'aliases' => [
+    // ...
+      'Form' => Collective\Html\FormFacade::class,
+      'Html' => Collective\Html\HtmlFacade::class,
+    // ...
+  ],
+
+
+4.Auth in laravel
+
+composer dump-autoload

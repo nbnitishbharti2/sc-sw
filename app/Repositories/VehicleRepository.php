@@ -18,12 +18,13 @@ class VehicleRepository {
     {
        
     	try {
-    		  return  $query = Vehicle::withTrashed()->with('vehicle_type')->get();  
+    		return  $query = Vehicle::withTrashed()->with('vehicle_type')->get();  
     	} catch(\Exception $err){
     		Log::error('message error in getAllVehicle on VehicleRepository :'. $err->getMessage());
     		return back()->with('error', $err->getMessage());
     	}
     }
+
 
     /**
     * Method to fetch create resource data
@@ -37,7 +38,7 @@ class VehicleRepository {
                 'action'          => route('store.vehicle'),
                 'page_title'      => trans('label.vehicle'),
                 'title'           => trans('title.add_vehicle'),
-                'vehicle_id' => 0,
+                'vehicle_id'      => 0,
                 'driver_name'       => (old('driver_name')) ? old('driver_name') : '',
                 'driver_contact_no' => (old('driver_contact_no')) ? old('driver_contact_no') : '',
                 'helper_name'       => (old('helper_name')) ? old('helper_name') : '',
@@ -45,7 +46,6 @@ class VehicleRepository {
                 'vehicle_type_list'    => VehicleType::getAllVehicleTypeForListing(),
                 'vehicle_type_id'       => 0,
                 'vehicle_no' => (old('vehicle_no')) ? old('vehicle_no') : '',
-
             ];
             return $data;
         } catch(\Exception $err){
@@ -93,12 +93,13 @@ class VehicleRepository {
         try {
             $vehicle = Vehicle::withTrashed()->with('vehicle_type')
                 ->where('id',$vehicle_id)->first(); //Fetch vehicle data
+
             // Create data for edit form
             $data = [
                 'action'          => route('update.vehicle'),
                 'page_title'      => trans('label.vehicle'),
                 'title'           => trans('title.edit_vehicle'),
-                'vehicle_id' => $vehicle->id,
+                'vehicle_id'      => $vehicle->id,
                 'driver_name'       => ($vehicle->driver_name) ? $vehicle->driver_name : old('driver_name'),
                 'driver_contact_no' => ($vehicle->driver_contact_no) ? $vehicle->driver_contact_no : old('driver_contact_no'),
                 'helper_name'       => ($vehicle->helper_name) ? $vehicle->helper_name : old('helper_name'),
@@ -113,6 +114,7 @@ class VehicleRepository {
             return back()->with('error', $err->getMessage());
         }
     }
+
 
     /**
     * Method to update resource
@@ -141,6 +143,7 @@ class VehicleRepository {
         }
     }
 
+
     /**
     * Method to delete resource
     * @param Illuminate\Http\Request
@@ -160,6 +163,7 @@ class VehicleRepository {
             return back()->with('error', $err->getMessage());
         }
     }
+
 
     /**
     * Method to delete resource
@@ -181,5 +185,6 @@ class VehicleRepository {
         }
     }
 
+    
     
 }

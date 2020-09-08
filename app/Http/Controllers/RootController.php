@@ -13,6 +13,7 @@ use App;
 use Session;
 use Helper;
 
+
 class RootController extends Controller
 {
    	public function __construct(RootRepository $root)

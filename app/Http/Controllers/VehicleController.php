@@ -14,6 +14,7 @@ use App;
 use Session;
 use Helper;
 
+
 class VehicleController extends Controller
 {
    	public function __construct(VehicleRepository $vehicle)

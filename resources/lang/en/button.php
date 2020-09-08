@@ -29,5 +29,6 @@ return [
     'restore'                       => 'Restore',
     'edit'                          => 'Edit',
     'skip'			                => 'Skip',
+    'next'                          => 'Next',
     'import_prv_session_stopages'   => 'Import Prv Session Stopages',
 ];
